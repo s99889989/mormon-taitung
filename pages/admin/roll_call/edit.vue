@@ -5,18 +5,13 @@ const rollCallStore = useRollCallStore();
 
 
 
-// onMounted( () => {
-//
-//
-//   rollCallStore.roll_call.editData = {
-//     date: '',
-//     roll_call_man: '',
-//     member_list: [],
-//     member_visit_list: [],
-//   }
-//
-//
-// })
+onMounted( () => {
+
+
+
+
+
+})
 
 </script>
 

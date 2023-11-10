@@ -209,7 +209,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
   }
 
   const refreshMember = async () => {
-    data.member_list = await getAll();
+    data.member_list = await getAllMembers();
   }
 
   onMounted(async () => {
