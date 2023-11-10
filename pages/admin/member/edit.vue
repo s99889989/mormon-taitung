@@ -3,6 +3,11 @@ import {useMembersStore} from "~/stores/members";
 
 const membersStore = useMembersStore();
 
+onMounted( () => {
+
+
+})
+
 </script>
 
 <template>
@@ -55,6 +60,8 @@ const membersStore = useMembersStore();
             <option>女青年</option>
             <option>初級會</option>
             <option>傳教士</option>
+            <option>其他支會</option>
+            <option>非成員</option>
             <option>其他</option>
           </select>
         </div>

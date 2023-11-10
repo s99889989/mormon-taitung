@@ -1,10 +1,13 @@
 
 import { defineStore } from 'pinia'
 import {computed} from "vue";
-import {useMainStore} from "~/stores/main.js";
-const mainStore = useMainStore();
+
 export const useRollCallStore = defineStore('roll_call', () => {
+  //https://madustrialtd.asuscomm.com:9100/
+  //https://localhost:9100/
+
   const data = reactive({
+    main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
     search_member_organizations: '選擇組織',
     search_member_have: '所有',
@@ -74,26 +77,18 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
       })
     }
-    // return roll_call.data.filter((element, index, array)=>{
-    //   let display = true;
-    //
-    //
-    //
-    //   if(display){
-    //     return element;
-    //   }
-    // })
+
     return displayRollCalls;
   })
 
-  //獲取全部
+  //獲取全部成員
   const getAllMembers = async () => {
-    const url = mainStore.main_url+'mormon/member/get';
+    const url = data.main_url+'mormon/member/get';
     try {
       const response = await fetch(url);
       return await response.json();
     } catch (error) {
-      console.error('错误:', error);
+      console.error('錯誤:', error);
       return [];
     }
   }
@@ -110,7 +105,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
     })
 
 
-    const url = mainStore.main_url+'mormon/roll_call/add';
+    const url = data.main_url+'mormon/roll_call/add';
     console.log(JSON.stringify(data.editData))
     fetch(url, {
       method: 'POST',
@@ -135,7 +130,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
         data.editData.member_list.push(member.id);
       }
     })
-    const url = mainStore.main_url+'mormon/roll_call/update';
+    const url = data.main_url+'mormon/roll_call/update';
 
     fetch(url, {
       method: 'PUT',
@@ -153,7 +148,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
   }
   //獲取全部
   const getAll = async () => {
-    const url = mainStore.main_url+'mormon/roll_call/get';
+    const url = data.main_url+'mormon/roll_call/get';
     try {
       const response = await fetch(url);
       return await response.json();
@@ -166,19 +161,19 @@ export const useRollCallStore = defineStore('roll_call', () => {
   //設置編輯值
   const getEdit = (id) => {
     console.log(id)
-    const url = mainStore.main_url+'mormon/roll_call/get/'+id;
-
+    const url = data.main_url+'mormon/roll_call/get/'+id;
+    console.log('GET')
     fetch(url, {
       method: 'GET'
 
     })
         .then(res => res.json())
-        .then(async data => {
-          data.editData = data;
+        .then(async resData => {
+          data.editData = resData;
 
-          data.members = await getAllMembers();
+          data.member_list = await getAllMembers();
 
-          data.members.forEach((member)=>{
+          data.member_list.forEach((member)=>{
               if(data.editData.member_list.includes(member.id)){
                 member.have = true;
               }
@@ -189,7 +184,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
   //移除
   const remove = async (date, idx) => {
-    const url = mainStore.main_url+'mormon/roll_call/remove/' + date;
+    const url = data.main_url+'mormon/roll_call/remove/' + date;
 
     fetch(url, {
       method: 'DELETE'

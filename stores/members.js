@@ -1,9 +1,11 @@
 import {defineStore} from 'pinia'
 import {computed} from "vue";
-import {useMainStore} from "~/stores/main.js";
-const mainStore = useMainStore();
+
 export const useMembersStore = defineStore('members', () => {
+  //https://madustrialtd.asuscomm.com:9100/
+  //https://localhost:9100/
   const data = reactive({
+    main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
     search_member_organizations: '選擇組織',
     member_list: [
@@ -58,7 +60,7 @@ export const useMembersStore = defineStore('members', () => {
 
   //新增
   const add = async () => {
-    const url = mainStore.main_url+'mormon/member/add';
+    const url = data.main_url+'mormon/member/add';
 
     fetch(url, {
       method: 'POST',
@@ -78,7 +80,7 @@ export const useMembersStore = defineStore('members', () => {
   //更新
   const edit = async () => {
 
-    const url = mainStore.main_url+'mormon/member/update';
+    const url = data.main_url+'mormon/member/update';
 
     fetch(url, {
       method: 'PUT',
@@ -96,12 +98,12 @@ export const useMembersStore = defineStore('members', () => {
   }
   //獲取全部
   const getAll = async () => {
-    const url = mainStore.main_url+'mormon/member/get';
+    const url = data.main_url+'mormon/member/get';
+    data.member_list.length = 0;
     try {
       const response = await fetch(url);
       return await response.json();
     } catch (error) {
-      console.error('错误:', error);
       return [];
     }
   }
@@ -109,21 +111,21 @@ export const useMembersStore = defineStore('members', () => {
   //設置編輯值
   const getEdit = (id) => {
     console.log(id)
-     const url = mainStore.main_url+'mormon/member/get/'+id;
+     const url = data.main_url+'mormon/member/get/'+id;
 
     fetch(url, {
       method: 'GET'
 
     })
         .then(res => res.json())
-        .then(data => {
-          data.editData = data;
+        .then(resData => {
+          data.editData = resData;
         })
   }
 
   //移除
   const remove = async (id, idx) => {
-    const url = mainStore.main_url+'mormon/member/remove/' + id;
+    const url = data.main_url+'mormon/member/remove/' + id;
 
     fetch(url, {
       method: 'DELETE'

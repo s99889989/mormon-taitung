@@ -16,13 +16,14 @@ const membersStore = useMembersStore();
         <div>
           <select v-model="membersStore.data.search_member_organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option selected>選擇組織</option>
-            <option >長老定額組</option>
-            <option >慈助會</option>
-            <option >男青年</option>
-            <option >女青年</option>
-            <option >初級會</option>
-            <option >傳教士</option>
-            <option >其他</option>
+            <option>長老定額組</option>
+            <option>慈助會</option>
+            <option>男青年</option>
+            <option>女青年</option>
+            <option>初級會</option>
+            <option>傳教士</option>
+            <option>其他支會</option>
+            <option>其他</option>
           </select>
         </div>
 
@@ -40,7 +41,7 @@ const membersStore = useMembersStore();
         <div  v-for="(member, index) in membersStore.memberList" class="p-1 md:p-5 flex justify-around sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
           <p class="text-2xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.name}}</p>
           <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.area}}</p>
-<!--          <p class="text-2xl p-2 md:text-3xl font-normal text-gray-700 dark:text-gray-400">{{index}}</p>-->
+<!--          <p class="text-2xl p-2 md:text-3xl font-normal text-gray-700 dark:text-gray-400">{{member.id}}</p>-->
           <p class="text-xl md:text-3xl font-normal text-fuchsia-700 dark:text-fuchsia-400">{{member.organizations}}</p>
           <p class="text-xl md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>
           <div class="inline-flex rounded-md shadow-sm" role="group">

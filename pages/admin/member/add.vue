@@ -71,6 +71,7 @@ onMounted( () => {
             <option>女青年</option>
             <option>初級會</option>
             <option>傳教士</option>
+            <option>其他支會</option>
             <option>其他</option>
           </select>
         </div>

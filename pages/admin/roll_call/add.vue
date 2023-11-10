@@ -40,13 +40,14 @@ onMounted( async () => {
           <div>
             <select v-model="rollCallStore.data.search_member_organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option selected>選擇組織</option>
-              <option >長老定額組</option>
-              <option >慈助會</option>
-              <option >男青年</option>
-              <option >女青年</option>
-              <option >初級會</option>
-              <option >傳教士</option>
-              <option >其他</option>
+              <option>長老定額組</option>
+              <option>慈助會</option>
+              <option>男青年</option>
+              <option>女青年</option>
+              <option>初級會</option>
+              <option>傳教士</option>
+              <option>其他支會</option>
+              <option>其他</option>
             </select>
           </div>
           <div>
