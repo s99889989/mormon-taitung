@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.container-top{
+    padding-top: 65px;
+
+    min-height: 100vh;
+}
+/*.navbar-top{*/
+/*    position: fixed;*/
+/*    width: 100%;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+
+@media (max-width: 768px) {
+    .container-top{
+        box-sizing: border-box;
+        padding-top: 70px;
+
+        min-height: calc(100vh + 200px);
+    }
+    /*.navbar-top{*/
+    /*    position: fixed;*/
+    /*    box-sizing: border-box;*/
+    /*    width: 100%;*/
+
+    /*}*/
+}
