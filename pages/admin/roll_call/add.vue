@@ -15,7 +15,21 @@ onMounted( async () => {
 
 
 })
+const scrollToBottom = () => {
+  // 使用 JavaScript 滚动到页面底部
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth', // 可以添加 smooth 实现平滑滚动
+  });
+};
 
+const scrollToTop = () => {
+  // 使用 JavaScript 滚动到页面底部
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth', // 可以添加 smooth 实现平滑滚动
+  });
+};
 </script>
 
 <template>
@@ -92,9 +106,49 @@ onMounted( async () => {
 
     </div>
   </div>
-
+  <button id="goto" @click="scrollToTop" class="go_top">TOP</button>
+  <button @click="scrollToBottom" class="go_down">Down</button>
 </template>
 
 <style scoped>
-
+.go_top {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background-color: #2a4f6f;
+  text-decoration: none;
+  color: #eee;
+  z-index: 999;
+  right: 30px;
+  bottom: 90px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  border:2px solid #222;
+//display: none;
+  transition: opacity 0.5s ease;
+}
+.go_down {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background-color: #2a4f6f;
+  text-decoration: none;
+  color: #eee;
+  z-index: 999;
+  right: 30px;
+  bottom: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  border:2px solid #222;
+//display: none;
+  transition: opacity 0.5s ease;
+}
+.fadeIn {
+  opacity: 1;
+}
+.fadeOut {
+  opacity: 0;
+}
 </style>
