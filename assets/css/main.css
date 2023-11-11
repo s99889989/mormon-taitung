@@ -4,7 +4,7 @@
 
 
 .container-top{
-    /*padding-top: 65px;*/
+    padding-top: 65px;
 
     min-height: 100vh;
 }
@@ -18,9 +18,9 @@
 @media (max-width: 768px) {
     .container-top{
         box-sizing: border-box;
-        /*padding-top: 70px;*/
+        padding-top: 0px;
 
-        min-height: calc(100vh + 200px);
+        /*min-height: calc(100vh + 200px);*/
     }
     /*.navbar-top{*/
     /*    position: fixed;*/
