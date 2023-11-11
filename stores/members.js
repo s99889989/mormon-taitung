@@ -7,7 +7,9 @@ export const useMembersStore = defineStore('members', () => {
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
-    search_member_organizations: '選擇組織',
+    search_member_stake: '花蓮支聯會',
+    search_member_ward: '台東一支會',
+    search_member_organizations: '所有分類',
     member_list: [
       {
         id: '',
@@ -23,14 +25,16 @@ export const useMembersStore = defineStore('members', () => {
       },
     ],
     editData: {
+      id: '',
       name: '',
-      priesthood: '選擇職位',
+      priesthood: '無職位',
       calling: '',
       stake: '花蓮支聯會',
       ward: '台東一支會',
       organizations: '選擇組織',
       area: '',
       registration_number: '',
+      objectID: 0,
     },
   })
   //處理後成員列表
@@ -42,14 +46,26 @@ export const useMembersStore = defineStore('members', () => {
     displayMembers.forEach((member, index)=>{
         member.objectID = index;
     })
-
+    //名稱
     if (data.search_member_name.length > 0) {
       displayMembers = displayMembers.filter((element) =>
           element.name.includes(data.search_member_name)
       );
     }
-
-    if (data.search_member_organizations !== '選擇組織') {
+    //支聯會
+    if (data.search_member_stake !== '所有分類') {
+      displayMembers = displayMembers.filter(
+          (element) => element.stake === data.search_member_stake
+      );
+    }
+    //支會
+    if (data.search_member_ward !== '所有分類') {
+      displayMembers = displayMembers.filter(
+          (element) => element.ward === data.search_member_ward
+      );
+    }
+    //組織
+    if (data.search_member_organizations !== '所有分類') {
       displayMembers = displayMembers.filter(
           (element) => element.organizations === data.search_member_organizations
       );
@@ -70,12 +86,13 @@ export const useMembersStore = defineStore('members', () => {
       body: JSON.stringify(data.editData)
     })
         .then(res => res.text())
-        .then(data => {
-
+        .then(async data => {
+          //刷新內容
+          await refresh();
         })
 
-    //刷新內容
-    await refresh();
+
+
   }
   //更新
   const edit = async () => {
@@ -90,16 +107,15 @@ export const useMembersStore = defineStore('members', () => {
       body: JSON.stringify(data.editData)
     })
         .then(res => res.text())
-        .then(data => {
-
+        .then(async data => {
+          //刷新內容
+          await refresh();
         })
-    //刷新內容
-    await refresh();
+
   }
   //獲取全部
   const getAll = async () => {
     const url = data.main_url+'mormon/member/get';
-    data.member_list.length = 0;
     try {
       const response = await fetch(url);
       return await response.json();
@@ -135,7 +151,6 @@ export const useMembersStore = defineStore('members', () => {
         .then(data => {
 
         })
-      // console.log('Size: '+memberList.length)
     data.member_list.splice(idx, 1);
   }
 

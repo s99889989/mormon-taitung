@@ -9,7 +9,9 @@ export const useRollCallStore = defineStore('roll_call', () => {
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
-    search_member_organizations: '選擇組織',
+    search_member_stake: '花蓮支聯會',
+    search_member_ward: '台東一支會',
+    search_member_organizations: '所有分類',
     search_member_have: '所有',
     search_roll_call_month: '選擇月份',
     roll_call_list: [
@@ -43,26 +45,49 @@ export const useRollCallStore = defineStore('roll_call', () => {
   })
   const memberList = computed(() => {
     let displayMembers = data.member_list.slice(); // 创建一个副本以确保响应性
-
+    //名稱
     if (data.search_member_name.length > 0) {
       displayMembers = displayMembers.filter((element) =>
           element.name.includes(data.search_member_name)
       );
     }
-
-    if (data.search_member_organizations !== '選擇組織') {
+    //支聯會
+    if (data.search_member_stake !== '所有分類') {
+      displayMembers = displayMembers.filter(
+          (element) => element.stake === data.search_member_stake
+      );
+    }
+    //支會
+    if (data.search_member_ward !== '所有分類') {
+      displayMembers = displayMembers.filter(
+          (element) => element.ward === data.search_member_ward
+      );
+    }
+    //組織
+    if (data.search_member_organizations !== '所有分類') {
       displayMembers = displayMembers.filter(
           (element) => element.organizations === data.search_member_organizations
       );
     }
 
+    //是否有來
     if (data.search_member_have !== '所有') {
       displayMembers = displayMembers.filter((element) =>
           data.search_member_have === '有來' ? element.have : !element.have
       );
     }
 
+    return displayMembers;
+  });
 
+  const memberHaveList = computed(() => {
+    let displayMembers = data.member_list.slice();
+
+
+    //是否有來
+    displayMembers = displayMembers.filter((element) =>
+        element.have
+    );
 
     return displayMembers;
   });
@@ -115,12 +140,12 @@ export const useRollCallStore = defineStore('roll_call', () => {
       body: JSON.stringify(data.editData)
     })
         .then(res => res.text())
-        .then(data => {
-          // console.log('新增:', data);
+        .then(async data => {
+          //刷新內容
+          await refresh();
         })
 
-    //刷新內容
-    await refresh();
+
   }
   //更新
   const edit = async () => {
@@ -140,11 +165,11 @@ export const useRollCallStore = defineStore('roll_call', () => {
       body: JSON.stringify(data.editData)
     })
         .then(res => res.text())
-        .then(data => {
-          // console.log('新增:', data);
+        .then(async data => {
+          //刷新內容
+          await refresh();
         })
-    //刷新內容
-    await refresh();
+
   }
   //獲取全部
   const getAll = async () => {
@@ -202,7 +227,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
   const refresh = async () => {
     data.roll_call_list = await getAll();
   }
-
+  //刷新人員列表
   const refreshMember = async () => {
     data.member_list = await getAllMembers();
   }
@@ -214,5 +239,5 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
   })
 
-  return { data, rollCallList, memberList, add, edit, getEdit, remove, refresh, refreshMember }
+  return { data, rollCallList, memberList, memberHaveList, add, edit, getEdit, remove, refresh, refreshMember }
 })
