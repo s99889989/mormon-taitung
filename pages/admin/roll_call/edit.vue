@@ -3,7 +3,16 @@ import {useRollCallStore} from "~/stores/roll_call";
 
 const rollCallStore = useRollCallStore();
 
+const addVisit = () => {
+  rollCallStore.data.edit_member_visit_list.push({
+    name: '',
+    amount: 1,
+  })
+}
 
+const removeVisit = (idx: any) => {
+  rollCallStore.data.edit_member_visit_list.splice(idx, 1);
+}
 
 </script>
 
@@ -67,6 +76,30 @@ const rollCallStore = useRollCallStore();
             <p class="text-xl p-2 md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>
           </div>
 
+        </div>
+
+        <div class="flex items-center">
+          <p class="w-64 text-black dark:text-white text-3xl">未在名單內人員</p>
+          <button @click="addVisit" type="button" class="text-center text-2xl text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+            增加
+          </button>
+        </div>
+
+        <div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+
+          <div v-for="(member, index) in rollCallStore.data.edit_member_visit_list"  class="p-5 flex flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" >
+
+            <div class="flex items-center mb-5">
+              <label for="first_name" class="w-20 text-2xl block font-medium text-gray-900 dark:text-white">名稱</label>
+              <input v-model="member.name" type="text" id="first_name" class="text-lg bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+            </div>
+            <div class="flex items-center mb-5">
+              <label for="first_name" class="w-20 text-2xl block font-medium text-gray-900 dark:text-white">人數</label>
+              <input v-model="member.amount" type="number" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+            </div>
+            <button @click="removeVisit(index)" type="button" class="text-center text-2xl text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+              刪除</button>
+          </div>
         </div>
 
         <div class="grid gap-6 grid-cols-2">

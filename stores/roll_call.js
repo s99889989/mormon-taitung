@@ -20,8 +20,16 @@ export const useRollCallStore = defineStore('roll_call', () => {
         roll_call_man: '',
         member_list: [],
         member_visit_list: [],
+        objectID: 0,
+        member_visit_list2: [
+          {
+            name: '',
+            amount: 1,
+          },
+        ],
       },
     ],
+
     member_list: [
       {
         id: '',
@@ -34,6 +42,13 @@ export const useRollCallStore = defineStore('roll_call', () => {
         area: '',
         registration_number: '',
         have: false,
+      },
+    ],
+
+    edit_member_visit_list: [
+      {
+        name: '',
+        amount: 1,
       },
     ],
     editData: {
@@ -102,7 +117,9 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
       })
     }
-
+    displayRollCalls.forEach((member, index)=>{
+      member.objectID = index;
+    })
     return displayRollCalls;
   })
 
@@ -122,13 +139,20 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
   //新增
   const add = async () => {
-
+    data.editData.member_list.length =0;
     data.member_list.forEach((member) =>{
       if(member.have){
         data.editData.member_list.push(member.id);
       }
     })
 
+    data.editData.member_visit_list.length = 0;
+    data.edit_member_visit_list.forEach((member)=>{
+      if(member.name.length > 0 && member.amount > 0){
+        data.editData.member_visit_list.push(member.name+' _ '+member.amount)
+      }
+
+    })
 
     const url = data.main_url+'mormon/roll_call/add';
     console.log(JSON.stringify(data.editData))
@@ -149,11 +173,19 @@ export const useRollCallStore = defineStore('roll_call', () => {
   }
   //更新
   const edit = async () => {
-    data.editData.member_list.length = 0;
+    data.editData.member_list.length =0;
     data.member_list.forEach((member) =>{
       if(member.have){
         data.editData.member_list.push(member.id);
       }
+    })
+
+    data.editData.member_visit_list.length = 0;
+    data.edit_member_visit_list.forEach((member)=>{
+      if(member.name.length > 0 && member.amount > 0){
+        data.editData.member_visit_list.push(member.name+' _ '+member.amount)
+      }
+
     })
     const url = data.main_url+'mormon/roll_call/update';
 
@@ -196,6 +228,18 @@ export const useRollCallStore = defineStore('roll_call', () => {
         .then(async resData => {
           data.editData = resData;
 
+          data.edit_member_visit_list.length = 0;
+          data.editData.member_visit_list.forEach((memberString)=>{
+            const parts = memberString.split(' _ ');
+            const name = parts[0];
+            const amount = parseInt(parts[1], 10);
+            data.edit_member_visit_list.push({
+              name: name,
+              amount: amount,
+            })
+
+          })
+
           data.member_list = await getAllMembers();
 
           data.member_list.forEach((member)=>{
@@ -226,6 +270,28 @@ export const useRollCallStore = defineStore('roll_call', () => {
   //刷新列表
   const refresh = async () => {
     data.roll_call_list = await getAll();
+    console.log('刷新列表')
+    data.roll_call_list.forEach((roll_call)=>{
+      roll_call.member_visit_list2 = [{
+        name: '',
+        amount: 1,
+      },];
+      roll_call.member_visit_list2.length = 0;
+      roll_call.member_visit_list.forEach((memberString)=>{
+
+        const parts = memberString.split(' _ ');
+        const name = parts[0];
+        const amount = parseInt(parts[1], 10);
+
+        roll_call.member_visit_list2.push({
+          name: name,
+          amount: amount,
+        })
+      })
+    })
+
+
+
   }
   //刷新人員列表
   const refreshMember = async () => {

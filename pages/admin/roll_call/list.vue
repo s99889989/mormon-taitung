@@ -4,6 +4,20 @@ import {useRollCallStore} from "~/stores/roll_call";
 
 const rollCallStore = useRollCallStore();
 
+const getAmount = (objectID: any) => {
+  const member = rollCallStore.rollCallList[objectID];
+
+  let amount = member.member_list.length;
+  console.log('1數量: '+amount)
+  member.member_visit_list2.forEach((addMember)=>{
+    console.log(addMember.name)
+    amount += addMember.amount;
+    console.log('2數量: '+addMember.amount)
+  })
+  console.log('3數量: '+amount)
+  return amount;
+}
+
 </script>
 
 <template>
@@ -43,7 +57,7 @@ const rollCallStore = useRollCallStore();
 
         <div  v-for="(member, index) in rollCallStore.rollCallList" class="p-1 md:p-5 flex sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
           <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.date}}</p>
-          <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-sky-700 dark:text-sky-400 text-center">人數: {{member.member_list.length}}</p>
+          <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-sky-700 dark:text-sky-400 text-center">人數: {{getAmount(member.objectID)}}</p>
 
           <div class="inline-flex rounded-md shadow-sm" role="group">
 

@@ -43,9 +43,7 @@ export const useMembersStore = defineStore('members', () => {
   const memberList = computed(() => {
     let displayMembers = data.member_list.slice();
 
-    displayMembers.forEach((member, index)=>{
-        member.objectID = index;
-    })
+
     //名稱
     if (data.search_member_name.length > 0) {
       displayMembers = displayMembers.filter((element) =>
@@ -70,7 +68,9 @@ export const useMembersStore = defineStore('members', () => {
           (element) => element.organizations === data.search_member_organizations
       );
     }
-
+    displayMembers.forEach((member, index)=>{
+      member.objectID = index;
+    })
     return displayMembers;
   })
 
