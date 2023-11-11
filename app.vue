@@ -1,5 +1,5 @@
 <template>
-<!--  <NavBar class="hidden md:block"/>-->
+  <NavBar class="hidden md:block"/>
   <NuxtPage />
-<!--  <BottomBar class="md:hidden"/>-->
+  <BottomBar class="md:hidden"/>
 </template>
