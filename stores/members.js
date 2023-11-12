@@ -27,7 +27,7 @@ export const useMembersStore = defineStore('members', () => {
     editData: {
       id: '',
       name: '',
-      priesthood: '無職位',
+      priesthood: '無聖職職位',
       calling: '',
       stake: '花蓮支聯會',
       ward: '台東一支會',

@@ -82,7 +82,6 @@ const addVisit = () => {
             </div>
             <p class="text-2xl p-2 md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.name}}</p>
             <p class="text-2xl p-2 md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.area}}</p>
-<!--            <p class="text-xl p-2 md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>-->
           </div>
 
         </div>
@@ -95,7 +94,7 @@ const addVisit = () => {
           </button>
         </div>
 
-        <div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div class="grid gap-6 grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
 
           <div v-for="(member, index) in rollCallStore.data.edit_member_visit_list"  class="p-5 flex flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" >
 
@@ -107,6 +106,7 @@ const addVisit = () => {
               <label for="first_name" class="w-20 text-2xl block font-medium text-gray-900 dark:text-white">人數</label>
               <input v-model="member.amount" type="number" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
             </div>
+
             <button>刪除</button>
           </div>
         </div>

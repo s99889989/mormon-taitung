@@ -87,17 +87,16 @@ const removeVisit = (idx: any) => {
 
         <div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
 
-          <div v-for="(member, index) in rollCallStore.data.edit_member_visit_list"  class="p-5 flex flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" >
+          <div v-for="(member, index) in rollCallStore.data.edit_member_visit_list"  class="p-5 flex flex-wrap bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" >
 
-            <div class="flex items-center mb-5">
+            <div class="basis-4/5 flex items-center pe-2 mb-5">
               <label for="first_name" class="w-20 text-2xl block font-medium text-gray-900 dark:text-white">名稱</label>
               <input v-model="member.name" type="text" id="first_name" class="text-lg bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+
             </div>
-            <div class="flex items-center mb-5">
-              <label for="first_name" class="w-20 text-2xl block font-medium text-gray-900 dark:text-white">人數</label>
-              <input v-model="member.amount" type="number" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
-            </div>
-            <button @click="removeVisit(index)" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+            <input v-model="member.amount" type="number" id="visitors" class=" mb-5 basis-1/5 bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+
+            <button @click="removeVisit(index)" type="button" class="basis-full text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
               刪除</button>
           </div>
         </div>

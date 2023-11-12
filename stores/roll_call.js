@@ -13,7 +13,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
     search_member_ward: '台東一支會',
     search_member_organizations: '所有分類',
     search_member_have: '所有',
-    search_roll_call_month: '選擇月份',
+    search_roll_call_month: '所有月份',
     roll_call_list: [
       {
         date: '',
@@ -109,7 +109,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
   const rollCallList = computed(() => {
     let displayRollCalls = data.roll_call_list.slice();
-    if (data.search_roll_call_month !== '選擇月份') {
+    if (data.search_roll_call_month !== '所有月份') {
       displayRollCalls = displayRollCalls.filter((element)=>{
 
         const month = new Date(element.date).getMonth()+1+'';

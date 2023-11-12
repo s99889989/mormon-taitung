@@ -25,7 +25,7 @@ onMounted(async ()=>{
 </script>
 
 <template>
-  <div class="dark:bg-black bg-white flex justify-center container-top w-full">
+  <div class="dark:bg-black min-h-full bg-white flex justify-center container-top w-full">
     <div class="w-full lg:w-3/4 mx-5">
       <p class="text-black dark:text-white text-5xl text-center pt-5">人員名單</p>
       <div class="grid gap-6 mb-6 grid-cols-3 items-center pt-5">
@@ -60,9 +60,9 @@ onMounted(async ()=>{
 
 
 
-        <NuxtLink to="/admin/member/add" type="button" class="text-center text-xl text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+        <NuxtLink to="/admin/member/add" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
           新增</NuxtLink>
-        <button @click="membersStore.refresh()" type="button" class="text-xl text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+        <button @click="membersStore.refresh()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
           刷新</button>
         <p class="text-xl text-black dark:text-white" >人數:{{membersStore.memberList.length}}</p>
       </div>
