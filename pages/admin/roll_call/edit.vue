@@ -73,7 +73,7 @@ const removeVisit = (idx: any) => {
             </div>
             <p class="text-2xl p-2 md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.name}}</p>
             <p class="text-2xl p-2 md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.area}}</p>
-            <p class="text-xl p-2 md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>
+<!--            <p class="text-xl p-2 md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>-->
           </div>
 
         </div>
