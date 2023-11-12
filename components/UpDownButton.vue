@@ -59,11 +59,11 @@ const scrollToTop = () => {
 @media (max-width: 768px) {
   .go_top {
     right: 10px;
-    bottom: 90px;
+    bottom: 130px;
   }
   .go_down {
     right: 10px;
-    bottom: 30px;
+    bottom: 70px;
   }
 }
 </style>

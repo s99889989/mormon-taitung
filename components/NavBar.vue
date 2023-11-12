@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { initFlowbite } from 'flowbite'
-onMounted(() => {
-  initFlowbite();
-})
+import {useDarkModeStore} from "~/stores/dark_mode";
+
+const dark_mode = useDarkModeStore();
 
 </script>
 
 <template>
 
   <nav class="fixed w-full border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-<!--    <div class="max-w-screen-xl flex flex-wrap items-center justify-center mx-auto p-4">-->
     <div class="flex flex-row p-4">
       <NuxtLink to="/" class="basis-1/4 flex items-center">
         <img src="/logo.png" class="h-8 mr-3" alt="Flowbite Logo" />
@@ -36,8 +33,8 @@ onMounted(() => {
           </li>
 
           <li>
-            <NuxtLink to="/admin/setting/main" class="text-2xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-              設定</NuxtLink>
+            <button @click="dark_mode.change_dark_mode" to="/admin/setting/main" class="text-2xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+              {{dark_mode.data.display_name}}</button>
           </li>
 
         </ul>
