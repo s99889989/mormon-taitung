@@ -9,7 +9,10 @@ export const useMembersStore = defineStore('members', () => {
     search_member_name: '',
     search_member_stake: '花蓮支聯會',
     search_member_ward: '台東一支會',
-    search_member_organizations: '所有分類',
+    search_member_organizations: '所有組織',
+    //紀錄UUID和member_list位置
+    member_map: new Map(),
+    //成員列表
     member_list: [
       {
         id: '',
@@ -21,9 +24,9 @@ export const useMembersStore = defineStore('members', () => {
         organizations: '',
         area: '',
         registration_number: '',
-        objectID: 0,
       },
     ],
+    //編輯的成員
     editData: {
       id: '',
       name: '',
@@ -31,10 +34,9 @@ export const useMembersStore = defineStore('members', () => {
       calling: '',
       stake: '花蓮支聯會',
       ward: '台東一支會',
-      organizations: '選擇組織',
+      organizations: '慕道友',
       area: '',
       registration_number: '',
-      objectID: 0,
     },
   })
   //處理後成員列表
@@ -43,7 +45,6 @@ export const useMembersStore = defineStore('members', () => {
   const memberList = computed(() => {
     let displayMembers = data.member_list.slice();
 
-
     //名稱
     if (data.search_member_name.length > 0) {
       displayMembers = displayMembers.filter((element) =>
@@ -51,26 +52,24 @@ export const useMembersStore = defineStore('members', () => {
       );
     }
     //支聯會
-    if (data.search_member_stake !== '所有分類') {
+    if (data.search_member_stake !== '所有支聯會') {
       displayMembers = displayMembers.filter(
           (element) => element.stake === data.search_member_stake
       );
     }
     //支會
-    if (data.search_member_ward !== '所有分類') {
+    if (data.search_member_ward !== '所有支會') {
       displayMembers = displayMembers.filter(
           (element) => element.ward === data.search_member_ward
       );
     }
     //組織
-    if (data.search_member_organizations !== '所有分類') {
+    if (data.search_member_organizations !== '所有組織') {
       displayMembers = displayMembers.filter(
           (element) => element.organizations === data.search_member_organizations
       );
     }
-    displayMembers.forEach((member, index)=>{
-      member.objectID = index;
-    })
+
     return displayMembers;
   })
 
@@ -86,16 +85,17 @@ export const useMembersStore = defineStore('members', () => {
       body: JSON.stringify(data.editData)
     })
         .then(res => res.text())
-        .then(async data => {
-          //刷新內容
-          await refresh();
+        .then(uuidString => {
+          data.editData.id = uuidString;
+          data.member_list.unshift(data.editData);
+          //更新人員Map對應列表
+          refreshMemberMap();
+
         })
-
-
 
   }
   //更新
-  const edit = async () => {
+  const edit = () => {
 
     const url = data.main_url+'mormon/member/update';
 
@@ -105,67 +105,63 @@ export const useMembersStore = defineStore('members', () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data.editData)
+    }).then(res => {
+      const id = data.editData.id;
+      const index = data.member_map.get(id);
+      data.member_list[index] =  data.editData;
     })
-        .then(res => res.text())
-        .then(async data => {
-          //刷新內容
-          await refresh();
-        })
 
   }
-  //獲取全部
-  const getAll = async () => {
-    const url = data.main_url+'mormon/member/get';
-    try {
-      const response = await fetch(url);
-      return await response.json();
-    } catch (error) {
-      return [];
-    }
-  }
+
 
   //設置編輯值
-  const getEdit = (id) => {
-    console.log(id)
-     const url = data.main_url+'mormon/member/get/'+id;
-
-    fetch(url, {
-      method: 'GET'
-
-    })
-        .then(res => res.json())
-        .then(resData => {
-          data.editData = resData;
-        })
+  const setEditValue = (id) => {
+    //從id獲取index
+    const index = data.member_map.get(id);
+    data.editData =  data.member_list[index];
   }
 
   //移除
-  const remove = async (id, idx) => {
+  const remove = (id) => {
     const url = data.main_url+'mormon/member/remove/' + id;
 
     fetch(url, {
       method: 'DELETE'
 
-    })
-        .then(res => res.text())
+    }).then(res => res.text())
         .then(data => {
 
         })
-    data.member_list.splice(idx, 1);
+    //從id獲取index
+    const index = data.member_map.get(id);
+    //從列表刪除
+    data.member_list.splice(index, 1);
+    //更新人員Map對應列表
+    refreshMemberMap();
+
+  }
+  //更新人員Map對應列表
+  const refreshMemberMap = () => {
+    data.member_list.forEach((member, key, index)=>{
+      data.member_map.set(member.id, key)
+    })
   }
 
-  //刷新列表
-  const refresh = async () => {
-
-    data.member_list = await getAll();
+  //刷新人員列表
+  const refreshMember = async () => {
+    if(data.member_list.length < 2){
+      const url = data.main_url+'mormon/member/get';
+      try {
+        const response = await fetch(url);
+        data.member_list = await response.json();
+      } catch (error) {
+        data.member_list =  [];
+      }finally {
+        //更新人員Map對應列表
+        refreshMemberMap();
+      }
+    }
   }
 
-  onMounted(async () => {
-
-    await refresh();
-
-
-  })
-
-  return { data, memberList, add, edit, getEdit, remove, refresh, getAll }
+  return { data, memberList, add, edit, setEditValue, remove, refreshMember }
 })

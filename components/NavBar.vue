@@ -7,7 +7,7 @@ const dark_mode = useDarkModeStore();
 
 <template>
 
-  <nav class="fixed w-full border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+  <nav class="fixed w-full border-b border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex flex-row p-4">
       <NuxtLink to="/" class="basis-1/4 flex items-center">
         <img src="/logo.png" class="h-8 mr-3" alt="Flowbite Logo" />

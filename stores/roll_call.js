@@ -11,25 +11,13 @@ export const useRollCallStore = defineStore('roll_call', () => {
     search_member_name: '',
     search_member_stake: '花蓮支聯會',
     search_member_ward: '台東一支會',
-    search_member_organizations: '所有分類',
-    search_member_have: '所有',
+    search_member_organizations: '所有組織',
+    search_member_have: '有來+沒來',
     search_roll_call_month: '所有月份',
-    roll_call_list: [
-      {
-        date: '',
-        roll_call_man: '',
-        member_list: [],
-        member_visit_list: [],
-        objectID: 0,
-        member_visit_list2: [
-          {
-            name: '',
-            amount: 1,
-          },
-        ],
-      },
-    ],
-
+    edit_roll_call_date: '',
+    //紀錄UUID和roll_call_list位置
+    roll_call_map: new Map(),
+    //成員列表
     member_list: [
       {
         id: '',
@@ -41,74 +29,60 @@ export const useRollCallStore = defineStore('roll_call', () => {
         organizations: '',
         area: '',
         registration_number: '',
-        have: false,
       },
     ],
-
-    edit_member_visit_list: [
+    //點名表列表
+    roll_call_list: [
       {
-        name: '',
-        amount: 1,
+        date: '',
+        roll_call_man: '',
+        member_list: [{
+          id: '',
+          name: '',
+          stake: '',
+          ward: '',
+          organizations: '',
+          area: '',
+          have: false,
+        }],
+        member_visit_list: [
+          {
+            name: '',
+            amount: 1,
+          },
+        ],
       },
     ],
-    editData: {
+    edit_roll_call:{
       date: '',
       roll_call_man: '',
-      member_list: [],
-      member_visit_list: [],
-    },
+      member_list: [{
+        id: '',
+        name: '',
+        stake: '',
+        ward: '',
+        organizations: '',
+        area: '',
+        have: false,
+      }],
+      member_visit_list: [
+        {
+          name: '',
+          amount: 1,
+        },
+      ],
+    }
   })
-  const memberList = computed(() => {
-    let displayMembers = data.member_list.slice(); // 创建一个副本以确保响应性
-    //名稱
-    if (data.search_member_name.length > 0) {
-      displayMembers = displayMembers.filter((element) =>
-          element.name.includes(data.search_member_name)
-      );
-    }
-    //支聯會
-    if (data.search_member_stake !== '所有分類') {
-      displayMembers = displayMembers.filter(
-          (element) => element.stake === data.search_member_stake
-      );
-    }
-    //支會
-    if (data.search_member_ward !== '所有分類') {
-      displayMembers = displayMembers.filter(
-          (element) => element.ward === data.search_member_ward
-      );
-    }
-    //組織
-    if (data.search_member_organizations !== '所有分類') {
-      displayMembers = displayMembers.filter(
-          (element) => element.organizations === data.search_member_organizations
-      );
-    }
-
-    //是否有來
-    if (data.search_member_have !== '所有') {
-      displayMembers = displayMembers.filter((element) =>
-          data.search_member_have === '有來' ? element.have : !element.have
-      );
-    }
-
-    return displayMembers;
-  });
-
-  const memberHaveList = computed(() => {
-    let displayMembers = data.member_list.slice();
-
-
-    //是否有來
-    displayMembers = displayMembers.filter((element) =>
-        element.have
-    );
-
-    return displayMembers;
-  });
+  //選擇編輯的點名表
+  const getEditRollCall = () => {
+    const edit_roll_call_index = data.roll_call_map.get(data.edit_roll_call_date);
+    console.log(data.edit_roll_call_date+'獲取'+edit_roll_call_index)
+    return data.roll_call_list[edit_roll_call_index];
+  }
 
   const rollCallList = computed(() => {
     let displayRollCalls = data.roll_call_list.slice();
+
     if (data.search_roll_call_month !== '所有月份') {
       displayRollCalls = displayRollCalls.filter((element)=>{
 
@@ -117,76 +91,86 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
       })
     }
-    displayRollCalls.forEach((member, index)=>{
-      member.objectID = index;
-    })
+
     return displayRollCalls;
   })
 
-  //獲取全部成員
-  const getAllMembers = async () => {
-    const url = data.main_url+'mormon/member/get';
-    try {
-      const response = await fetch(url);
-      return await response.json();
-    } catch (error) {
-      console.error('錯誤:', error);
-      return [];
-    }
-  }
-
-
-
   //新增
   const add = async () => {
-    data.editData.member_list.length =0;
-    data.member_list.forEach((member) =>{
+
+    let roll_call_list=
+      {
+        date: data.edit_roll_call.date,
+        roll_call_man: data.edit_roll_call.roll_call_man,
+        member_list: ['123', '456'],
+        member_visit_list: [],
+      }
+    ;
+
+
+
+    roll_call_list.member_list.length = 0;
+    data.edit_roll_call.member_list.forEach((member) =>{
       if(member.have){
-        data.editData.member_list.push(member.id);
+        roll_call_list.member_list.push(member.id);
       }
     })
 
-    data.editData.member_visit_list.length = 0;
-    data.edit_member_visit_list.forEach((member)=>{
+
+    data.edit_roll_call.member_visit_list.forEach((member)=>{
       if(member.name.length > 0 && member.amount > 0){
-        data.editData.member_visit_list.push(member.name+' _ '+member.amount)
+        roll_call_list.member_visit_list.push(member.name+' _ '+member.amount)
       }
 
     })
 
     const url = data.main_url+'mormon/roll_call/add';
-    console.log(JSON.stringify(data.editData))
+
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data.editData)
+      body: JSON.stringify(roll_call_list)
     })
         .then(res => res.text())
         .then(async data => {
           //刷新內容
-          await refresh();
+          await refreshRollCall();
         })
 
 
   }
   //更新
   const edit = async () => {
-    data.editData.member_list.length =0;
-    data.member_list.forEach((member) =>{
+
+
+    let roll_call_list=
+        {
+          date: data.edit_roll_call.date,
+          roll_call_man: data.edit_roll_call.roll_call_man,
+          member_list: ['123', '456'],
+          member_visit_list: [],
+        }
+    ;
+
+
+
+    roll_call_list.member_list.length = 0;
+    data.edit_roll_call.member_list.forEach((member) =>{
       if(member.have){
-        data.editData.member_list.push(member.id);
+        roll_call_list.member_list.push(member.id);
       }
     })
 
-    data.editData.member_visit_list.length = 0;
-    data.edit_member_visit_list.forEach((member)=>{
+
+    data.edit_roll_call.member_visit_list.forEach((member)=>{
       if(member.name.length > 0 && member.amount > 0){
-        data.editData.member_visit_list.push(member.name+' _ '+member.amount)
+        roll_call_list.member_visit_list.push(member.name+' _ '+member.amount)
       }
 
     })
+
     const url = data.main_url+'mormon/roll_call/update';
 
     fetch(url, {
@@ -194,116 +178,131 @@ export const useRollCallStore = defineStore('roll_call', () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data.editData)
+      body: JSON.stringify(roll_call_list)
     })
         .then(res => res.text())
         .then(async data => {
           //刷新內容
-          await refresh();
+          await refreshRollCall();
         })
 
-  }
-  //獲取全部
-  const getAll = async () => {
-    const url = data.main_url+'mormon/roll_call/get';
-    try {
-      const response = await fetch(url);
-      return await response.json();
-    } catch (error) {
-      console.error('错误:', error);
-      return [];
-    }
-  }
-
-  //設置編輯值
-  const getEdit = (id) => {
-    console.log(id)
-    const url = data.main_url+'mormon/roll_call/get/'+id;
-    console.log('GET')
-    fetch(url, {
-      method: 'GET'
-
-    })
-        .then(res => res.json())
-        .then(async resData => {
-          data.editData = resData;
-
-          data.edit_member_visit_list.length = 0;
-          data.editData.member_visit_list.forEach((memberString)=>{
-            const parts = memberString.split(' _ ');
-            const name = parts[0];
-            const amount = parseInt(parts[1], 10);
-            data.edit_member_visit_list.push({
-              name: name,
-              amount: amount,
-            })
-
-          })
-
-          data.member_list = await getAllMembers();
-
-          data.member_list.forEach((member)=>{
-              if(data.editData.member_list.includes(member.id)){
-                member.have = true;
-              }
-          })
-
-        })
   }
 
   //移除
-  const remove = async (date, idx) => {
+  const remove = async (date) => {
     const url = data.main_url+'mormon/roll_call/remove/' + date;
 
     fetch(url, {
       method: 'DELETE'
 
-    })
-        .then(res => res.text())
-        .then(data => {
-          console.log('獲取:', data);
+    }).then(res => {
+          //從id獲取index
+          const index = data.roll_call_map.get(date);
+          data.roll_call_list.splice(index, 1);
+          //更新人員Map對應列表
+          refreshRollCallMap();
         })
 
-    data.roll_call_list.splice(idx, 1);
+
+
+  }
+
+  //設置目前要查看的RollCall
+  const setEditRollCall = (date) => {
+    const index = data.roll_call_map.get(date);
+    data.edit_roll_call = { ...data.roll_call_list[index] };
   }
 
   //刷新列表
-  const refresh = async () => {
-    data.roll_call_list = await getAll();
-    console.log('刷新列表')
-    data.roll_call_list.forEach((roll_call)=>{
-      roll_call.member_visit_list2 = [{
-        name: '',
-        amount: 1,
-      },];
-      roll_call.member_visit_list2.length = 0;
-      roll_call.member_visit_list.forEach((memberString)=>{
+  const refreshRollCall = async () => {
+    let roll_call_list= [
+      {
+        date: '',
+        roll_call_man: '',
+        member_list: [],
+        member_visit_list: [],
+      },
+    ];
+    const url = data.main_url+'mormon/roll_call/get';
+    try {
+      const response = await fetch(url);
+      roll_call_list =  await response.json();
+    } catch (error) {
+      roll_call_list =  [];
+    }finally {
+      data.roll_call_list.length = 0;
+      roll_call_list.forEach(value => {
 
-        const parts = memberString.split(' _ ');
-        const name = parts[0];
-        const amount = parseInt(parts[1], 10);
+        //RollCall設置
+        const roll_call = {
+          date: value.date,
+          roll_call_man: value.roll_call_man,
+          member_list: [{
+            id: '',
+            name: '',
+            stake: '',
+            ward: '',
+            organizations: '',
+            area: '',
+            have: false,
+          }],
+          member_visit_list: [
+            {
+              name: '',
+              amount: 1,
+            },
+          ],
+        }
 
-        roll_call.member_visit_list2.push({
-          name: name,
-          amount: amount,
+        //Member設置
+        roll_call.member_list.length = 0;
+
+        data.member_list.forEach(value1 => {
+
+          const member = {
+            id: value1.id,
+            name: value1.name,
+            stake: value1.stake,
+            ward: value1.ward,
+            organizations: value1.organizations,
+            area: value1.area,
+            have: false,
+          }
+          if(value.member_list.includes(value1.id)){
+            member.have = true;
+          }
+
+          roll_call.member_list.push(member);
         })
+        //拜訪Member設置
+        roll_call.member_visit_list.length = 0;
+        value.member_visit_list.forEach(value1 => {
+          const parts = value1.split(' _ ');
+          const name = parts[0];
+          const amount = parseInt(parts[1]);
+          const member_visit = {
+            name: name,
+            amount: amount,
+          }
+          roll_call.member_visit_list.push(member_visit);
+        })
+        //RollCall放入
+        data.roll_call_list.push(roll_call)
+
       })
+
+
+      //更新人員Map對應列表
+      refreshRollCallMap();
+    }
+  }
+
+  //更新人員Map對應列表
+  const refreshRollCallMap = () => {
+    data.roll_call_list.forEach((roll_call, key)=>{
+      data.roll_call_map.set(roll_call.date, key)
     })
-
-
-
-  }
-  //刷新人員列表
-  const refreshMember = async () => {
-    data.member_list = await getAllMembers();
   }
 
-  onMounted(async () => {
-
-    await refresh();
-
-
-  })
-
-  return { data, rollCallList, memberList, memberHaveList, add, edit, getEdit, remove, refresh, refreshMember }
+  return { data, rollCallList, setEditRollCall, add, edit, getEditRollCall, remove, refreshRollCall }
 })
