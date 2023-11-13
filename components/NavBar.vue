@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import {useDarkModeStore} from "~/stores/dark_mode";
-
+import { initFlowbite } from 'flowbite'
 const dark_mode = useDarkModeStore();
-
+onMounted(() => {
+  initFlowbite();
+})
 </script>
 
 <template>
