@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useRollCallStore} from "~/stores/roll_call";
-
+import html2canvas from 'html2canvas';
 const rollCallStore = useRollCallStore();
 const organizationsOrder = [
   '長老定額組',
@@ -131,15 +131,39 @@ const oneAmount = () => {
   return amount;
 }
 
+const downLoad = async () => {
+
+  const targetDiv = document.getElementById('myDiv');
+
+
+  const canvas = await html2canvas(targetDiv);
+
+
+  const imageData = canvas.toDataURL('image/png');
+
+
+  const link = document.createElement('a');
+  link.href = imageData;
+  link.download = 'captured_image.png';
+
+
+  link.click();
+}
 
 onMounted(()=>{
   roll_call.value = rollCallStore.data.edit_roll_call;
+
+  if(roll_call.value.date.length == 0){
+    const router = useRouter()
+    router.push('/admin/roll_call/list');
+  }
+
 })
 
 </script>
 
 <template>
-  <div class="dark:bg-black bg-white flex justify-center container-top w-full">
+  <div id="myDiv" class="dark:bg-black bg-white flex justify-center container-top w-full">
 
     <div class="w-full lg:w-3/4">
 
@@ -269,6 +293,11 @@ onMounted(()=>{
           </div>
         </div>
       </div>
+      <div class="mx-5 mt-5">
+        <button @click="downLoad()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+          下載</button>
+      </div>
+
 
       <br/> <br/> <br/>
 

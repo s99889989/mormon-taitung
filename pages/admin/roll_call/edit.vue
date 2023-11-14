@@ -37,7 +37,10 @@ const removeVisit = (idx: any) => {
 
 onMounted(()=>{
   roll_call.value = rollCallStore.data.edit_roll_call;
-
+  if(roll_call.value.date.length == 0){
+    const router = useRouter()
+    router.push('/admin/roll_call/list');
+  }
 })
 
 //總人數

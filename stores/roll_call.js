@@ -79,7 +79,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
     console.log(data.edit_roll_call_date+'獲取'+edit_roll_call_index)
     return data.roll_call_list[edit_roll_call_index];
   }
-
+  //過濾後的點名列表
   const rollCallList = computed(() => {
     let displayRollCalls = data.roll_call_list.slice();
 

@@ -15,7 +15,6 @@ onMounted( () => {
     organizations: '慕道友',
     area: '',
     registration_number: '',
-    objectID: 0,
   }
 
 

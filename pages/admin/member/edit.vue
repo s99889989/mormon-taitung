@@ -4,7 +4,10 @@ import {useMembersStore} from "~/stores/members";
 const membersStore = useMembersStore();
 
 onMounted( () => {
-
+  if(membersStore.data.editData.id.length == 0){
+    const router = useRouter()
+    router.push('/admin/member/list');
+  }
 
 })
 
