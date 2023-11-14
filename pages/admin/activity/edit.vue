@@ -19,7 +19,9 @@ const active = ref({
 })
 
 onMounted(()=>{
-   active.value = activeStore.data.edit_active
+  active.value = activeStore.data.edit_active
+
+  changeFixed();
 
   initFlowbite();
 })
@@ -77,6 +79,7 @@ const changeFixed = () => {
             <option>禮拜五</option>
             <option>禮拜六</option>
             <option>禮拜日</option>
+            <option>每個月一次</option>
           </select>
         </div>
 

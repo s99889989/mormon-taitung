@@ -10,6 +10,7 @@ export const useMembersStore = defineStore('members', () => {
     search_member_stake: '花蓮支聯會',
     search_member_ward: '台東一支會',
     search_member_organizations: '所有組織',
+    search_member_calling: '所有召喚',
     //紀錄UUID和member_list位置
     member_map: new Map(),
     //成員列表
@@ -69,7 +70,12 @@ export const useMembersStore = defineStore('members', () => {
           (element) => element.organizations === data.search_member_organizations
       );
     }
-
+    //組織
+    if (data.search_member_calling !== '所有召喚') {
+      displayMembers = displayMembers.filter(
+          (element) => element.calling.includes(data.search_member_calling)
+      );
+    }
     return displayMembers;
   })
 

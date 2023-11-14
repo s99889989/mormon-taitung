@@ -15,7 +15,7 @@ const setDeleteDate = (date: string) => {
 }
 
 onMounted(()=>{
-  initFlowbite();
+
   membersStore.refreshMember();
   rollCallStore.data.member_list.length = 0;
   setTimeout(()=>{

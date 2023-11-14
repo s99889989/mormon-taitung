@@ -109,6 +109,7 @@ const changeFixed = () => {
             <option>禮拜五</option>
             <option>禮拜六</option>
             <option>禮拜日</option>
+            <option>每個月一次</option>
           </select>
         </div>
 

@@ -1,6 +1,7 @@
 <script setup lang="js">
-import {useActiveStore} from "~/stores/active";
 import {initFlowbite} from "flowbite";
+import {useActiveStore} from "~/stores/active";
+
 
 const activeStore = useActiveStore();
 
@@ -33,7 +34,10 @@ onMounted(()=>{
 
         <div>
           <select v-model="activeStore.data.search_active_month" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>所有月份</option>
+            <option selected>所有時間</option>
+            <option>固定時間</option>
+            <option>11</option>
+            <option>12</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -44,8 +48,6 @@ onMounted(()=>{
             <option>8</option>
             <option>9</option>
             <option>10</option>
-            <option>11</option>
-            <option>12</option>
           </select>
         </div>
         <NuxtLink to="/admin/activity/add" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
@@ -60,7 +62,9 @@ onMounted(()=>{
         <div  v-for="(active) in activeStore.activeList" class="p-1 grid justify-items-center grid-cols-2 md:grid-cols-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
           <div>
             <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{active.name}}</p>
-            <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-blue-700 dark:text-blue-400 text-center">{{active.date}}</p>
+            <p v-show="!active.fixed" class="text-xl p-2 md:text-5xl font-bold tracking-tight text-blue-700 dark:text-blue-400 text-center">{{active.date}}</p>
+            <p v-show="active.fixed" class="text-xl p-2 md:text-5xl font-bold tracking-tight text-blue-700 dark:text-blue-400 text-center">{{active.week}}</p>
+            <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-orange-700 dark:text-orange-400 text-center">{{active.time}}~{{active.end_time}}</p>
           </div>
 
 

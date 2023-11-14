@@ -1,6 +1,5 @@
 
 import { defineStore } from 'pinia'
-import {initFlowbite} from "flowbite";
 
 
 export const useActiveStore = defineStore('active', () => {
@@ -8,7 +7,7 @@ export const useActiveStore = defineStore('active', () => {
   //https://localhost:9100/
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
-    search_active_month: '所有月份',
+    search_active_month: '所有時間',
     //紀錄saveName和active_list位置
     active_map: new Map(),
     active_list:[
@@ -43,11 +42,18 @@ export const useActiveStore = defineStore('active', () => {
   const activeList = computed(() => {
     let activeDisplayList = data.active_list.slice();
 
-    if (data.search_active_month !== '所有月份') {
+
+    if (data.search_active_month === '固定時間') {
+      activeDisplayList = activeDisplayList.filter((active)=>{
+        return active.fixed;
+      })
+    }
+
+    if (data.search_active_month !== '所有時間' && data.search_active_month !== '固定時間') {
       activeDisplayList = activeDisplayList.filter((active)=>{
 
         const month = new Date(active.date).getMonth()+1+'';
-        return month === data.search_active_month;
+        return month === data.search_active_month && !active.fixed;
 
       })
     }
@@ -80,7 +86,7 @@ export const useActiveStore = defineStore('active', () => {
   const update = async () => {
     const url = data.main_url+'mormon/active/update';
     console.log('更新')
-    console.log(JSON.stringify(data.edit_active))
+    console.log(data.edit_active.info)
 
 
 
@@ -111,7 +117,7 @@ export const useActiveStore = defineStore('active', () => {
     }).then(res => {
       //從id獲取index
       const index = data.active_map.get(saveName);
-      data.roll_call_list.splice(index, 1);
+      data.active_list.splice(index, 1);
       //更新活動Map對應列表
       refreshActiveMap();
     })

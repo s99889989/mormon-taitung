@@ -9,7 +9,16 @@ export const useImageStore = defineStore('image', () => {
         main_url: 'https://madustrialtd.asuscomm.com:9100/',
         search_active_month: '所有月份',
         select_image_path: '',
-        image_list:['https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg','https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg'],
+        image_list:[
+            {
+            url: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg',
+            select: false,
+        },
+            {
+                url: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg',
+                select: false,
+            },
+        ],
         path:['mormon', 'image', 'active'],
     })
 
@@ -27,7 +36,7 @@ export const useImageStore = defineStore('image', () => {
         })
             .then(response => response.text())
             .then(imageName => {
-                data.select_image_path = '<img>https://localhost:9100/'+data.path.join('/')+'/'+ imageName+'</img>';
+                data.select_image_path = '<img>'+data.main_url+data.path.join('/')+'/'+ imageName+'</img>';
                 //
                 //
                 //   data.image_list.push('https://localhost:9100/'+imageName)
@@ -54,6 +63,7 @@ export const useImageStore = defineStore('image', () => {
         textarea.focus();
 
 
+
     }
 
     const refreshImage = () => {
@@ -73,7 +83,10 @@ export const useImageStore = defineStore('image', () => {
                 image_list = dataRes;
                 data.image_list.length = 0;
                 image_list.forEach(image=>{
-                    data.image_list.push(data.main_url+image)
+                    data.image_list.push({
+                        url: data.main_url+image,
+                        select: false,
+                    })
                 })
             })
     }

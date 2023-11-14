@@ -1,23 +1,38 @@
 <script setup lang="ts">
 import {useImageStore} from "~/stores/image.js";
+import {useActiveStore} from "~/stores/active";
 
+
+
+
+const activeStore = useActiveStore();
 const imageStore = useImageStore();
 
 const page = ref('up_data');
 const selectPage = (page_in) => {
   page.value = page_in;
 }
-
+const hasNewClass = ref(false);
 const selectImage = (image) => {
-  imageStore.data.select_image_path = '<img>'+image+'</img>';
+  imageStore.data.select_image_path = '<img>'+image.url+'</img>';
+  // hasNewClass.value = !hasNewClass.value;
+  imageStore.data.image_list.forEach(i=>{
+    i.select = false;
+  })
 
-  const clickedElement = event.target;
-  console.log('Clicked element text:', clickedElement.textContent);
-   clickedElement.classList.add('border-black border-8')
+  image.select = true;
+
+  // const clickedElement = event.target;
+  // console.log('Clicked element text:', clickedElement.textContent);
+  // clickedElement.classList.add('border-black border-8')
 
 }
 
 
+
+const insertImage = () => {
+  imageStore.insertImage()
+}
 
 onMounted(()=>{
   imageStore.refreshImage();
@@ -86,7 +101,7 @@ onMounted(()=>{
             <div v-for="(image) in imageStore.data.image_list">
 <!--              <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">-->
 <!--              <img class="h-auto max-w-full rounded-lg" src="https://localhost:9100/mormon/image/active/temporary/button_default.png" alt="">-->
-              <img @click="selectImage(image)" class="h-auto max-w-full rounded-lg" :src="image" alt="">
+              <img @click="selectImage(image)" class="h-auto max-w-full rounded-lg" :class="{'border-cyan-300': image.select, 'border-4': image.select}" :src="image.url" alt="">
 <!--              <p class="text-black dark:text-white text-xl" >{{image.image}}</p>-->
             </div>
 
@@ -102,7 +117,7 @@ onMounted(()=>{
         </div>
         <!-- Modal footer -->
         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-          <button @click="imageStore.insertImage()" data-modal-hide="insert_picture" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">確定</button>
+          <button @click="insertImage()" data-modal-hide="insert_picture" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">確定</button>
           <button data-modal-hide="insert_picture" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">取消</button>
         </div>
       </div>
@@ -111,5 +126,7 @@ onMounted(()=>{
 </template>
 
 <style scoped>
+.select-image{
 
+}
 </style>
