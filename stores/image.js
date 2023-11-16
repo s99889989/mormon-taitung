@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import * as path from "path";
 
 export const useImageStore = defineStore('image', () => {
-    //https://localhost:9100/
+    //http://localhost:9100/
     //https://madustrialtd.asuscomm.com:9100/
     const data = reactive({
         main_url: 'https://madustrialtd.asuscomm.com:9100/',
@@ -28,7 +28,7 @@ export const useImageStore = defineStore('image', () => {
         const formData = new FormData();
         formData.append('file', inputFile.files[0]);
 
-        const url = data.main_url+'mormon/image/add/'+data.path.join('__');
+        const url = data.main_url+'image/add/'+data.path.join('__');
 
         fetch(url, {
             method: 'POST',
@@ -68,7 +68,7 @@ export const useImageStore = defineStore('image', () => {
 
     const refreshImage = () => {
         const pathList = data.path;
-        const url = data.main_url+'mormon/image/get';
+        const url = data.main_url+'image/get';
         fetch(url,{
             method: 'POST',
             headers: {

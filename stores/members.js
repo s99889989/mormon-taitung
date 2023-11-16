@@ -3,7 +3,7 @@ import {computed} from "vue";
 
 export const useMembersStore = defineStore('members', () => {
   //https://madustrialtd.asuscomm.com:9100/
-  //https://localhost:9100/
+  //http://localhost:9100/
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
@@ -41,8 +41,6 @@ export const useMembersStore = defineStore('members', () => {
     },
   })
   //處理後成員列表
-
-
   const memberList = computed(() => {
     let displayMembers = data.member_list.slice();
 
@@ -155,17 +153,16 @@ export const useMembersStore = defineStore('members', () => {
 
   //刷新人員列表
   const refreshMember = async () => {
-    if(data.member_list.length < 2){
-      const url = data.main_url+'mormon/member/get';
-      try {
-        const response = await fetch(url);
-        data.member_list = await response.json();
-      } catch (error) {
-        data.member_list =  [];
-      }finally {
-        //更新人員Map對應列表
-        refreshMemberMap();
-      }
+    console.log('刷新!!')
+    const url = data.main_url+'mormon/member/get';
+    try {
+      const response = await fetch(url);
+      data.member_list = await response.json();
+    } catch (error) {
+      data.member_list =  [];
+    }finally {
+      //更新人員Map對應列表
+      refreshMemberMap();
     }
   }
 

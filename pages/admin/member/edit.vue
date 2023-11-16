@@ -8,7 +8,6 @@ onMounted( () => {
     const router = useRouter()
     router.push('/admin/member/list');
   }
-
 })
 
 </script>

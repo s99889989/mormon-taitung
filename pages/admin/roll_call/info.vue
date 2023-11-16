@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import {useRollCallStore} from "~/stores/roll_call";
 import html2canvas from 'html2canvas';
 const rollCallStore = useRollCallStore();
@@ -63,7 +63,7 @@ const getAllMember = computed(()=>{
   return memberList;
 })
 //獲取本支會分類人員
-const getOrganizations = (organizations: string) => {
+const getOrganizations = (organizations) => {
   let memberList = roll_call.value.member_list;
 
   memberList = memberList.filter(member => {

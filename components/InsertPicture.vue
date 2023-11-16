@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import {useImageStore} from "~/stores/image.js";
 import {useActiveStore} from "~/stores/active";
 
