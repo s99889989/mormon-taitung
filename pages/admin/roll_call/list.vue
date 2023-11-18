@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import {useRollCallStore} from "~/stores/roll_call";
 
 const rollCallStore = useRollCallStore();
@@ -10,7 +10,7 @@ const membersStore = useMembersStore();
 //要刪除的點名表名稱
 const delete_date = ref('');
 //設置要刪除的點名表名稱
-const setDeleteDate = (date: string) => {
+const setDeleteDate = (date) => {
   delete_date.value = date;
 }
 //是否在讀取
@@ -40,7 +40,7 @@ const refresh = () => {
 }
 
 //計算所有有到人數
-const getAmount = (date: string) => {
+const getAmount = (date) => {
   let amount = 0;
 
   //從id獲取index
@@ -61,6 +61,35 @@ const getAmount = (date: string) => {
   return amount;
 }
 
+//獲取拜訪人數
+const getVisit = (date) => {
+  let sum = 0;
+
+  //從id獲取index
+  const index = rollCallStore.data.roll_call_map.get(date);
+  if(index != null){
+    const roll_call = rollCallStore.data.roll_call_list[index];
+
+    roll_call.member_visit_list.forEach(member_visit=>{
+      sum += member_visit.amount;
+    })
+
+    let memberList = roll_call.member_list.slice();
+    //支會
+    memberList = memberList.filter(
+        (member) => member.ward !== '台東一支會'
+    );
+
+    //有沒有到
+    memberList = memberList.filter((member) =>
+        member.have
+    );
+
+    sum += memberList.length;
+
+  }
+  return sum;
+}
 
 </script>
 
@@ -109,20 +138,22 @@ const getAmount = (date: string) => {
         </div>
 
 
-        <div class="grid gap-6 mx-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+        <div class="grid gap-6 mx-5 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 
-          <div  v-for="(roll_call) in rollCallStore.rollCallList" class="p-1 md:p-5 flex sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
-            <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{roll_call.date}}</p>
-            <p class="text-xl p-2 md:text-5xl font-bold tracking-tight text-sky-700 dark:text-sky-400 text-center">人數: {{getAmount(roll_call.date)}}</p>
+          <div  v-for="(roll_call) in rollCallStore.rollCallList" class="p-1 md:p-5 flex flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
+            <p class="text-xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{roll_call.date}}</p>
+            <p class="text-xl md:text-4xl font-bold tracking-tight text-red-700 dark:text-red-400 text-center">總人數: {{getAmount(roll_call.date)}}</p>
+            <p class="text-xl md:text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 text-center">支會: {{getAmount(roll_call.date)-getVisit(roll_call.date)}}</p>
+            <p class="text-xl md:text-4xl font-bold tracking-tight text-gray-700 dark:text-gray-400 text-center">拜訪: {{getVisit(roll_call.date)}}</p>
             <div class="inline-flex rounded-md shadow-sm" role="group">
 
-              <NuxtLink @click="rollCallStore.setEditRollCall(roll_call.date)" to="/admin/roll_call/info" type="button" class="text-lg md:text-2xl px-4 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+              <NuxtLink @click="rollCallStore.setEditRollCall(roll_call.date)" to="/admin/roll_call/info" type="button" class="text-lg md:text-2xl px-2 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 查看
               </NuxtLink>
-              <NuxtLink @click="rollCallStore.setEditRollCall(roll_call.date)" to="/admin/roll_call/edit" type="button" class="text-lg md:text-2xl px-4 py-2 font-medium text-gray-900 bg-transparent border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+              <NuxtLink @click="rollCallStore.setEditRollCall(roll_call.date)" to="/admin/roll_call/edit" type="button" class="text-lg md:text-2xl px-2 py-2 font-medium text-gray-900 bg-transparent border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 編輯
               </NuxtLink>
-              <button @click="setDeleteDate(roll_call.date)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button" class="text-lg md:text-2xl px-4 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-r-md hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+              <button @click="setDeleteDate(roll_call.date)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button" class="text-lg md:text-2xl px-2 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-r-md hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 刪除
               </button>
 

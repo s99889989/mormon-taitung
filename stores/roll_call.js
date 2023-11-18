@@ -12,7 +12,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
     search_member_stake: '花蓮支聯會',
     search_member_ward: '台東一支會',
     search_member_organizations: '所有組織',
-    search_member_have: '有來+沒來',
+    search_member_have: '有到+沒到',
     search_roll_call_month: '所有月份',
     edit_roll_call_date: '',
     //紀錄UUID和roll_call_list位置
@@ -35,6 +35,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
     roll_call_list: [
       {
         date: '',
+        name: '',
         roll_call_man: '',
         member_list: [{
           id: '',
@@ -55,6 +56,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
     ],
     edit_roll_call:{
       date: '',
+      name: '',
       roll_call_man: '',
       member_list: [{
         id: '',
@@ -76,7 +78,6 @@ export const useRollCallStore = defineStore('roll_call', () => {
   //選擇編輯的點名表
   const getEditRollCall = () => {
     const edit_roll_call_index = data.roll_call_map.get(data.edit_roll_call_date);
-    console.log(data.edit_roll_call_date+'獲取'+edit_roll_call_index)
     return data.roll_call_list[edit_roll_call_index];
   }
   //過濾後的點名列表
@@ -104,10 +105,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
         roll_call_man: data.edit_roll_call.roll_call_man,
         member_list: ['123', '456'],
         member_visit_list: [],
-      }
-    ;
-
-
+      };
 
     roll_call_list.member_list.length = 0;
     data.edit_roll_call.member_list.forEach((member) =>{

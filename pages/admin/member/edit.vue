@@ -17,6 +17,10 @@ onMounted( () => {
   <div class="dark:bg-black bg-white flex justify-center container-top w-full">
     <div class="w-full lg:w-3/4">
 
+      <div class="flex justify-center">
+        <span class=" text-4xl font-medium text-gray-900 dark:text-white">編輯成員</span>
+      </div>
+
       <div class="grid gap-6 grid-cols-1 items-center pt-5 px-5">
         <div class="flex items-center">
           <label for="first_name" class="w-20 text-3xl block font-medium text-gray-900 dark:text-white">姓名</label>
