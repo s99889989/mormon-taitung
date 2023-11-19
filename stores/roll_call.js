@@ -4,7 +4,7 @@ import {computed} from "vue";
 
 export const useRollCallStore = defineStore('roll_call', () => {
   //https://madustrialtd.asuscomm.com:9100/
-  //https://localhost:9100/
+  //http://localhost:9100/
 
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
@@ -140,7 +140,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
 
   }
   //更新
-  const edit = async () => {
+  const update = async () => {
 
 
     let roll_call_list=
@@ -149,9 +149,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
           roll_call_man: data.edit_roll_call.roll_call_man,
           member_list: ['123', '456'],
           member_visit_list: [],
-        }
-    ;
-
+        };
 
 
     roll_call_list.member_list.length = 0;
@@ -302,5 +300,5 @@ export const useRollCallStore = defineStore('roll_call', () => {
     })
   }
 
-  return { data, rollCallList, setEditRollCall, add, edit, getEditRollCall, remove, refreshRollCall }
+  return { data, rollCallList, setEditRollCall, add, update, getEditRollCall, remove, refreshRollCall }
 })

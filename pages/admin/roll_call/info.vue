@@ -48,7 +48,7 @@ const getVisitMemberAmount = () => {
 
 
 //獲取本支會分類人員
-const getOrganizations = (organizations) => {
+const getOrganizations = (organizations, be) => {
   let memberList = rollCallStore.data.edit_roll_call.member_list;
 
   memberList = memberList.filter(member => {
@@ -63,9 +63,21 @@ const getOrganizations = (organizations) => {
     if(member.organizations !== organizations){
       b = false;
     }
-    if(!member.have){
+
+    if ((be && !member.have) || (!be && member.have)) {
       b = false;
     }
+
+    // if(be){
+    //   if(!member.have){
+    //     b = false;
+    //   }
+    // }else {
+    //   if(member.have){
+    //     b = false;
+    //   }
+    // }
+
 
     return b;
   })
@@ -145,13 +157,13 @@ const title_width = ref(240)
           <LabelDisplay :title="'拜訪人數'" :title-width="title_width" :value="getVisitMemberAmount()+''" />
         </div>
 
-        <DisplayOptions :title="'長老定額組'" :member_list="getOrganizations('長老定額組')" />
-        <DisplayOptions :title="'慈助會'" :member_list="getOrganizations('慈助會')" />
-        <DisplayOptions :title="'男青年'" :member_list="getOrganizations('男青年')" />
-        <DisplayOptions :title="'女青年'" :member_list="getOrganizations('女青年')" />
-        <DisplayOptions :title="'初級會'" :member_list="getOrganizations('初級會')" />
-        <DisplayOptions :title="'傳教士'" :member_list="getOrganizations('傳教士')" />
-        <DisplayOptions :title="'慕道友'" :member_list="getOrganizations('慕道友')" />
+        <DisplayOptions :title="'長老定額組'" :member_list="getOrganizations('長老定額組', true)" :member_list2="getOrganizations('長老定額組', false)" />
+        <DisplayOptions :title="'慈助會'" :member_list="getOrganizations('慈助會', true)" :member_list2="getOrganizations('慈助會', false)" />
+        <DisplayOptions :title="'男青年'" :member_list="getOrganizations('男青年', true)" :member_list2="getOrganizations('男青年', false)" />
+        <DisplayOptions :title="'女青年'" :member_list="getOrganizations('女青年', true)" :member_list2="getOrganizations('女青年', false)" />
+        <DisplayOptions :title="'初級會'" :member_list="getOrganizations('初級會', true)" :member_list2="getOrganizations('初級會', false)" />
+        <DisplayOptions :title="'傳教士'" :member_list="getOrganizations('傳教士', true)" :member_list2="getOrganizations('傳教士', false)" />
+        <DisplayOptions :title="'慕道友'" :member_list="getOrganizations('慕道友', true)" :member_list2="getOrganizations('慕道友', false)" />
 
         <div class="mx-5 mt-5 bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <p class="px-5 pt-5 text-3xl text-fuchsia-700 dark:text-fuchsia-400">拜訪 人數: {{getVisitMemberAmount()}}</p>
