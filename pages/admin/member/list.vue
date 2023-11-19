@@ -93,6 +93,7 @@ const refresh = async () => {
           <select v-model="membersStore.data.search_member_calling" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option selected>所有召喚</option>
             <option>主教團</option>
+            <option>長老定額組</option>
             <option>慈助會</option>
             <option>女青年</option>
             <option>初級會</option>
@@ -109,7 +110,7 @@ const refresh = async () => {
 
         <div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pb-20">
 
-          <div  v-for="(member, key, index) in membersStore.memberList" class="p-1 md:p-5 flex justify-around sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
+          <div  v-for="(member) in membersStore.memberList" class="p-1 md:p-5 flex justify-around sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
             <p class="text-2xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.name}}</p>
             <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.area}}</p>
             <p class="text-xl md:text-3xl font-normal text-fuchsia-700 dark:text-fuchsia-400">{{member.organizations}}</p>
@@ -149,7 +150,7 @@ const refresh = async () => {
           <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
           </svg>
-          <h3 class="mb-5 text-2xl font-normal font-black text-gray-500 dark:text-gray-400">你確定要刪除 <p class="text-2xl font-black text-red-500">{{delete_name}}</p>嗎?</h3>
+          <h3 class="mb-5 text-2xl font-normal text-gray-500 dark:text-gray-400">你確定要刪除 <p class="text-2xl font-black text-red-500">{{delete_name}}</p>嗎?</h3>
 
           <button @click="membersStore.remove(delete_member)" data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-2xl inline-flex items-center px-5 py-2.5 text-center me-2">
             是，我確定
