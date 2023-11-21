@@ -2,6 +2,7 @@
 import {useMembersStore} from "~/stores/members";
 import {useRollCallStore} from "~/stores/roll_call.js";
 import {initFlowbite} from "flowbite";
+import html2canvas from "html2canvas";
 
 const membersStore = useMembersStore();
 const rollCallStore = useRollCallStore();
@@ -127,7 +128,25 @@ const getChild = () => {
   })
   return child_list;
 }
+//下載成圖片
+const downLoad = async () => {
 
+  const targetDiv = document.getElementById('reportDiv');
+
+
+  const canvas = await html2canvas(targetDiv);
+
+
+  const imageData = canvas.toDataURL('image/png');
+
+
+  const link = document.createElement('a');
+  link.href = imageData;
+  link.download = '55歲以下長定組成員.png';
+
+
+  link.click();
+}
 //是否在讀取
 const loading = ref(false);
 onMounted( () => {
@@ -159,15 +178,12 @@ onMounted( () => {
 
 
       <!--   內容   -->
-      <div :class="{'hidden': loading}" class="mb-5 mt-5 bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <div id="reportDiv" :class="{'hidden': loading}" class="mx-5 mb-5 mt-5 bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <div class="flex justify-center">
-          <span class=" text-4xl font-medium text-gray-900 dark:text-white">查看55歲以下長定組成員</span>
+          <span class=" text-4xl font-medium text-gray-900 dark:text-white">55歲以下長定組成員</span>
         </div>
 
-        <div>
-          <p class="px-2 pt-2 text-3xl text-amber-700 dark:text-amber-400">長定組</p>
-          <p class="px-5 pt-5 text-3xl text-blue-700 dark:text-blue-400">  人數: {{memberFilterList().length}}</p>
-        </div>
+        <p class="px-5 pt-5 text-3xl text-blue-700 dark:text-blue-400">  人數: {{memberFilterList().length}}</p>
         <div class="p-5 gap-3 grid grid-cols-2 md:grid-cols-3 items-center ">
 
           <div  v-for="(member) in memberFilterList()" class="flex">
@@ -195,9 +211,13 @@ onMounted( () => {
 
 
 
+      <div class="mx-5">
+        <button @click="downLoad()" type="button" class="me-5 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-2xl px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+          下載成圖片</button>
+        <NuxtLink to="/admin/member/list" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-2xl px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+          返回列表</NuxtLink>
+      </div>
 
-      <NuxtLink to="/admin/member/list" type="button" class="text-center text-2xl text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
-        返回列表</NuxtLink>
 
 
 
