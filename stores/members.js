@@ -11,6 +11,7 @@ export const useMembersStore = defineStore('members', () => {
     search_member_ward: '台東一支會',
     search_member_organizations: '所有組織',
     search_member_calling: '所有召喚',
+    search_member_age: 100,
     //紀錄UUID和member_list位置
     member_map: new Map(),
     //成員列表
@@ -18,6 +19,9 @@ export const useMembersStore = defineStore('members', () => {
       {
         id: '',
         name: '',
+        english_name: '',
+        gender: '',
+        birthday: '',
         priesthood: '',
         calling: '',
         stake: '',
@@ -25,12 +29,19 @@ export const useMembersStore = defineStore('members', () => {
         organizations: '',
         area: '',
         registration_number: '',
+        address: '',
+        father: '',
+        mother: '',
+        child: [],
       },
     ],
     //編輯的成員
     editData: {
       id: '',
       name: '',
+      english_name: '',
+      gender: '男',
+      birthday: '',
       priesthood: '無聖職職位',
       calling: '',
       stake: '花蓮支聯會',
@@ -38,6 +49,10 @@ export const useMembersStore = defineStore('members', () => {
       organizations: '慕道友',
       area: '',
       registration_number: '',
+      address: '',
+      father: '',
+      mother: '',
+      child: [],
     },
   })
   //處理後成員列表
@@ -74,9 +89,32 @@ export const useMembersStore = defineStore('members', () => {
           (element) => element.calling.includes(data.search_member_calling)
       );
     }
+    //年齡
+    if (data.search_member_age > 0) {
+      displayMembers = displayMembers.filter((element) =>
+          getAge(element.birthday) < data.search_member_age
+      );
+    }
     return displayMembers;
   })
+  //年齡
+  const getAge = (birthday) => {
+    let age = 0;
+    if(birthday.length > 0){
+      const birthDate = new Date(birthday);
+      const currentDate = new Date();
+      age = currentDate.getFullYear() - birthDate.getFullYear();
+      if (
+          currentDate.getMonth() < birthDate.getMonth() ||
+          (currentDate.getMonth() === birthDate.getMonth() &&
+              currentDate.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+    }
 
+    return age;
+  }
   //新增
   const add = async () => {
     const url = data.main_url+'mormon/member/add';
@@ -165,6 +203,8 @@ export const useMembersStore = defineStore('members', () => {
       refreshMemberMap();
     }
   }
+
+
 
   return { data, memberList, add, edit, setEditValue, remove, refreshMember }
 })

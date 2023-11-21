@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 
 import {useMembersStore} from "~/stores/members";
 import {initFlowbite} from "flowbite";
@@ -9,7 +9,7 @@ const membersStore = useMembersStore();
 const delete_member = ref('');
 const delete_name = ref('');
 //設置要刪除的點名表名稱
-const setDeleteMember = (id: string, name: string) => {
+const setDeleteMember = (id, name) => {
   delete_member.value = id;
   delete_name.value = name;
 }
@@ -32,7 +32,23 @@ onMounted(async ()=>{
 
 
 })
+const getAge = (birthday) => {
+  let age = 0;
+  if(birthday.length > 0){
+    const birthDate = new Date(birthday);
+    const currentDate = new Date();
+    age = currentDate.getFullYear() - birthDate.getFullYear();
+    if (
+        currentDate.getMonth() < birthDate.getMonth() ||
+        (currentDate.getMonth() === birthDate.getMonth() &&
+            currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+  }
 
+  return age;
+}
 //是否在讀取
 const loading = ref(false);
 const refresh = async () => {
@@ -99,6 +115,13 @@ const refresh = async () => {
             <option>初級會</option>
           </select>
 
+          <div class="">
+            <input v-model="membersStore.data.search_member_age" type="text" id="first_name" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="搜尋姓名" required>
+          </div>
+
+          <NuxtLink to="/admin/member/report" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+            報表</NuxtLink>
+
           <NuxtLink to="/admin/member/add" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
             新增</NuxtLink>
           <button @click="refresh()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
@@ -113,16 +136,18 @@ const refresh = async () => {
           <div  v-for="(member) in membersStore.memberList" class="p-1 md:p-5 flex justify-around sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
             <p class="text-2xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.name}}</p>
             <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.area}}</p>
+            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.birthday}}</p>
+            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{getAge(member.birthday)}}</p>
             <p class="text-xl md:text-3xl font-normal text-fuchsia-700 dark:text-fuchsia-400">{{member.organizations}}</p>
             <p class="text-xl md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>
             <div class="inline-flex rounded-md shadow-sm" role="group">
-              <NuxtLink to="/admin/member/info" @click="membersStore.setEditValue(member.id)" type="button" class="text-xl md:text-3xl px-4 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+              <NuxtLink to="/admin/member/info" @click="membersStore.setEditValue(member.id)" type="button" class="text-xl md:text-3xl px-2 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 查看
               </NuxtLink>
-              <NuxtLink to="/admin/member/edit" @click="membersStore.setEditValue(member.id)" type="button" class="text-xl md:text-3xl px-4 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+              <NuxtLink to="/admin/member/edit" @click="membersStore.setEditValue(member.id)" type="button" class="text-xl md:text-3xl px-2 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 編輯
               </NuxtLink>
-              <button @click="setDeleteMember(member.id, member.name)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button" class="text-xl md:text-3xl px-4 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-r-md hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+              <button @click="setDeleteMember(member.id, member.name)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button" class="text-xl md:text-3xl px-2 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-r-md hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 刪除
               </button>
             </div>

@@ -292,7 +292,9 @@ export const useRollCallStore = defineStore('roll_call', () => {
       refreshRollCallMap();
     }
   }
+  
 
+  
   //更新人員Map對應列表
   const refreshRollCallMap = () => {
     data.roll_call_list.forEach((roll_call, key)=>{

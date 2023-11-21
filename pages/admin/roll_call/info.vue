@@ -2,7 +2,7 @@
 import {useRollCallStore} from "~/stores/roll_call";
 import html2canvas from 'html2canvas';
 import DisplayOptions from "~/pages/admin/roll_call/add/DisplayOptions.vue";
-import LabelDisplay from "~/pages/admin/roll_call/add/LabelDisplay.vue";
+import LabelDisplay from "~/components/LabelDisplay.vue";
 const rollCallStore = useRollCallStore();
 
 //顯示計算用(本支會)
