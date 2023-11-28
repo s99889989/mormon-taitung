@@ -11,6 +11,7 @@ export const useMembersStore = defineStore('members', () => {
     search_member_ward: '台東一支會',
     search_member_organizations: '所有組織',
     search_member_calling: '所有召喚',
+    search_member_positive: '所有情況',
     search_member_age: 100,
     //紀錄UUID和member_list位置
     member_map: new Map(),
@@ -28,6 +29,7 @@ export const useMembersStore = defineStore('members', () => {
         stake: '',
         ward: '',
         organizations: '',
+        positive: '',
         area: '',
         registration_number: '',
         address: '',
@@ -49,6 +51,7 @@ export const useMembersStore = defineStore('members', () => {
       stake: '花蓮支聯會',
       ward: '台東一支會',
       organizations: '慕道友',
+      positive: '',
       area: '',
       registration_number: '',
       address: '',
@@ -91,6 +94,13 @@ export const useMembersStore = defineStore('members', () => {
           (element) => element.calling.includes(data.search_member_calling)
       );
     }
+    //積極-不積極
+    if(data.search_member_positive !== '所有情況'){
+      displayMembers = displayMembers.filter(
+          (element) => element.positive === data.search_member_positive
+      );
+    }
+
     //年齡
     if (data.search_member_age > 0) {
       displayMembers = displayMembers.filter((element) =>

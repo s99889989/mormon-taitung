@@ -106,7 +106,17 @@ const getMemberName = (uuid) => {
             <option>女青年</option>
             <option>初級會</option>
             <option>傳教士</option>
+            <option>部分成員</option>
             <option>慕道友</option>
+            <option>不積極</option>
+          </select>
+        </div>
+
+        <div class="flex items-center">
+          <label for="first_name" class="w-20 text-3xl block font-medium text-gray-900 dark:text-white">是否積極</label>
+          <select v-model="membersStore.data.editData.positive" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>不積極</option>
+            <option>積極</option>
           </select>
         </div>
 
@@ -145,8 +155,17 @@ const getMemberName = (uuid) => {
             <option>女青年</option>
             <option>初級會</option>
             <option>傳教士</option>
+            <option>部分成員</option>
             <option>慕道友</option>
+            <option>不積極</option>
           </select>
+
+          <select v-model="membersStore.data.search_member_positive" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>所有情況</option>
+            <option>不積極</option>
+            <option>積極</option>
+          </select>
+
         </div>
 
 
