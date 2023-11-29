@@ -10,8 +10,9 @@ export const useMembersStore = defineStore('members', () => {
     search_member_stake: '花蓮支聯會',
     search_member_ward: '台東一支會',
     search_member_organizations: '所有組織',
+    search_member_person_type: '人員類型',
     search_member_calling: '所有召喚',
-    search_member_positive: '所有情況',
+    search_member_positive: '積極情況',
     search_member_age: 100,
     //紀錄UUID和member_list位置
     member_map: new Map(),
@@ -28,6 +29,7 @@ export const useMembersStore = defineStore('members', () => {
         calling: '',
         stake: '',
         ward: '',
+        person_type: '',
         organizations: '',
         positive: '',
         area: '',
@@ -37,6 +39,16 @@ export const useMembersStore = defineStore('members', () => {
         mother: '',
         child: [],
       },
+    ],
+    family_list:[
+      {
+        father: '',
+        mother: '',
+        main: '',
+        children: [{
+
+        }],
+      }
     ],
     //編輯的成員
     editData: {
@@ -50,6 +62,7 @@ export const useMembersStore = defineStore('members', () => {
       calling: '',
       stake: '花蓮支聯會',
       ward: '台東一支會',
+      person_type: '',
       organizations: '慕道友',
       positive: '',
       area: '',
@@ -60,6 +73,81 @@ export const useMembersStore = defineStore('members', () => {
       child: [],
     },
   })
+  const reportMember = computed(()=>{
+    let member_list= [
+      {
+        id: '',
+        name: '',
+        english_name: '',
+        gender: '',
+        birthday: '',
+        spouse: '',
+        priesthood: '',
+        calling: '',
+        stake: '',
+        ward: '',
+        person_type: '',
+        organizations: '',
+        positive: '',
+        area: '',
+        registration_number: '',
+        address: '',
+        father: '',
+        mother: '',
+        child: [],
+      },
+    ]
+
+    let displayMembers = data.member_list.slice();
+    displayMembers = displayMembers.filter((member) =>
+        member.stake === '花蓮支聯會'
+        && member.ward === '台東一支會'
+        && member.organizations !== '非成員'
+        && member.organizations !== '傳教士'
+        && member.person_type === '成員'
+        && member.positive === '積極'
+    );
+    member_list = [];
+    displayMembers.forEach(member=>{
+      let c = false;
+      const inputID = member.id;
+      member_list.forEach(m=>{
+        if(member.father.length === 0 && member.mother.length === 0 && member.child.length === 0){
+          c = true;
+        }
+        if(m.child.includes(member.father) || m.child.includes(member.mother)){
+          c = true;
+        }
+        if(member.child.includes(m.father) || member.child.includes(m.mother)){
+          c = true;
+        }
+        if(m.spouse === inputID){
+          c = true;
+        }
+        if(m.father === member.father){
+          c = true;
+        }
+        if(m.father === inputID){
+          c = true;
+        }
+        if(m.mother === inputID){
+          c = true;
+        }
+        if(m.child.includes(inputID)){
+          c = true;
+        }
+      })
+
+      if(c !== true){
+        member_list.push(member);
+      }
+
+    })
+
+    return  member_list;
+  })
+
+
   //處理後成員列表
   const memberList = computed(() => {
     let displayMembers = data.member_list.slice();
@@ -88,14 +176,20 @@ export const useMembersStore = defineStore('members', () => {
           (element) => element.organizations === data.search_member_organizations
       );
     }
-    //組織
+    //召喚
     if (data.search_member_calling !== '所有召喚') {
       displayMembers = displayMembers.filter(
           (element) => element.calling.includes(data.search_member_calling)
       );
     }
+    //人員類型
+    if(data.search_member_person_type !== '人員類型'){
+      displayMembers = displayMembers.filter(
+          (element) => element.person_type === data.search_member_person_type
+      );
+    }
     //積極-不積極
-    if(data.search_member_positive !== '所有情況'){
+    if(data.search_member_positive !== '積極情況'){
       displayMembers = displayMembers.filter(
           (element) => element.positive === data.search_member_positive
       );
@@ -203,7 +297,6 @@ export const useMembersStore = defineStore('members', () => {
 
   //刷新人員列表
   const refreshMember = async () => {
-    console.log('刷新!!')
     const url = data.main_url+'mormon/member/get';
     try {
       const response = await fetch(url);
@@ -218,5 +311,5 @@ export const useMembersStore = defineStore('members', () => {
 
 
 
-  return { data, memberList, add, edit, setEditValue, remove, refreshMember }
+  return { data, memberList, add, edit, setEditValue, remove, refreshMember, reportMember }
 })

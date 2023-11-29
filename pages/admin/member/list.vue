@@ -103,13 +103,18 @@ const refresh = async () => {
             <option>女青年</option>
             <option>初級會</option>
             <option>傳教士</option>
+            <option>非成員</option>
+          </select>
+
+          <select  v-model="membersStore.data.search_member_person_type" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>人員類型</option>
+            <option>成員</option>
             <option>部分成員</option>
             <option>慕道友</option>
-            <option>不積極</option>
           </select>
 
           <select v-model="membersStore.data.search_member_positive" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>所有情況</option>
+            <option>積極情況</option>
             <option>不積極</option>
             <option>積極</option>
           </select>
@@ -134,6 +139,8 @@ const refresh = async () => {
             新增</NuxtLink>
           <button @click="refresh()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
             刷新</button>
+<!--          <button @click="membersStore.setPerson()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">-->
+<!--            設置</button>-->
           <p class="text-xl text-black dark:text-white" >人數:{{membersStore.memberList.length}}</p>
         </div>
 
@@ -143,12 +150,12 @@ const refresh = async () => {
 
           <div  v-for="(member) in membersStore.memberList" class="p-1 md:p-5 flex justify-around sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
             <p class="text-2xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.name}}</p>
-            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.area}}</p>
-            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.birthday}}</p>
-            <p class="text-2xl md:text-3xl font-normal text-red-700 dark:text-red-400">{{member.positive}}</p>
-            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{getAge(member.birthday)}}</p>
-            <p class="text-xl md:text-3xl font-normal text-fuchsia-700 dark:text-fuchsia-400">{{member.organizations}}</p>
-            <p class="text-xl md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>
+            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.gender}}</p>
+<!--            <p class="text-2xl md:text-3xl font-normal text-teal-700 dark:text-teal-400">{{member.person_type}}</p>-->
+<!--            <p class="text-2xl md:text-3xl font-normal text-red-700 dark:text-red-400">{{member.positive}}</p>-->
+<!--            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{getAge(member.birthday)}}</p>-->
+<!--            <p class="text-xl md:text-3xl font-normal text-fuchsia-700 dark:text-fuchsia-400">{{member.organizations}}</p>-->
+<!--            <p class="text-xl md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>-->
             <div class="inline-flex rounded-md shadow-sm" role="group">
               <NuxtLink to="/admin/member/info" @click="membersStore.setEditValue(member.id)" type="button" class="text-xl md:text-3xl px-2 py-2 font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 查看
