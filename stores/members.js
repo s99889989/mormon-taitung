@@ -7,12 +7,12 @@ export const useMembersStore = defineStore('members', () => {
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
-    search_member_stake: '花蓮支聯會',
-    search_member_ward: '台東一支會',
-    search_member_organizations: '所有組織',
-    search_member_person_type: '人員類型',
-    search_member_calling: '所有召喚',
-    search_member_positive: '積極情況',
+    search_member_stake: '花蓮',
+    search_member_ward: '台東一',
+    search_member_organizations: '所有',
+    search_member_person_type: '所有',
+    search_member_calling: '所有',
+    search_member_positive: '所有',
     search_member_age: 100,
     //紀錄UUID和member_list位置
     member_map: new Map(),
@@ -60,8 +60,8 @@ export const useMembersStore = defineStore('members', () => {
       birthday: '',
       priesthood: '無聖職職位',
       calling: '',
-      stake: '花蓮支聯會',
-      ward: '台東一支會',
+      stake: '花蓮',
+      ward: '台東一',
       person_type: '',
       organizations: '慕道友',
       positive: '',
@@ -100,8 +100,8 @@ export const useMembersStore = defineStore('members', () => {
 
     let displayMembers = data.member_list.slice();
     displayMembers = displayMembers.filter((member) =>
-        member.stake === '花蓮支聯會'
-        && member.ward === '台東一支會'
+        member.stake === '花蓮'
+        && member.ward === '台東一'
         && member.organizations !== '非成員'
         && member.organizations !== '傳教士'
         && member.person_type === '成員'
@@ -159,37 +159,37 @@ export const useMembersStore = defineStore('members', () => {
       );
     }
     //支聯會
-    if (data.search_member_stake !== '所有支聯會') {
+    if (data.search_member_stake !== '所有') {
       displayMembers = displayMembers.filter(
           (element) => element.stake === data.search_member_stake
       );
     }
     //支會
-    if (data.search_member_ward !== '所有支會') {
+    if (data.search_member_ward !== '所有') {
       displayMembers = displayMembers.filter(
           (element) => element.ward === data.search_member_ward
       );
     }
     //組織
-    if (data.search_member_organizations !== '所有組織') {
+    if (data.search_member_organizations !== '所有') {
       displayMembers = displayMembers.filter(
           (element) => element.organizations === data.search_member_organizations
       );
     }
     //召喚
-    if (data.search_member_calling !== '所有召喚') {
+    if (data.search_member_calling !== '所有') {
       displayMembers = displayMembers.filter(
           (element) => element.calling.includes(data.search_member_calling)
       );
     }
     //人員類型
-    if(data.search_member_person_type !== '人員類型'){
+    if(data.search_member_person_type !== '所有'){
       displayMembers = displayMembers.filter(
           (element) => element.person_type === data.search_member_person_type
       );
     }
     //積極-不積極
-    if(data.search_member_positive !== '積極情況'){
+    if(data.search_member_positive !== '所有'){
       displayMembers = displayMembers.filter(
           (element) => element.positive === data.search_member_positive
       );
@@ -260,7 +260,24 @@ export const useMembersStore = defineStore('members', () => {
     })
 
   }
+//更新
+  const edit2 = (member) => {
 
+    const url = data.main_url+'mormon/member/update';
+
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(member)
+    }).then(res => {
+      const id = data.editData.id;
+      const index = data.member_map.get(id);
+      data.member_list[index] =  data.editData;
+    })
+
+  }
 
   //設置編輯值
   const setEditValue = (id) => {
@@ -311,5 +328,5 @@ export const useMembersStore = defineStore('members', () => {
 
 
 
-  return { data, memberList, add, edit, setEditValue, remove, refreshMember, reportMember }
+  return { data, memberList, add, edit, edit2, setEditValue, remove, refreshMember, reportMember }
 })
