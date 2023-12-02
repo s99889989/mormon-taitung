@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import {computed} from "vue";
+import logger from "quill/core/logger.js";
 
 export const useMembersStore = defineStore('members', () => {
   //https://madustrialtd.asuscomm.com:9100/
@@ -35,6 +36,9 @@ export const useMembersStore = defineStore('members', () => {
         area: '',
         registration_number: '',
         address: '',
+        cell_phone: '',
+        home_phone: '',
+        e_mail: '',
         father: '',
         mother: '',
         child: [],
@@ -63,11 +67,14 @@ export const useMembersStore = defineStore('members', () => {
       stake: '花蓮',
       ward: '台東一',
       person_type: '',
-      organizations: '慕道友',
+      organizations: '非成員',
       positive: '',
       area: '',
       registration_number: '',
       address: '',
+      cell_phone: '',
+      home_phone: '',
+      e_mail: '',
       father: '',
       mother: '',
       child: [],
@@ -92,6 +99,9 @@ export const useMembersStore = defineStore('members', () => {
         area: '',
         registration_number: '',
         address: '',
+        cell_phone: '',
+        home_phone: '',
+        e_mail: '',
         father: '',
         mother: '',
         child: [],
@@ -178,9 +188,17 @@ export const useMembersStore = defineStore('members', () => {
     }
     //召喚
     if (data.search_member_calling !== '所有') {
-      displayMembers = displayMembers.filter(
-          (element) => element.calling.includes(data.search_member_calling)
-      );
+      if(data.search_member_calling === '沒有'){
+        displayMembers = displayMembers.filter(
+            (element) => {
+              return element.calling.length <= 0;
+            }
+        );
+      }else {
+        displayMembers = displayMembers.filter(
+            (element) => element.calling.includes(data.search_member_calling)
+        );
+      }
     }
     //人員類型
     if(data.search_member_person_type !== '所有'){

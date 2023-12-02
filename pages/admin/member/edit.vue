@@ -106,15 +106,15 @@ const memberList = computed(() => {
         <div class="flex items-center">
           <label for="first_name" class="w-32 text-3xl block font-medium text-gray-900 dark:text-white">支聯會</label>
           <select  v-model="membersStore.data.editData.stake" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>花蓮支聯會</option>
-            <option>其他支聯會</option>
+            <option>花蓮</option>
+            <option>其他</option>
           </select>
         </div>
         <div class="flex items-center">
           <label for="first_name" class="w-20 text-3xl block font-medium text-gray-900 dark:text-white">支會</label>
           <select  v-model="membersStore.data.editData.ward" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>台東一支會</option>
-            <option>其他支會</option>
+            <option>台東一</option>
+            <option>其他</option>
           </select>
         </div>
         <div class="flex items-center">
@@ -128,7 +128,6 @@ const memberList = computed(() => {
         <div class="flex items-center">
           <label for="first_name" class="w-20 text-3xl block font-medium text-gray-900 dark:text-white">組織</label>
           <select v-model="membersStore.data.editData.organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>所有組織</option>
             <option>長老定額組</option>
             <option>慈助會</option>
             <option>男青年</option>
@@ -155,6 +154,21 @@ const memberList = computed(() => {
         <div id="date" class="flex items-center">
           <label for="address" style="width: 80px" class="text-3xl block font-medium text-gray-900 dark:text-white">地址</label>
           <input v-model="membersStore.data.editData.address" id="address" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div id="date" class="flex items-center">
+          <label for="cell_phone" style="width: 80px" class="text-3xl block font-medium text-gray-900 dark:text-white">手機</label>
+          <input v-model="membersStore.data.editData.cell_phone" id="cell_phone" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div id="date" class="flex items-center">
+          <label for="home_phone" style="width: 140px" class="text-3xl block font-medium text-gray-900 dark:text-white">住家電話</label>
+          <input v-model="membersStore.data.editData.home_phone" id="home_phone" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div id="date" class="flex items-center">
+          <label for="e_mail" style="width: 140px" class="text-3xl block font-medium text-gray-900 dark:text-white">電子郵件</label>
+          <input v-model="membersStore.data.editData.e_mail" id="e_mail" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         </div>
 
         <div class="grid gap-6 mb-6 grid-cols-3 items-center pt-5">

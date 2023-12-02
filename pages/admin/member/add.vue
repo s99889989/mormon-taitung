@@ -14,14 +14,17 @@ onMounted( () => {
     spouse: '',
     priesthood: '無聖職職位',
     calling: '',
-    stake: '花蓮支聯會',
-    ward: '台東一支會',
+    stake: '花蓮',
+    ward: '台東一',
     person_type: '成員',
-    organizations: '部分成員',
+    organizations: '非成員',
     positive: '不積極',
     area: '',
     registration_number: '',
     address: '',
+    cell_phone: '',
+    home_phone: '',
+    e_mail: '',
     father: '',
     mother: '',
     child: [],
@@ -157,6 +160,21 @@ const getMemberName = (uuid) => {
         <div id="date" class="flex items-center">
           <label for="address" style="width: 80px" class="text-3xl block font-medium text-gray-900 dark:text-white">地址</label>
           <input v-model="membersStore.data.editData.address" id="address" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div id="date" class="flex items-center">
+          <label for="cell_phone" style="width: 80px" class="text-3xl block font-medium text-gray-900 dark:text-white">手機</label>
+          <input v-model="membersStore.data.editData.cell_phone" id="cell_phone" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div id="date" class="flex items-center">
+          <label for="home_phone" style="width: 140px" class="text-3xl block font-medium text-gray-900 dark:text-white">住家電話</label>
+          <input v-model="membersStore.data.editData.home_phone" id="home_phone" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <div id="date" class="flex items-center">
+          <label for="e_mail" style="width: 140px" class="text-3xl block font-medium text-gray-900 dark:text-white">電子郵件</label>
+          <input v-model="membersStore.data.editData.e_mail" id="e_mail" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         </div>
 
         <div class="grid gap-6 mb-6 grid-cols-3 items-center pt-5">

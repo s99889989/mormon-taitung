@@ -2,6 +2,7 @@
 
 import {useMembersStore} from "~/stores/members";
 import {initFlowbite} from "flowbite";
+import html2canvas from "html2canvas";
 
 const membersStore = useMembersStore();
 
@@ -38,6 +39,9 @@ onMounted(async ()=>{
 
 })
 const getAge = (birthday) => {
+  if(birthday.length < 1){
+    return ""
+  }
   let age = 0;
   if(birthday.length > 0){
     const birthDate = new Date(birthday);
@@ -75,7 +79,25 @@ const fixMember = () => {
     membersStore.edit2(member);
   })
 }
+//下載成圖片
+const downLoad = async () => {
 
+  const targetDiv = document.getElementById('myDiv');
+
+
+  const canvas = await html2canvas(targetDiv);
+
+
+  const imageData = canvas.toDataURL('image/png');
+
+
+  const link = document.createElement('a');
+  link.href = imageData;
+  link.download = "部分成員名單.png";
+
+
+  link.click();
+}
 </script>
 
 <template>
@@ -161,6 +183,7 @@ const fixMember = () => {
               <option>慈助會</option>
               <option>女青年</option>
               <option>初級會</option>
+              <option>沒有</option>
             </select>
           </div>
 
@@ -187,6 +210,8 @@ const fixMember = () => {
             新增</NuxtLink>
           <button @click="refresh()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
             刷新</button>
+          <button @click="downLoad()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-2xl px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+            下載成圖片</button>
 <!--          <button @click="fixMember()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">-->
 <!--            修復</button>-->
 <!--          <button @click="membersStore.setPerson()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">-->
@@ -195,13 +220,16 @@ const fixMember = () => {
         </div>
 
 
-
-        <div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pb-20">
+        <!--    卡片    -->
+        <div v-show="list_data.list_type === '卡片'" class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pb-20">
 
           <div  v-for="(member) in membersStore.memberList" class="p-1 md:p-5 flex justify-around sm:flex-row md:flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center md:items-start">
             <p class="text-2xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{{member.name}}</p>
-            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.gender}}</p>
-            <p class="text-2xl md:text-3xl font-normal text-teal-700 dark:text-teal-400">{{member.ward}}</p>
+            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.cell_phone}}</p>
+            <p class="text-2xl md:text-3xl font-normal text-teal-700 dark:text-teal-400">{{member.e_mail}}</p>
+            <p class="text-2xl md:text-3xl font-normal text-red-700 dark:text-red-400">{{member.address}}</p>
+<!--            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.gender}}</p>-->
+<!--            <p class="text-2xl md:text-3xl font-normal text-teal-700 dark:text-teal-400">{{member.ward}}</p>-->
 <!--            <p class="text-2xl md:text-3xl font-normal text-red-700 dark:text-red-400">{{member.positive}}</p>-->
 <!--            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{getAge(member.birthday)}}</p>-->
 <!--            <p class="text-xl md:text-3xl font-normal text-fuchsia-700 dark:text-fuchsia-400">{{member.organizations}}</p>-->
@@ -220,6 +248,63 @@ const fixMember = () => {
           </div>
 
         </div>
+
+        <!--    表格    -->
+        <div id="myDiv" v-show="list_data.list_type === '表格'" class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                <p class="text-2xl dark:text-white">姓名</p>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <p class="text-2xl dark:text-white">性別</p>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <p class="text-2xl dark:text-white">年齡</p>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <p class="text-2xl dark:text-white">出生日期</p>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <p class="text-2xl dark:text-white">手機</p>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <p class="text-2xl dark:text-white">電子郵件</p>
+              </th>
+
+            </tr>
+
+            </thead>
+            <tbody>
+
+            <tr  v-for="(member) in membersStore.memberList" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <p class="text-2xl dark:text-white">{{member.name}}</p>
+              </th>
+              <td class="px-6 py-4">
+                <p class="text-2xl dark:text-white">{{member.gender}}</p>
+              </td>
+              <td class="px-6 py-4">
+                <p class="text-2xl dark:text-white">{{getAge(member.birthday)}}</p>
+              </td>
+              <td class="px-6 py-4">
+                <p class="text-2xl dark:text-white">{{member.birthday}}</p>
+              </td>
+              <td class="px-6 py-4">
+                <p class="text-2xl dark:text-white">{{member.cell_phone}}</p>
+              </td>
+              <td class="px-6 py-4">
+                <p class="text-2xl dark:text-white">{{member.e_mail}}</p>
+              </td>
+
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
 
