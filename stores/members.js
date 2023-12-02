@@ -11,7 +11,7 @@ export const useMembersStore = defineStore('members', () => {
     search_member_stake: '花蓮',
     search_member_ward: '台東一',
     search_member_organizations: '所有',
-    search_member_person_type: '所有',
+    search_member_person_type: '成員',
     search_member_calling: '所有',
     search_member_positive: '所有',
     search_member_age: 100,
