@@ -9,11 +9,14 @@ export const useRollCallStore = defineStore('roll_call', () => {
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
-    search_member_stake: '花蓮支聯會',
-    search_member_ward: '台東一支會',
-    search_member_organizations: '所有組織',
-    search_member_have: '有到+沒到',
-    search_roll_call_month: '所有月份',
+    search_member_stake: '花蓮',
+    search_member_ward: '台東一',
+    search_member_organizations: '所有',
+    search_member_person_type: '成員',
+    search_member_positive: '所有',
+    search_member_have: '所有',
+    search_roll_call_year: '所有',
+    search_roll_call_month: '所有',
     edit_roll_call_date: '',
     //紀錄UUID和roll_call_list位置
     roll_call_map: new Map(),
@@ -27,6 +30,8 @@ export const useRollCallStore = defineStore('roll_call', () => {
         stake: '',
         ward: '',
         organizations: '',
+        person_type: '',
+        positive: '',
         area: '',
         registration_number: '',
       },
@@ -43,6 +48,8 @@ export const useRollCallStore = defineStore('roll_call', () => {
           stake: '',
           ward: '',
           organizations: '',
+          person_type: '',
+          positive: '',
           area: '',
           have: false,
         }],
@@ -64,6 +71,8 @@ export const useRollCallStore = defineStore('roll_call', () => {
         stake: '',
         ward: '',
         organizations: '',
+        person_type: '',
+        positive: '',
         area: '',
         have: false,
       }],
@@ -84,7 +93,17 @@ export const useRollCallStore = defineStore('roll_call', () => {
   const rollCallList = computed(() => {
     let displayRollCalls = data.roll_call_list.slice();
 
-    if (data.search_roll_call_month !== '所有月份') {
+    //年份
+    if (data.search_roll_call_year !== '所有') {
+      displayRollCalls = displayRollCalls.filter((element)=>{
+
+        const year = new Date(element.date).getFullYear()+"";
+        return year === data.search_roll_call_year;
+
+      })
+    }
+    //月份
+    if (data.search_roll_call_month !== '所有') {
       displayRollCalls = displayRollCalls.filter((element)=>{
 
         const month = new Date(element.date).getMonth()+1+'';
@@ -239,6 +258,8 @@ export const useRollCallStore = defineStore('roll_call', () => {
             stake: '',
             ward: '',
             organizations: '',
+            person_type: '',
+            positive: '',
             area: '',
             have: false,
           }],
@@ -261,6 +282,8 @@ export const useRollCallStore = defineStore('roll_call', () => {
             stake: value1.stake,
             ward: value1.ward,
             organizations: value1.organizations,
+            person_type: value1.person_type,
+            positive: value1.positive,
             area: value1.area,
             have: false,
           }

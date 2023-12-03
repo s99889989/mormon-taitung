@@ -77,7 +77,7 @@ const getVisit = (date) => {
     let memberList = roll_call.member_list.slice();
     //支會
     memberList = memberList.filter(
-        (member) => member.ward !== '台東一支會'
+        (member) => member.ward !== '台東一'
     );
 
     //有沒有到
@@ -110,11 +110,23 @@ const getVisit = (date) => {
 
       <!--   內容   -->
       <div :class="{'hidden': loading}">
-        <div class="grid gap-6 mb-6 grid-cols-3 md:grid-cols-4 items-center pt-5  mx-5">
+        <div class="grid gap-6 mb-6 grid-cols-2 md:grid-cols-4 items-center pt-5  mx-5">
 
-          <div>
+          <div class="flex items-center">
+            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">年份</label>
+            <select v-model="rollCallStore.data.search_roll_call_year" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option>所有</option>
+              <option>2023</option>
+              <option>2024</option>
+            </select>
+          </div>
+
+          <div class="flex items-center">
+            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">月份</label>
             <select v-model="rollCallStore.data.search_roll_call_month" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option selected>所有月份</option>
+              <option>所有</option>
+              <option>11</option>
+              <option>12</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -125,8 +137,6 @@ const getVisit = (date) => {
               <option>8</option>
               <option>9</option>
               <option>10</option>
-              <option>11</option>
-              <option>12</option>
             </select>
           </div>
 

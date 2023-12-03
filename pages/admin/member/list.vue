@@ -231,7 +231,7 @@ const downLoad = async () => {
 <!--            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{member.gender}}</p>-->
 <!--            <p class="text-2xl md:text-3xl font-normal text-teal-700 dark:text-teal-400">{{member.ward}}</p>-->
 <!--            <p class="text-2xl md:text-3xl font-normal text-red-700 dark:text-red-400">{{member.positive}}</p>-->
-<!--            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{getAge(member.birthday)}}</p>-->
+            <p class="text-2xl md:text-3xl font-normal text-sky-700 dark:text-sky-400">{{getAge(member.birthday)}}</p>
 <!--            <p class="text-xl md:text-3xl font-normal text-fuchsia-700 dark:text-fuchsia-400">{{member.organizations}}</p>-->
 <!--            <p class="text-xl md:text-3xl font-normal text-orange-700 dark:text-orange-400">{{member.calling}}</p>-->
             <div class="inline-flex rounded-md shadow-sm" role="group">

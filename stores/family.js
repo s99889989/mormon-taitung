@@ -7,12 +7,12 @@ export const useFamilyStore = defineStore('useFamilyStore', () => {
   const data = reactive({
     main_url: 'https://madustrialtd.asuscomm.com:9100/',
     search_member_name: '',
-    search_member_stake: '花蓮支聯會',
-    search_member_ward: '台東一支會',
-    search_member_organizations: '所有組織',
-    search_member_person_type: '人員類型',
-    search_member_calling: '所有召喚',
-    search_member_positive: '積極情況',
+    search_member_stake: '花蓮',
+    search_member_ward: '台東一',
+    search_member_organizations: '所有',
+    search_member_person_type: '成員',
+    search_member_calling: '所有',
+    search_member_positive: '所有',
     search_member_age: 100,
     //紀錄UUID和member_list位置
     member_map: new Map(),
@@ -122,8 +122,8 @@ export const useFamilyStore = defineStore('useFamilyStore', () => {
 
     let displayMembers = data.member_list.slice();
     displayMembers = displayMembers.filter((member) =>
-        member.stake === '花蓮支聯會'
-        && member.ward === '台東一支會'
+        member.stake === '花蓮'
+        && member.ward === '台東一'
         && member.organizations !== '非成員'
         && member.organizations !== '傳教士'
         && member.person_type === '成員'

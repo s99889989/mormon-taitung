@@ -11,14 +11,19 @@ const memberFilterList = (state) => {
 
   //支聯會
   memberList = memberList.filter(
-      (member) => member.stake === '花蓮支聯會'
+      (member) => member.stake === '花蓮'
   );
   //支會
   memberList = memberList.filter(
-      (member) => member.ward === '台東一支會'
+      (member) => member.ward === '台東一'
   );
+  // //人員類型
+  // memberList = memberList.filter(
+  //     (member) => member.person_type === '成員'
+  // );
+
   //有沒有到
-  if(state !== '有到+沒到'){
+  if(state !== '所有'){
     memberList = memberList.filter((member) =>
         state === '有到' ? member.have : !member.have
     );
@@ -35,7 +40,7 @@ const getVisitMemberAmount = () => {
   let memberList = rollCallStore.data.edit_roll_call.member_list.slice();
   //支會
   memberList = memberList.filter(
-      (member) => member.ward !== '台東一支會'
+      (member) => member.ward !== '台東一'
   );
   //有沒有到
   memberList = memberList.filter((member) =>
@@ -48,36 +53,37 @@ const getVisitMemberAmount = () => {
 
 
 //獲取本支會分類人員
-const getOrganizations = (organizations, be) => {
+const getOrganizations = (organizations, have) => {
   let memberList = rollCallStore.data.edit_roll_call.member_list;
 
   memberList = memberList.filter(member => {
 
     let b = true;
-    if(member.stake !== '花蓮支聯會'){
+    if(member.stake !== '花蓮'){
       b = false;
     }
-    if(member.ward !== '台東一支會'){
+    if(member.ward !== '台東一'){
       b = false;
     }
+    if(member.organizations !== '初級會'){
+      if(member.person_type === '部分成員'){
+        b = false;
+      }
+    }
+
     if(member.organizations !== organizations){
       b = false;
     }
 
-    if ((be && !member.have) || (!be && member.have)) {
-      b = false;
+    if(!have){
+      if(member.area.length < 1){
+        b = false;
+      }
     }
 
-    // if(be){
-    //   if(!member.have){
-    //     b = false;
-    //   }
-    // }else {
-    //   if(member.have){
-    //     b = false;
-    //   }
-    // }
-
+    if ((have && !member.have) || (!have && member.have)) {
+      b = false;
+    }
 
     return b;
   })
@@ -92,7 +98,7 @@ const getVisit = () => {
 
     let b = true;
 
-    if(member.ward === '台東一支會'){
+    if(member.ward === '台東一'){
       b = false;
     }
 
@@ -151,7 +157,7 @@ const title_width = ref(240)
         <div class="grid gap-6 grid-cols-1 xl:grid-cols-2 items-center pt-5 px-5">
           <LabelDisplay :title="'日期'" :title-width="title_width" :value="rollCallStore.data.edit_roll_call.date" />
           <LabelDisplay :title="'點名人員'" :title-width="title_width" :value="rollCallStore.data.edit_roll_call.roll_call_man" />
-          <LabelDisplay :title="'(一支會)總人數'" :title-width="title_width" :value="memberFilterList('有到+沒到').length+''" />
+<!--          <LabelDisplay :title="'(一支會)總人數'" :title-width="title_width" :value="memberFilterList('有到+沒到').length+''" />-->
           <LabelDisplay :title="'總共點到人數'" :title-width="title_width" :value="memberFilterList('有到').length + getVisitMemberAmount()+''" />
           <LabelDisplay :title="'(一支會)有到人數'" :title-width="title_width" :value="memberFilterList('有到').length+''" />
           <LabelDisplay :title="'拜訪人數'" :title-width="title_width" :value="getVisitMemberAmount()+''" />
@@ -163,7 +169,7 @@ const title_width = ref(240)
         <DisplayOptions :title="'女青年'" :member_list="getOrganizations('女青年', true)" :member_list2="getOrganizations('女青年', false)" />
         <DisplayOptions :title="'初級會'" :member_list="getOrganizations('初級會', true)" :member_list2="getOrganizations('初級會', false)" />
         <DisplayOptions :title="'傳教士'" :member_list="getOrganizations('傳教士', true)" :member_list2="getOrganizations('傳教士', false)" />
-        <DisplayOptions :title="'慕道友'" :member_list="getOrganizations('慕道友', true)" :member_list2="getOrganizations('慕道友', false)" />
+        <DisplayOptions :title="'非教友'" :member_list="getOrganizations('非成員', true)" :member_list2="getOrganizations('非成員', false)" />
 
         <div class="mx-5 mt-5 bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <p class="px-5 pt-5 text-3xl text-fuchsia-700 dark:text-fuchsia-400">拜訪 人數: {{getVisitMemberAmount()}}</p>

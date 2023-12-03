@@ -14,6 +14,8 @@ onMounted( async () => {
       stake: '',
       ward: '',
       organizations: '',
+      person_type: '',
+      positive: '',
       area: '',
       have: false,
     }],
@@ -28,14 +30,16 @@ onMounted( async () => {
   rollCallStore.data.edit_roll_call.member_visit_list.length = 0;
   rollCallStore.data.member_list.forEach(member=>{
     const memberAdd = {
-          id: member.id,
-          name: member.name,
-          stake: member.stake,
-          ward: member.ward,
-          organizations: member.organizations,
-          area: member.area,
-          have: false,
-        }
+      id: member.id,
+      name: member.name,
+      stake: member.stake,
+      ward: member.ward,
+      organizations: member.organizations,
+      person_type: member.person_type,
+      positive: member.positive,
+      area: member.area,
+      have: false,
+    }
     rollCallStore.data.edit_roll_call.member_list.push(memberAdd);
   })
 
@@ -47,16 +51,18 @@ const getVisitMemberAmount = () => {
   rollCallStore.data.edit_roll_call.member_visit_list.forEach(member_visit=>{
     sum += member_visit.amount;
   })
+
   let memberList = rollCallStore.data.edit_roll_call.member_list.slice();
   //支會
   memberList = memberList.filter(
-      (member) => member.ward !== '台東一支會'
+      (member) => member.ward !== '台東一'
   );
   //有沒有到
   memberList = memberList.filter((member) =>
       member.have
   );
   sum += memberList.length;
+
   return sum;
 }
 
@@ -66,11 +72,15 @@ const memberFilterList = (state) => {
 
   //支聯會
   memberList = memberList.filter(
-      (member) => member.stake === '花蓮支聯會'
+      (member) => member.stake === '花蓮'
   );
   //支會
   memberList = memberList.filter(
-      (member) => member.ward === '台東一支會'
+      (member) => member.ward === '台東一'
+  );
+  //人員類型
+  memberList = memberList.filter(
+      (member) => member.person_type === '成員'
   );
   //有沒有到
   if(state !== '有到+沒到'){
@@ -103,26 +113,40 @@ const searchMemberList = computed(() => {
     );
   }
   //支聯會
-  if (rollCallStore.data.search_member_stake !== '所有支聯會') {
+  if (rollCallStore.data.search_member_stake !== '所有') {
     displayMembers = displayMembers.filter(
         (element) => element.stake === rollCallStore.data.search_member_stake
     );
   }
   //支會
-  if (rollCallStore.data.search_member_ward !== '所有支會') {
+  if (rollCallStore.data.search_member_ward !== '所有') {
     displayMembers = displayMembers.filter(
         (element) => element.ward === rollCallStore.data.search_member_ward
     );
   }
   //組織
-  if (rollCallStore.data.search_member_organizations !== '所有組織') {
+  if (rollCallStore.data.search_member_organizations !== '所有') {
     displayMembers = displayMembers.filter(
         (element) => element.organizations === rollCallStore.data.search_member_organizations
     );
   }
 
+  //人員類型
+  if(rollCallStore.data.search_member_person_type !== '所有'){
+    displayMembers = displayMembers.filter(
+        (element) => element.person_type === rollCallStore.data.search_member_person_type
+    );
+  }
+
+  //積極-不積極
+  if(rollCallStore.data.search_member_positive !== '所有'){
+    displayMembers = displayMembers.filter(
+        (element) => element.positive === rollCallStore.data.search_member_positive
+    );
+  }
+
   //是否有來
-  if (rollCallStore.data.search_member_have !== '有到+沒到') {
+  if (rollCallStore.data.search_member_have !== '所有') {
     displayMembers = displayMembers.filter((element) =>
         rollCallStore.data.search_member_have === '有到' ? element.have : !element.have
     );
@@ -151,6 +175,7 @@ const searchMemberList = computed(() => {
         </div>
 
 
+        <!--    人員數量計算    -->
         <div class="flex">
           <p class="text-black dark:text-white text-lg me-5">人數: </p>
           <p class="text-black dark:text-white text-lg me-5">所有: {{memberFilterList('有到+沒到').length}}</p>
@@ -159,34 +184,69 @@ const searchMemberList = computed(() => {
           <p class="text-black dark:text-white text-lg">拜訪: {{getVisitMemberAmount()}}</p>
         </div>
 
-        <div class="grid gap-6 grid-cols-3 items-center">
+        <!--   人員過濾條件    -->
+        <div class="grid gap-6 grid-cols-2 md:grid-cols-3 items-center">
           <input v-model="rollCallStore.data.search_member_name" type="text" id="first_name" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="搜尋姓名" required>
+          <div class="flex items-center">
+            <label class="flex-none w-24 text-3xl font-medium text-gray-900 dark:text-white">支聯會</label>
+            <select v-model="rollCallStore.data.search_member_stake" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option>花蓮</option>
+              <option>其他</option>
+              <option>所有</option>
+            </select>
+          </div>
 
-          <select v-model="rollCallStore.data.search_member_stake" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>花蓮支聯會</option>
-            <option>其他支聯會</option>
-            <option>所有支聯會</option>
-          </select>
-          <select v-model="rollCallStore.data.search_member_ward" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>台東一支會</option>
-            <option>其他支會</option>
-            <option>所有支會</option>
-          </select>
-          <select v-model="rollCallStore.data.search_member_organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>所有組織</option>
-            <option>長老定額組</option>
-            <option>慈助會</option>
-            <option>男青年</option>
-            <option>女青年</option>
-            <option>初級會</option>
-            <option>傳教士</option>
-            <option>慕道友</option>
-          </select>
-          <select v-model="rollCallStore.data.search_member_have" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>有到+沒到</option>
-            <option>有到</option>
-            <option>沒到</option>
-          </select>
+          <div class="flex items-center">
+            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">支會</label>
+            <select v-model="rollCallStore.data.search_member_ward" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option>台東一</option>
+              <option>其他</option>
+              <option>所有</option>
+            </select>
+          </div>
+
+          <div class="flex items-center">
+            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">組織</label>
+            <select v-model="rollCallStore.data.search_member_organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option>所有</option>
+              <option>長老定額組</option>
+              <option>慈助會</option>
+              <option>男青年</option>
+              <option>女青年</option>
+              <option>初級會</option>
+              <option>傳教士</option>
+              <option>非成員</option>
+            </select>
+          </div>
+
+          <div class="flex items-center">
+            <label class="flex-none w-30 text-3xl font-medium text-gray-900 dark:text-white">人員類型</label>
+            <select  v-model="rollCallStore.data.search_member_person_type" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option>所有</option>
+              <option>成員</option>
+              <option>部分成員</option>
+              <option>慕道友</option>
+            </select>
+          </div>
+
+          <div class="flex items-center">
+            <label class="flex-none w-30 text-3xl font-medium text-gray-900 dark:text-white">積極情況</label>
+            <select v-model="rollCallStore.data.search_member_positive" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option>所有</option>
+              <option>不積極</option>
+              <option>積極</option>
+            </select>
+          </div>
+
+          <div class="flex items-center">
+            <label class="flex-none w-30 text-3xl font-medium text-gray-900 dark:text-white">點到狀況</label>
+            <select v-model="rollCallStore.data.search_member_have" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option>所有</option>
+              <option>有到</option>
+              <option>沒到</option>
+            </select>
+          </div>
+
         </div>
         <!--   人員列表     -->
         <div class="grid gap-6 grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">

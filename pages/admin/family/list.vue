@@ -120,68 +120,92 @@ const getMemberColor = (member) => {
       <!--   內容   -->
       <div :class="{'hidden': loading}">
         <div class="grid gap-6 mb-6 grid-cols-3 items-center pt-5">
-          <div class="">
-            <input v-model="familyStore.data.search_member_name" type="text" id="first_name" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="搜尋姓名" required>
-          </div>
+<!--          <div class="">-->
+<!--            <input v-model="familyStore.data.search_member_name" type="text" id="first_name" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="搜尋姓名" required>-->
+<!--          </div>-->
 
-          <select v-model="familyStore.data.search_member_stake" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>花蓮支聯會</option>
-            <option>其他支聯會</option>
-            <option>所有支聯會</option>
-          </select>
+<!--          <div class="flex items-center">-->
+<!--            <label class="flex-none w-24 text-3xl font-medium text-gray-900 dark:text-white">支聯會</label>-->
+<!--            <select v-model="familyStore.data.search_member_stake" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+<!--              <option>花蓮</option>-->
+<!--              <option>其他</option>-->
+<!--              <option>所有</option>-->
+<!--            </select>-->
+<!--          </div>-->
 
-          <select v-model="familyStore.data.search_member_ward" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>台東一支會</option>
-            <option>其他支會</option>
-            <option>所有支會</option>
-          </select>
+<!--          <div class="flex items-center">-->
+<!--            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">支會</label>-->
+<!--            <select v-model="familyStore.data.search_member_ward" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+<!--              <option>台東一</option>-->
+<!--              <option>其他</option>-->
+<!--              <option>所有</option>-->
+<!--            </select>-->
+<!--          </div>-->
 
-          <select v-model="familyStore.data.search_member_organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>所有組織</option>
-            <option>長老定額組</option>
-            <option>慈助會</option>
-            <option>男青年</option>
-            <option>女青年</option>
-            <option>初級會</option>
-            <option>傳教士</option>
-            <option>非成員</option>
-          </select>
 
-          <select v-model="familyStore.data.search_member_person_type" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>人員類型</option>
-            <option>成員</option>
-            <option>部分成員</option>
-            <option>慕道友</option>
-          </select>
+<!--          <div class="flex items-center">-->
+<!--            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">組織</label>-->
+<!--            <select v-model="familyStore.data.search_member_organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+<!--              <option>所有</option>-->
+<!--              <option>長老定額組</option>-->
+<!--              <option>慈助會</option>-->
+<!--              <option>男青年</option>-->
+<!--              <option>女青年</option>-->
+<!--              <option>初級會</option>-->
+<!--              <option>傳教士</option>-->
+<!--              <option>非成員</option>-->
+<!--            </select>-->
+<!--          </div>-->
 
-          <select v-model="familyStore.data.search_member_positive" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>積極情況</option>
-            <option>不積極</option>
-            <option>積極</option>
-          </select>
 
-          <select v-model="familyStore.data.search_member_calling" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>所有召喚</option>
-            <option>主教團</option>
-            <option>長老定額組</option>
-            <option>慈助會</option>
-            <option>女青年</option>
-            <option>初級會</option>
-          </select>
+<!--          <div class="flex items-center">-->
+<!--            <label class="flex-none w-30 text-3xl font-medium text-gray-900 dark:text-white">人員類型</label>-->
+<!--            <select  v-model="familyStore.data.search_member_person_type" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+<!--              <option>所有</option>-->
+<!--              <option>成員</option>-->
+<!--              <option>部分成員</option>-->
+<!--              <option>慕道友</option>-->
+<!--            </select>-->
+<!--          </div>-->
 
-          <div class="">
-            <input v-model="familyStore.data.search_member_age" type="text" id="first_name" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="搜尋姓名" required>
-          </div>
+<!--          <div class="flex items-center">-->
+<!--            <label class="flex-none w-30 text-3xl font-medium text-gray-900 dark:text-white">積極情況</label>-->
+<!--            <select v-model="familyStore.data.search_member_positive" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+<!--              <option>所有</option>-->
+<!--              <option>不積極</option>-->
+<!--              <option>積極</option>-->
+<!--            </select>-->
+<!--          </div>-->
 
-<!--          <NuxtLink to="/admin/member/report" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">-->
-<!--            報表</NuxtLink>-->
+<!--          <div class="flex items-center">-->
+<!--            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">召喚</label>-->
+<!--            <select v-model="familyStore.data.search_member_calling" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+<!--              <option>所有</option>-->
+<!--              <option>主教團</option>-->
+<!--              <option>長老定額組</option>-->
+<!--              <option>慈助會</option>-->
+<!--              <option>女青年</option>-->
+<!--              <option>初級會</option>-->
+<!--              <option>沒有</option>-->
+<!--            </select>-->
+<!--          </div>-->
 
-          <NuxtLink to="/admin/member/add" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-            新增</NuxtLink>
-          <button @click="refresh()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-            刷新</button>
-          <button @click="familyStore.fixMember()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-            修復</button>
+
+<!--          <div class="flex items-center">-->
+<!--            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">年齡</label>-->
+<!--            <input v-model.number="familyStore.data.search_member_age" type="text" id="age" class="w-full h-12 text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>-->
+<!--            <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">以下</label>-->
+<!--          </div>-->
+
+<!--&lt;!&ndash;          <NuxtLink to="/admin/member/report" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">&ndash;&gt;-->
+<!--&lt;!&ndash;            報表</NuxtLink>&ndash;&gt;-->
+
+<!--          <NuxtLink to="/admin/member/add" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">-->
+<!--            新增</NuxtLink>-->
+<!--          <button @click="refresh()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">-->
+<!--            刷新</button>-->
+<!--          <button @click="familyStore.fixMember()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-xl py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">-->
+<!--            修復</button>-->
           <p class="text-xl text-black dark:text-white" >人數:{{ familyStore.familyList.length }}</p>
           <button @click="downLoad()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-center rounded-lg text-2xl px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
             下載成圖片</button>
