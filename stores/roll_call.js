@@ -84,14 +84,16 @@ export const useRollCallStore = defineStore('roll_call', () => {
       ],
     }
   })
+
   //選擇編輯的點名表
   const getEditRollCall = () => {
     const edit_roll_call_index = data.roll_call_map.get(data.edit_roll_call_date);
     return data.roll_call_list[edit_roll_call_index];
   }
+
   //過濾後的點名列表
   const rollCallList = computed(() => {
-    let displayRollCalls = data.roll_call_list.slice();
+    let displayRollCalls = data.roll_call_list.slice().reverse();
 
     //年份
     if (data.search_roll_call_year !== '所有') {

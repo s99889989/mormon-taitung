@@ -67,7 +67,7 @@ const getVisitMemberAmount = () => {
 }
 
 //顯示計算用
-const memberFilterList = (state) => {
+const memberFilterList = () => {
   let memberList = rollCallStore.data.edit_roll_call.member_list.slice();
 
   //支聯會
@@ -78,16 +78,10 @@ const memberFilterList = (state) => {
   memberList = memberList.filter(
       (member) => member.ward === '台東一'
   );
-  //人員類型
-  memberList = memberList.filter(
-      (member) => member.person_type === '成員'
-  );
   //有沒有到
-  if(state !== '有到+沒到'){
-    memberList = memberList.filter((member) =>
-        state === '有到' ? member.have : !member.have
-    );
-  }
+  memberList = memberList.filter((member) =>
+      member.have
+  );
   return memberList;
 }
 
@@ -177,10 +171,9 @@ const searchMemberList = computed(() => {
 
         <!--    人員數量計算    -->
         <div class="flex">
-          <p class="text-black dark:text-white text-lg me-5">人數: </p>
-          <p class="text-black dark:text-white text-lg me-5">所有: {{memberFilterList('有到+沒到').length}}</p>
-          <p class="text-black dark:text-white text-lg me-5">有到: {{memberFilterList('有到').length}}</p>
-          <p class="text-black dark:text-white text-lg me-5">沒到: {{memberFilterList('沒到').length}}</p>
+          <p class="text-black dark:text-white text-lg me-5">點到人數人數: </p>
+          <p class="text-black dark:text-white text-lg me-5">總共: {{memberFilterList().length+getVisitMemberAmount()}}</p>
+          <p class="text-black dark:text-white text-lg me-5">台東一: {{memberFilterList().length}}</p>
           <p class="text-black dark:text-white text-lg">拜訪: {{getVisitMemberAmount()}}</p>
         </div>
 

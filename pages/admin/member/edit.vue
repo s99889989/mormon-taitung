@@ -87,7 +87,7 @@ const memberList = computed(() => {
         <div class="flex items-center">
           <label for="first_name" class="w-40 text-3xl block font-medium text-gray-900 dark:text-white">聖職職位</label>
           <select  v-model="membersStore.data.editData.priesthood" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>無聖職職位</option>
+            <option>無聖職職位</option>
             <option>亞倫聖職-執事</option>
             <option>亞倫聖職-教師</option>
             <option>亞倫聖職-祭司</option>

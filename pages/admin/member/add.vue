@@ -91,7 +91,7 @@ const getMemberName = (uuid) => {
         <div class="flex items-center">
           <label for="first_name" class="w-40 text-3xl block font-medium text-gray-900 dark:text-white">聖職職位</label>
           <select  v-model="membersStore.data.editData.priesthood" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>無聖職職位</option>
+            <option>無聖職職位</option>
             <option>亞倫聖職-執事</option>
             <option>亞倫聖職-教師</option>
             <option>亞倫聖職-祭司</option>
@@ -110,15 +110,15 @@ const getMemberName = (uuid) => {
         <div class="flex items-center">
           <label for="first_name" class="w-32 text-3xl block font-medium text-gray-900 dark:text-white">支聯會</label>
           <select  v-model="membersStore.data.editData.stake" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>花蓮支聯會</option>
-            <option>其他支聯會</option>
+            <option>花蓮</option>
+            <option>其他</option>
           </select>
         </div>
         <div class="flex items-center">
           <label for="first_name" class="w-20 text-3xl block font-medium text-gray-900 dark:text-white">支會</label>
           <select  v-model="membersStore.data.editData.ward" id="countries" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>台東一支會</option>
-            <option>其他支會</option>
+            <option>台東一</option>
+            <option>其他</option>
           </select>
         </div>
         <div class="flex items-center">
@@ -132,15 +132,13 @@ const getMemberName = (uuid) => {
         <div class="flex items-center">
           <label for="first_name" class="w-20 text-3xl block font-medium text-gray-900 dark:text-white">組織</label>
           <select  v-model="membersStore.data.editData.organizations" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>所有組織</option>
             <option>長老定額組</option>
             <option>慈助會</option>
             <option>男青年</option>
             <option>女青年</option>
             <option>初級會</option>
             <option>傳教士</option>
-            <option>部分成員</option>
-            <option>慕道友</option>
+            <option>非成員</option>
           </select>
         </div>
 
