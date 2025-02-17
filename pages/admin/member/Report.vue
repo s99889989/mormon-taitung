@@ -76,6 +76,7 @@ const getMember = (uuid) => {
       address: '',
       father: '',
       mother: '',
+      death: false,
       child: [],
     };
   }
@@ -116,6 +117,7 @@ const getChild = () => {
     address: '',
     father: '',
     mother: '',
+    death: false,
     child: [],
   }];
 

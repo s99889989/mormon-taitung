@@ -62,6 +62,13 @@ const removeVisit = (idx) => {
 const searchMemberList = computed(() => {
 
   let displayMembers = rollCallStore.data.edit_roll_call.member_list.slice(); // 创建一个副本以确保响应性
+
+  displayMembers = displayMembers.filter((element) =>
+      element.death.includes('在世')
+  );
+
+  // displayMembers.forEach((element) => console.log("死亡: "+element.death))
+
   //名稱
   if (rollCallStore.data.search_member_name.length > 0) {
     displayMembers = displayMembers.filter((element) =>

@@ -13,7 +13,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
     search_member_ward: '台東一',
     search_member_organizations: '所有',
     search_member_person_type: '成員',
-    search_member_positive: '所有',
+    search_member_positive: '積極',
     search_member_have: '所有',
     search_roll_call_year: '所有',
     search_roll_call_month: '所有',
@@ -34,6 +34,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
         positive: '',
         area: '',
         registration_number: '',
+        death: '',
       },
     ],
     //點名表列表
@@ -52,6 +53,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
           positive: '',
           area: '',
           have: false,
+          death: '',
         }],
         member_visit_list: [
           {
@@ -75,6 +77,7 @@ export const useRollCallStore = defineStore('roll_call', () => {
         positive: '',
         area: '',
         have: false,
+        death: '',
       }],
       member_visit_list: [
         {
@@ -230,8 +233,8 @@ export const useRollCallStore = defineStore('roll_call', () => {
     data.edit_roll_call = { ...data.roll_call_list[index] };
   }
 
-  //刷新列表
-  const refreshRollCall = async () => {
+  //刷新列表 該年 該月
+  const refreshRollCallCurrentMonth = async () => {
     let roll_call_list= [
       {
         date: '',
@@ -240,9 +243,21 @@ export const useRollCallStore = defineStore('roll_call', () => {
         member_visit_list: [],
       },
     ];
-    const url = data.main_url+'mormon/roll_call/get';
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const dateString = `${year}-${month}`;
+
+    const url = data.main_url+'mormon/roll_call/get_date';
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: dateString
+      });
       roll_call_list =  await response.json();
     } catch (error) {
       roll_call_list =  [];
@@ -287,7 +302,100 @@ export const useRollCallStore = defineStore('roll_call', () => {
             person_type: value1.person_type,
             positive: value1.positive,
             area: value1.area,
+            death: value1.death,
             have: false,
+          }
+          if(value.member_list.includes(value1.id)){
+            member.have = true;
+          }
+
+          roll_call.member_list.push(member);
+        })
+        //拜訪Member設置
+        roll_call.member_visit_list.length = 0;
+        value.member_visit_list.forEach(value1 => {
+          const parts = value1.split(' _ ');
+          const name = parts[0];
+          const amount = parseInt(parts[1]);
+          const member_visit = {
+            name: name,
+            amount: amount,
+          }
+          roll_call.member_visit_list.push(member_visit);
+        })
+        //RollCall放入
+        data.roll_call_list.push(roll_call)
+
+      })
+
+
+      //更新人員Map對應列表
+      refreshRollCallMap();
+    }
+  }
+
+  //刷新列表
+  const refreshRollCall = async () => {
+    let roll_call_list= [
+      {
+        date: '',
+        roll_call_man: '',
+        member_list: [],
+        member_visit_list: [],
+      },
+    ];
+
+
+    const url = data.main_url+'mormon/roll_call/get';
+    try {
+      const response = await fetch(url);
+      roll_call_list =  await response.json();
+    } catch (error) {
+      roll_call_list =  [];
+    }finally {
+      data.roll_call_list.length = 0;
+      roll_call_list.forEach(value => {
+
+        //RollCall設置
+        const roll_call = {
+          date: value.date,
+          roll_call_man: value.roll_call_man,
+          member_list: [{
+            id: '',
+            name: '',
+            stake: '',
+            ward: '',
+            organizations: '',
+            person_type: '',
+            positive: '',
+            area: '',
+            have: false,
+            death: '',
+          }],
+          member_visit_list: [
+            {
+              name: '',
+              amount: 1,
+            },
+          ],
+        }
+
+        //Member設置
+        roll_call.member_list.length = 0;
+
+        data.member_list.forEach(value1 => {
+
+          const member = {
+            id: value1.id,
+            name: value1.name,
+            stake: value1.stake,
+            ward: value1.ward,
+            organizations: value1.organizations,
+            person_type: value1.person_type,
+            positive: value1.positive,
+            area: value1.area,
+            have: false,
+            death: value1.death,
           }
           if(value.member_list.includes(value1.id)){
             member.have = true;
@@ -327,5 +435,5 @@ export const useRollCallStore = defineStore('roll_call', () => {
     })
   }
 
-  return { data, rollCallList, setEditRollCall, add, update, getEditRollCall, remove, refreshRollCall }
+  return { data, rollCallList, setEditRollCall, add, update, getEditRollCall, remove, refreshRollCall, refreshRollCallCurrentMonth }
 })

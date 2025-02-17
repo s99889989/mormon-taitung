@@ -13,7 +13,7 @@ export const useMembersStore = defineStore('members', () => {
     search_member_organizations: '所有',
     search_member_person_type: '成員',
     search_member_calling: '所有',
-    search_member_positive: '所有',
+    search_member_positive: '積極',
     search_member_age: 100,
     //紀錄UUID和member_list位置
     member_map: new Map(),
@@ -41,6 +41,7 @@ export const useMembersStore = defineStore('members', () => {
         e_mail: '',
         father: '',
         mother: '',
+        death: '',
         child: [],
       },
     ],
@@ -77,6 +78,7 @@ export const useMembersStore = defineStore('members', () => {
       e_mail: '',
       father: '',
       mother: '',
+      death: '',
       child: [],
     },
   })
@@ -104,6 +106,7 @@ export const useMembersStore = defineStore('members', () => {
         e_mail: '',
         father: '',
         mother: '',
+        death: '',
         child: [],
       },
     ]

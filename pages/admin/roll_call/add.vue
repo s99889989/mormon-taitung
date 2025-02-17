@@ -26,21 +26,27 @@ onMounted( async () => {
       },
     ],
   }
+
+  rollCallStore.data.edit_roll_call.date = new Date().toISOString().split('T')[0];
   rollCallStore.data.edit_roll_call.member_list.length = 0;
   rollCallStore.data.edit_roll_call.member_visit_list.length = 0;
   rollCallStore.data.member_list.forEach(member=>{
-    const memberAdd = {
-      id: member.id,
-      name: member.name,
-      stake: member.stake,
-      ward: member.ward,
-      organizations: member.organizations,
-      person_type: member.person_type,
-      positive: member.positive,
-      area: member.area,
-      have: false,
+
+    if(member.death !== '歿'){
+      const memberAdd = {
+        id: member.id,
+        name: member.name,
+        stake: member.stake,
+        ward: member.ward,
+        organizations: member.organizations,
+        person_type: member.person_type,
+        positive: member.positive,
+        area: member.area,
+        have: false,
+      }
+      rollCallStore.data.edit_roll_call.member_list.push(memberAdd);
     }
-    rollCallStore.data.edit_roll_call.member_list.push(memberAdd);
+
   })
 
 })
@@ -100,6 +106,11 @@ const removeVisit = (idx) => {
 const searchMemberList = computed(() => {
 
   let displayMembers = rollCallStore.data.edit_roll_call.member_list.slice(); // 创建一个副本以确保响应性
+
+  displayMembers = displayMembers.filter((element) =>
+      element.name.includes(rollCallStore.data.search_member_name)
+  );
+
   //名稱
   if (rollCallStore.data.search_member_name.length > 0) {
     displayMembers = displayMembers.filter((element) =>

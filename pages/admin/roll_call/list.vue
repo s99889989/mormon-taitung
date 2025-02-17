@@ -20,10 +20,18 @@ onMounted(()=>{
   membersStore.refreshMember().then(()=>{
     rollCallStore.data.member_list.length = 0;
     rollCallStore.data.member_list = membersStore.data.member_list.slice();
-    rollCallStore.refreshRollCall().then(()=>{
+    rollCallStore.refreshRollCallCurrentMonth().then(()=>{
       initFlowbite();
       loading.value = false;
+
+      const today = new Date();
+      const year = today.getFullYear();
+      rollCallStore.data.search_roll_call_year = String(year);
+
+      rollCallStore.refreshRollCall();
+
     });
+
   });
 
 })
@@ -32,10 +40,15 @@ const refresh = () => {
   loading.value = true;
   rollCallStore.data.member_list.length = 0;
   rollCallStore.data.member_list = membersStore.data.member_list.slice();
-  rollCallStore.refreshRollCall().then(()=>{
+  rollCallStore.refreshRollCallCurrentMonth().then(()=>{
     initFlowbite();
     loading.value = false;
+    rollCallStore.refreshRollCall();
   });
+  // rollCallStore.refreshRollCall().then(()=>{
+  //   initFlowbite();
+  //   loading.value = false;
+  // });
 
 }
 
@@ -118,6 +131,8 @@ const getVisit = (date) => {
               <option>所有</option>
               <option>2023</option>
               <option>2024</option>
+              <option>2025</option>
+              <option>2026</option>
             </select>
           </div>
 
@@ -125,8 +140,6 @@ const getVisit = (date) => {
             <label class="flex-none w-16 text-3xl font-medium text-gray-900 dark:text-white">月份</label>
             <select v-model="rollCallStore.data.search_roll_call_month" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option>所有</option>
-              <option>11</option>
-              <option>12</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -137,6 +150,8 @@ const getVisit = (date) => {
               <option>8</option>
               <option>9</option>
               <option>10</option>
+              <option>11</option>
+              <option>12</option>
             </select>
           </div>
 

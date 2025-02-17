@@ -171,6 +171,14 @@ const memberList = computed(() => {
           <input v-model="membersStore.data.editData.e_mail" id="e_mail" style="height: 50px" class="ps-5 flex items-center grow bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         </div>
 
+        <div class="flex items-center">
+          <label for="first_name" class="w-40 text-3xl block font-medium text-gray-900 dark:text-white">死亡</label>
+          <select v-model="membersStore.data.editData.death" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>在世</option>
+            <option>歿</option>
+          </select>
+        </div>
+
         <div class="grid gap-6 mb-6 grid-cols-3 items-center pt-5">
           <div class="">
             <input v-model="search_member_name" type="text" id="first_name" class="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="搜尋姓名" required>
