@@ -78,7 +78,7 @@ export const useMembersStore = defineStore('members', () => {
       e_mail: '',
       father: '',
       mother: '',
-      death: '',
+      death: '在世',
       child: [],
     },
   })

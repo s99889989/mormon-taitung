@@ -75,6 +75,7 @@ const searchMemberList = computed(() => {
         element.name.includes(rollCallStore.data.search_member_name)
     );
   }
+
   //支聯會
   if (rollCallStore.data.search_member_stake !== '所有') {
     displayMembers = displayMembers.filter(

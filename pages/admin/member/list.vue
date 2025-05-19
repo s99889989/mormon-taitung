@@ -220,6 +220,8 @@ const downLoad = async () => {
         </div>
 
 
+
+
         <!--    卡片    -->
         <div v-show="list_data.list_type === '卡片'" class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pb-20">
 
