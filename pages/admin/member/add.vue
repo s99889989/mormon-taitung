@@ -27,7 +27,7 @@ onMounted( () => {
     e_mail: '',
     father: '',
     mother: '',
-    death: false,
+    death: '在世',
     child: [],
   }
 
