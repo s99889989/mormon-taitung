@@ -269,16 +269,12 @@ const memberList = computed(() => {
 
         <div class="grid gap-6 grid-cols-2">
           <NuxtLink to="/admin/member/list" @click="membersStore.edit()" type="button" class="text-center text-2xl text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
-            編輯</NuxtLink>
+            儲存</NuxtLink>
           <NuxtLink to="/admin/member/list" type="button" class="text-center text-2xl text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
             取消</NuxtLink>
         </div>
 
-
-
       </div>
-
-
 
     </div>
   </div>
