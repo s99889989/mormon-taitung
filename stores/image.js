@@ -3,10 +3,10 @@ import { defineStore } from 'pinia'
 import * as path from "path";
 
 export const useImageStore = defineStore('image', () => {
-    //http://localhost:9100/
-    //https://madustrialtd.asuscomm.com:9100/
+    //http://localhost:8080/
+    //https://madustrialtd.asuscomm.com:8080/
     const data = reactive({
-        main_url: 'https://madustrialtd.asuscomm.com:9100/',
+        main_url: 'https://madustrialtd.asuscomm.com:8080/',
         search_active_month: '所有月份',
         select_image_path: '',
         image_list:[

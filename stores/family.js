@@ -2,10 +2,10 @@ import {defineStore} from 'pinia'
 import {computed} from "vue";
 
 export const useFamilyStore = defineStore('useFamilyStore', () => {
-  //https://madustrialtd.asuscomm.com:9100/
-  //http://localhost:9100/
+  //https://madustrialtd.asuscomm.com:8080/
+  //http://localhost:8080/
   const data = reactive({
-    main_url: 'https://madustrialtd.asuscomm.com:9100/',
+    main_url: 'https://madustrialtd.asuscomm.com:8080/',
     search_member_name: '',
     search_member_stake: '花蓮',
     search_member_ward: '台東一',

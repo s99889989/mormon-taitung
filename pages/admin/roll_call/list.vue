@@ -133,6 +133,7 @@ const getVisit = (date) => {
               <option>2024</option>
               <option>2025</option>
               <option>2026</option>
+              <option>2027</option>
             </select>
           </div>
 

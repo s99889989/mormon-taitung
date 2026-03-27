@@ -3,10 +3,10 @@ import { defineStore } from 'pinia'
 
 
 export const useActiveStore = defineStore('active', () => {
-  //https://madustrialtd.asuscomm.com:9100/
-  //https://localhost:9100/
+  //https://madustrialtd.asuscomm.com:8080/
+  //https://localhost:8080/
   const data = reactive({
-    main_url: 'https://madustrialtd.asuscomm.com:9100/',
+    main_url: 'https://madustrialtd.asuscomm.com:8080/',
     search_active_month: '所有時間',
     //紀錄saveName和active_list位置
     active_map: new Map(),
