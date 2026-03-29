@@ -1,59 +1,60 @@
 <script setup lang="ts">
-import {useDarkModeStore} from "~/stores/dark_mode";
+import { useDarkModeStore } from "~/stores/dark_mode"
 import { initFlowbite } from 'flowbite'
-const dark_mode = useDarkModeStore();
+
+const dark_mode = useDarkModeStore()
+const route = useRoute()
+
 onMounted(() => {
-  initFlowbite();
+  initFlowbite()
 })
+
+const isActive = (path: string) => route.path.startsWith(path)
 </script>
 
 <template>
+  <nav class="fixed w-full border-b border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 z-40">
+    <div class="flex flex-row items-center px-4 py-3 gap-6">
 
-  <nav class="fixed w-full border-b border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex flex-row p-4">
-      <NuxtLink to="/" class="basis-1/4 flex items-center">
-        <img src="/logo.png" class="h-8 mr-3" alt="Flowbite Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">台東一支會</span>
+      <!-- Logo -->
+      <NuxtLink to="/" class="flex items-center gap-2 flex-none">
+        <img src="/logo.png" class="h-8" alt="Logo" />
+        <span class="text-xl font-semibold whitespace-nowrap dark:text-white">台東一支會</span>
       </NuxtLink>
 
-      <div class="w-full basis-1/2 flex justify-center" id="navbar-solid-bg">
-        <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+      <!-- 導覽連結 -->
+      <ul class="flex items-center gap-1 flex-1 justify-center">
+        <li v-for="item in [
+          { to: '/admin/activity/list', label: '活動' },
+          { to: '/admin/roll_call/list', label: '點名' },
+          { to: '/admin/member/list', label: '成員' },
+          { to: '/admin/family/list', label: '家庭' },
+        ]" :key="item.to">
+          <NuxtLink
+              :to="item.to"
+              :class="isActive(item.to)
+              ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30'
+              : 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'"
+              class="text-xl font-medium px-4 py-2 rounded-lg whitespace-nowrap transition-colors block">
+            {{ item.label }}
+          </NuxtLink>
+        </li>
 
-          <li>
-            <NuxtLink to="/admin/activity/list" class="text-2xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-              活動</NuxtLink>
-          </li>
-
-          <li>
-            <NuxtLink to="/admin/roll_call/list" class="text-2xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-              點名</NuxtLink>
-          </li>
-
-          <li>
-            <NuxtLink to="/admin/member/list" class="text-2xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-              成員</NuxtLink>
-          </li>
-
-          <li>
-            <NuxtLink to="/admin/family/list" class="text-2xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-              家庭</NuxtLink>
-          </li>
-
-          <li>
-            <button @click="dark_mode.change_dark_mode" to="/admin/setting/main" class="text-2xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-              {{dark_mode.data.display_name}}</button>
-          </li>
-
-        </ul>
-      </div>
-
-
+        <!-- 暗色模式 -->
+        <li>
+          <button
+              @click="dark_mode.change_dark_mode"
+              class="text-xl font-medium px-4 py-2 rounded-lg whitespace-nowrap transition-colors
+                   text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400
+                   hover:bg-gray-100 dark:hover:bg-gray-700">
+            {{ dark_mode.data.display_name }}
+          </button>
+        </li>
+      </ul>
 
     </div>
   </nav>
-
 </template>
 
 <style scoped>
-
 </style>

@@ -227,7 +227,7 @@ const searchMemberList = computed(() => {
         </div>
 
         <!-- 人員列表：點擊整張卡片切換狀態 -->
-        <div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))">
+        <div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))">
           <div v-for="(member) in searchMemberList" :key="member.id"
                :class="member.have
               ? 'dark:bg-gray-900 bg-gray-50 border-blue-400 dark:border-blue-500'
@@ -238,7 +238,7 @@ const searchMemberList = computed(() => {
             <div class="flex items-center gap-2">
               <div :class="member.have ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'"
                    class="w-4 h-4 rounded-full flex-none transition-colors"></div>
-              <p class="text-xl font-bold text-gray-900 dark:text-white leading-tight">{{ member.name }}</p>
+              <p class="text-3xl font-bold text-gray-900 dark:text-white leading-tight">{{ member.name }}</p>
             </div>
             <p class="text-sm text-sky-600 dark:text-sky-400">{{ member.area }}</p>
           </div>

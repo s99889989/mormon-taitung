@@ -110,35 +110,35 @@ const getVisit = (date) => {
         </div>
 
         <!-- 卡片列表：每欄最小 280px，自動填滿 -->
-        <div class="grid gap-4 mx-5 pb-6" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))">
+        <div class="grid gap-4 mx-5 pb-6" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
 
           <div v-for="(roll_call) in rollCallStore.rollCallList" :key="roll_call.date"
                class="p-4 flex flex-col gap-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-            <!-- 日期：whitespace-nowrap 防止換行 -->
-            <p class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white whitespace-nowrap">
+            <!-- 日期：text-2xl → text-3xl -->
+            <p class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white whitespace-nowrap">
               {{ roll_call.date }}
             </p>
 
-            <!-- 統計：三個數字同行顯示 -->
+            <!-- 統計：text-base → text-xl -->
             <div class="flex flex-wrap gap-x-3 gap-y-1">
-              <p class="text-base font-bold text-red-700 dark:text-red-400 whitespace-nowrap">
+              <p class="text-xl font-bold text-red-700 dark:text-red-400 whitespace-nowrap">
                 總人數 {{ getAmount(roll_call.date) }}
               </p>
-              <p class="text-base font-bold text-orange-700 dark:text-orange-400 whitespace-nowrap">
+              <p class="text-xl font-bold text-orange-700 dark:text-orange-400 whitespace-nowrap">
                 支會 {{ getAmount(roll_call.date) - getVisit(roll_call.date) }}
               </p>
-              <p class="text-base font-bold text-gray-500 dark:text-gray-400 whitespace-nowrap">
+              <p class="text-xl font-bold text-gray-500 dark:text-gray-400 whitespace-nowrap">
                 拜訪 {{ getVisit(roll_call.date) }}
               </p>
             </div>
 
-            <!-- 操作按鈕：flex 各佔 1/3，不換行 -->
+            <!-- 操作按鈕：text-sm → text-base -->
             <div class="flex rounded-md overflow-hidden border border-gray-300 dark:border-gray-600 mt-auto">
               <NuxtLink
                   @click="rollCallStore.setEditRollCall(roll_call.date)"
                   to="/admin/roll_call/info"
-                  class="flex-1 text-center py-2 text-sm font-medium text-gray-900 bg-white
+                  class="flex-1 text-center py-2 text-base font-medium text-gray-900 bg-white
                        hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600
                        border-r border-gray-300 dark:border-gray-600">
                 查看
@@ -146,7 +146,7 @@ const getVisit = (date) => {
               <NuxtLink
                   @click="rollCallStore.setEditRollCall(roll_call.date)"
                   to="/admin/roll_call/edit"
-                  class="flex-1 text-center py-2 text-sm font-medium text-gray-900 bg-white
+                  class="flex-1 text-center py-2 text-base font-medium text-gray-900 bg-white
                        hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600
                        border-r border-gray-300 dark:border-gray-600">
                 編輯
@@ -155,7 +155,7 @@ const getVisit = (date) => {
                   @click="setDeleteDate(roll_call.date)"
                   data-modal-target="popup-modal"
                   data-modal-toggle="popup-modal"
-                  class="flex-1 text-center py-2 text-sm font-medium text-red-600 bg-white
+                  class="flex-1 text-center py-2 text-base font-medium text-red-600 bg-white
                        hover:bg-red-50 dark:bg-gray-700 dark:text-red-400 dark:hover:bg-gray-600">
                 刪除
               </button>
