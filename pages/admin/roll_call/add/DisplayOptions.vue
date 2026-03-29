@@ -17,7 +17,7 @@ const props = defineProps({
 
       <div  v-for="(member) in member_list" class="flex">
         <p class="me-3 text-3xl text-gray-900 dark:text-white">{{member.name}}</p>
-        <p class="text-3xl text-sky-700 dark:text-sky-400">{{member.area}}</p>
+<!--        <p class="text-3xl text-sky-700 dark:text-sky-400">{{member.area}}</p>-->
       </div>
 
 
@@ -28,7 +28,7 @@ const props = defineProps({
 
       <div  v-for="(member) in member_list2" class="flex">
         <p class="me-3 text-3xl text-gray-900 dark:text-gray-400">{{member.name}}</p>
-        <p class="text-3xl text-sky-700 dark:text-sky-600">{{member.area}}</p>
+<!--        <p class="text-3xl text-sky-700 dark:text-sky-600">{{member.area}}</p>-->
       </div>
 
 

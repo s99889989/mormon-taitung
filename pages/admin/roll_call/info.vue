@@ -178,12 +178,12 @@ const title_width = ref(240)
             <!--    拜訪      -->
             <div  v-for="(member) in getVisit()" class="flex">
               <p class="me-3 text-3xl text-gray-900 dark:text-white">{{member.name}}</p>
-              <p class="text-3xl text-sky-700 dark:text-sky-400">{{member.area}}</p>
+<!--              <p class="text-3xl text-sky-700 dark:text-sky-400">{{member.area}}</p>-->
             </div>
             <!--    拜訪-沒在名單上      -->
             <div  v-for="(member) in rollCallStore.data.edit_roll_call.member_visit_list" class="flex">
               <p class="me-3 text-3xl text-gray-900 dark:text-white">{{member.name}}</p>
-              <p class="text-3xl text-yellow-700 dark:text-yellow-400">人數: {{member.amount}}</p>
+<!--              <p class="text-3xl text-yellow-700 dark:text-yellow-400">人數: {{member.amount}}</p>-->
             </div>
           </div>
         </div>
