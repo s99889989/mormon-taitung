@@ -1,28 +1,19 @@
 <script setup lang="ts">
-import {createEditor} from 'lexical';
+import { createEditor } from '~/components/Lexical.vue'
 
 const config = {
   namespace: 'MyEditor',
-  theme: {
-
-  },
+  theme: {},
   onError: console.error
-};
+}
 
-const editor = createEditor(config);
-
-const contentEditableElement = document.getElementById('editor');
-
-editor.setRootElement(contentEditableElement);
-
+onMounted(() => {
+  const editor = createEditor(config)
+  const contentEditableElement = document.getElementById('editor')
+  editor.setRootElement(contentEditableElement)
+})
 </script>
 
 <template>
-<div class="w-full h-60 bg-black dark:bg-white" id="editor">
-
-</div>
+  <div class="w-full h-60 bg-black dark:bg-white" id="editor"></div>
 </template>
-
-<style scoped>
-
-</style>

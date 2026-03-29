@@ -4,6 +4,14 @@
   <NuxtPage />
   <BottomBar class="md:hidden"/>
 </template>
+
 <script setup lang="ts">
-import UpDownButton from "~/components/UpDownButton.vue";
+import { useDarkModeStore } from '~/stores/dark_mode'
+import UpDownButton from "~/components/UpDownButton.vue"
+
+const dark_mode = useDarkModeStore()
+
+onMounted(() => {
+  dark_mode.init()
+})
 </script>

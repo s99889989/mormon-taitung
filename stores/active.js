@@ -1,30 +1,15 @@
-
+// stores/active.js
 import { defineStore } from 'pinia'
-
+import { reactive, computed } from 'vue'
+import { apiFetch } from '~/utils/api'
 
 export const useActiveStore = defineStore('active', () => {
-  //https://madustrialtd.asuscomm.com:8080/
-  //https://localhost:8080/
+
   const data = reactive({
-    main_url: 'https://madustrialtd.asuscomm.com:8080/',
     search_active_month: '所有時間',
-    //紀錄saveName和active_list位置
     active_map: new Map(),
-    active_list:[
-      {
-        fixed: false,
-        week: '禮拜一',
-        date: '',
-        time: '',
-        end_date: '',
-        end_time: '',
-        name: '',
-        location: '',
-        info: '',
-        states: '規劃中',
-      }
-    ],
-    edit_active:{
+    active_list: [],
+    edit_active: {
       fixed: false,
       week: '禮拜一',
       date: '2023-11-14',
@@ -38,122 +23,68 @@ export const useActiveStore = defineStore('active', () => {
     }
   })
 
-  //過濾後的點名列表
   const activeList = computed(() => {
-    let activeDisplayList = data.active_list.slice();
-
+    let list = data.active_list.slice()
 
     if (data.search_active_month === '固定時間') {
-      activeDisplayList = activeDisplayList.filter((active)=>{
-        return active.fixed;
+      list = list.filter(a => a.fixed)
+    } else if (data.search_active_month !== '所有時間') {
+      list = list.filter(a => {
+        const month = new Date(a.date).getMonth() + 1 + ''
+        return month === data.search_active_month && !a.fixed
       })
     }
 
-    if (data.search_active_month !== '所有時間' && data.search_active_month !== '固定時間') {
-      activeDisplayList = activeDisplayList.filter((active)=>{
-
-        const month = new Date(active.date).getMonth()+1+'';
-        return month === data.search_active_month && !active.fixed;
-
-      })
-    }
-
-    return activeDisplayList;
+    return list
   })
 
-  //新增
   const add = async () => {
-
-
-
-    const url = data.main_url+'mormon/active/add';
-
-    fetch(url, {
+    await apiFetch('mormon/active/add', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data.edit_active)
-
     })
-        .then(res => res.text())
-        .then(async data => {
-          //刷新活動列表內容
-          await refreshActive();
-        })
+    await refreshActive()
   }
-  //更新
+
   const update = async () => {
-    const url = data.main_url+'mormon/active/update';
-    console.log('更新')
-    console.log(data.edit_active.info)
-
-
-
-    fetch(url, {
+    await apiFetch('mormon/active/update', {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data.edit_active)
     })
-        .then(res => res.text())
-        .then(async data => {
-          //刷新活動列表內容
-          await refreshActive();
-        })
+    await refreshActive()
   }
 
-  //移除
   const remove = async (date, time) => {
-    const saveName = date+'-'+time.replace(':', '-');
-    console.log(saveName)
-
-    const url = data.main_url+'mormon/active/remove/'+saveName;
-
-    fetch(url, {
-      method: 'DELETE'
-
-    }).then(res => {
-      //從id獲取index
-      const index = data.active_map.get(saveName);
-      data.active_list.splice(index, 1);
-      //更新活動Map對應列表
-      refreshActiveMap();
-    })
-
-
-
+    const saveName = date + '-' + time.replace(':', '-')
+    await apiFetch('mormon/active/remove/' + saveName, { method: 'DELETE' })
+    const index = data.active_map.get(saveName)
+    data.active_list.splice(index, 1)
+    refreshActiveMap()
   }
 
-  //設置目前要查看的Active
   const setEditActive = (date, time) => {
-    const saveName = date+'-'+time.replace(':', '-');
-    const index = data.active_map.get(saveName);
-
-    data.edit_active = { ...data.active_list[index] };
+    const saveName = date + '-' + time.replace(':', '-')
+    const index = data.active_map.get(saveName)
+    data.edit_active = { ...data.active_list[index] }
   }
 
-  //更新活動Map對應列表
   const refreshActiveMap = () => {
-    data.active_list.forEach((active, key, index)=>{
-      const saveName = active.date+'-'+active.time.replace(':', '-');
+    data.active_list.forEach((active, key) => {
+      const saveName = active.date + '-' + active.time.replace(':', '-')
       data.active_map.set(saveName, key)
     })
   }
-  //刷新活動列表內容
-  const refreshActive = async () => {
-    data.active_list.length = 0;
-    const url = data.main_url + 'mormon/active/get';
-    try {
-      const response = await fetch(url);
-      data.active_list = await response.json();
-    } catch (error) {
-      data.active_list = [];
-    } finally {
-      //更新人員Map對應列表
-      refreshActiveMap();
 
+  const refreshActive = async () => {
+    try {
+      const response = await apiFetch('mormon/active/get')
+      data.active_list = await response.json()
+    } catch (error) {
+      data.active_list = []
+    } finally {
+      refreshActiveMap()
     }
   }
 
