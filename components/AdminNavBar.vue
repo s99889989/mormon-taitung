@@ -93,6 +93,12 @@ const navItems = [
             <i class="fa-solid fa-house w-4"></i>
             查看前台
           </NuxtLink>
+          <NuxtLink target="_blank" to="/photo/home" @click="showDropdown = false"
+                    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
+                     hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <i class="fa-solid fa-image w-4"></i>
+            查看照片
+          </NuxtLink>
           <NuxtLink to="/admin/setting/main" @click="showDropdown = false"
                     class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
                      hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
