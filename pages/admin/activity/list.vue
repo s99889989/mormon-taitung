@@ -195,36 +195,41 @@ const doDelete = async () => {
     <div class="max-w-4xl mx-auto px-4 py-5">
 
       <!-- 工具列 -->
-      <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
-        <p class="text-black dark:text-white text-2xl sm:text-4xl font-bold">活動列表</p>
-        <div class="flex items-center gap-2 flex-shrink-0 flex-wrap">
+      <div class="mb-4">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-black dark:text-white text-2xl sm:text-4xl font-bold">活動列表</p>
+          <div class="flex items-center gap-2">
+            <button @click="refresh"
+                    class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors whitespace-nowrap">
+              刷新
+            </button>
+            <button @click="openAdd"
+                    class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
+              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+              新增活動
+            </button>
+          </div>
+        </div>
+        <!-- 篩選列 -->
+        <div class="flex flex-wrap gap-2">
           <select v-model="activeStore.data.search_year"
-                  class="text-sm bg-white border border-gray-200 text-gray-700 rounded-lg px-2 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                  class="text-sm bg-white border border-gray-200 text-gray-700 rounded-lg px-2 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white flex-1 min-w-0">
             <option>所有年份</option>
             <option v-for="y in activeStore.usedYears" :key="y">{{ y }}</option>
           </select>
           <select v-model="activeStore.data.search_tag"
-                  class="text-sm bg-white border border-gray-200 text-gray-700 rounded-lg px-2 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                  class="text-sm bg-white border border-gray-200 text-gray-700 rounded-lg px-2 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white flex-1 min-w-0">
             <option value="">所有標籤</option>
             <option v-for="tag in activeStore.usedTags" :key="tag">{{ tag }}</option>
           </select>
           <select v-model="activeStore.data.search_visible"
-                  class="text-sm bg-white border border-gray-200 text-gray-700 rounded-lg px-2 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <option value="">所有狀態</option>
-            <option value="show">前台顯示</option>
-            <option value="hide">前台隱藏</option>
+                  class="text-sm bg-white border border-gray-200 text-gray-700 rounded-lg px-2 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white flex-1 min-w-0">
+            <option value="">前台顯示</option>
+            <option value="show">顯示</option>
+            <option value="hide">隱藏</option>
           </select>
-          <button @click="refresh"
-                  class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors whitespace-nowrap">
-            刷新
-          </button>
-          <button @click="openAdd"
-                  class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
-            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-            新增活動
-          </button>
         </div>
       </div>
 

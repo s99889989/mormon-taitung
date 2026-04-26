@@ -23,8 +23,9 @@ const navItems = [
   { to: '/front/activity/ActivityIndex', label: '活動' },
   // { to: '/front/clean/CleanTime', label: '打掃' },
   { to: '/front/english', label: '英文會話' },
+  { to: '/front/history', label: '支會歷史' },
   { to: '/front/link', label: '連結' },
-  { to: '/front/history', label: '支會歷史' }
+
 ]
 </script>
 

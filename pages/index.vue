@@ -9,7 +9,7 @@ onMounted(async () => {
 
 const quickLinks = [
   { to: '/front/activity/ActivityIndex', label: '活動', icon: '🎉', desc: '查看所有活動' },
-  { to: '/front/clean/CleanTime', label: '打掃', icon: '🧹', desc: '本週打掃時間表' },
+  // { to: '/front/clean/CleanTime', label: '打掃', icon: '🧹', desc: '本週打掃時間表' },
   { to: '/front/english', label: '英文會話', icon: '🗣️', desc: '每週三晚上 7:00' },
   { to: '/front/link', label: '常用連結', icon: '🔗', desc: '教會相關網站' },
 ]
