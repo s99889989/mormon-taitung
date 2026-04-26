@@ -45,7 +45,9 @@
           </div>
 
           <!-- 右側：Facebook 連結 -->
-          <a href="https://www.facebook.com/groups/Taitung1branch/" target="_blank" rel="noopener noreferrer"
+<!--     https://www.facebook.com/groups/Taitung1branch/     -->
+          <!--     https://www.facebook.com/profile.php?id=61556717655110     -->
+          <a href="https://www.facebook.com/profile.php?id=61556717655110" target="_blank" rel="noopener noreferrer"
              :class="isDark
                ? 'bg-gray-700 border-gray-600 hover:border-blue-500 hover:bg-gray-600'
                : 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-md'"
