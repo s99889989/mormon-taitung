@@ -1,6 +1,15 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'photo' })
 
+useHead({
+  link: [
+    { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css' }
+  ],
+  script: [
+    { src: 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js', defer: true }
+  ]
+})
+
 const route = useRoute()
 
 const pathArr = computed(() => {
@@ -38,7 +47,41 @@ const fetchImages = async (page = 1) => {
     body: JSON.stringify({ path: pathArr.value, amount: 30, page }),
   })
   photos.data = await res.json()
-  nextTick(() => observeImages())
+  nextTick(() => {
+    initPannellum()
+    observeImages()
+  })
+}
+
+const initPannellum = () => {
+  nextTick(() => {
+    photos.data.forEach((item: any) => {
+      if (!item.panoramic) return
+      const safeId = item.image.replace(/[^a-zA-Z0-9]/g, '_')
+      const el = document.getElementById('pano-' + safeId)
+      if (!el || el.dataset.init === 'true') return
+      // @ts-ignore
+      if (typeof window.pannellum === 'undefined') return
+
+      // @ts-ignore
+      const viewer = window.pannellum.viewer('pano-' + safeId, {
+        type: 'equirectangular',
+        panorama: fullUrl(item.image),
+        autoLoad: true,
+        autoRotate: -2,
+        showZoomCtrl: true,
+        mouseZoom: true,
+        onLoad: () => {
+          // 載入完成 → 隱藏模糊縮圖和 loading
+          const blur = document.getElementById('pano-blur-' + safeId)
+          const loading = document.getElementById('pano-loading-' + safeId)
+          if (blur) blur.style.opacity = '0'
+          if (loading) loading.style.opacity = '0'
+        },
+      })
+      el.dataset.init = 'true'
+    })
+  })
 }
 
 const goToPage = (page: number) => {
@@ -84,14 +127,22 @@ const fetchVideos = async () => {
   videos.data = await res.json()
 }
 
-onMounted(() => {
+const loadContent = () => {
+  currentPage.value = 1
+  photos.data = []
+  videos.data = []
   if (type.value === 'photo') {
     fetchTotalPages()
     setTimeout(() => fetchImages(1), 100)
   } else {
     fetchVideos()
   }
-})
+}
+
+onMounted(() => loadContent())
+
+// query 改變時重新載入（NavBar 切換不同天）
+watch(() => route.query, () => loadContent())
 
 onUnmounted(() => observer?.disconnect())
 </script>
@@ -137,10 +188,31 @@ onUnmounted(() => observer?.disconnect())
 
       <!-- 圖片格狀 -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 max-w-5xl mx-auto">
-        <div v-for="item in photos.data" :key="item.image" class="overflow-hidden rounded-xl">
-          <div v-if="item.panoramic" class="w-full h-80 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-            <p class="text-gray-500 text-sm">全景圖</p>
+        <div v-for="item in photos.data" :key="item.image"
+             :class="item.panoramic ? 'lg:col-span-2' : ''"
+             class="overflow-hidden rounded-xl">
+          <!-- 全景圖：先顯示模糊縮圖，載入完後初始化 Pannellum -->
+          <div v-if="item.panoramic"
+               :id="'pano-' + item.image.replace(/[^a-zA-Z0-9]/g, '_')"
+               class="w-full relative"
+               style="height: 400px;">
+            <!-- 模糊縮圖背景（Pannellum 載入前顯示） -->
+            <img
+                :src="thumbUrl(item.image)"
+                class="absolute inset-0 w-full h-full object-cover blur-sm scale-105 transition-opacity duration-500"
+                :id="'pano-blur-' + item.image.replace(/[^a-zA-Z0-9]/g, '_')"
+                alt=""
+            />
+            <!-- 載入中提示 -->
+            <div class="absolute inset-0 flex items-center justify-center"
+                 :id="'pano-loading-' + item.image.replace(/[^a-zA-Z0-9]/g, '_')">
+              <div class="flex flex-col items-center gap-2 text-white drop-shadow">
+                <div class="w-7 h-7 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span class="text-xs">360° 載入中…</span>
+              </div>
+            </div>
           </div>
+          <!-- 一般照片：漸進式載入 -->
           <img v-else
                class="lazy-img object-contain w-full img-blur transition-all duration-300"
                :src="thumbUrl(item.image)"
@@ -179,6 +251,7 @@ onUnmounted(() => observer?.disconnect())
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
         <div v-for="item in videos.data" :key="item.urlPath" class="rounded-xl overflow-hidden">
           <iframe class="w-full aspect-video" :src="item.urlPath" allowfullscreen></iframe>
+          <p v-if="item.name" class="text-xs text-center text-gray-500 dark:text-gray-400 py-1">{{ item.name }}</p>
         </div>
       </div>
     </template>

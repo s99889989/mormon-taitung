@@ -80,7 +80,7 @@ const quickLinks = [
       <div class="mb-10 rounded-2xl bg-blue-600 dark:bg-blue-700 px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="text-white text-center sm:text-left">
           <p class="text-lg font-bold mb-1">每週日聚會</p>
-          <p class="text-blue-100 text-sm">上午 10:00 · 台東市正氣北路 206 號</p>
+          <p class="text-blue-100 text-sm">上午 10:15 · 台東市正氣北路 206 號</p>
         </div>
         <NuxtLink to="/front/meeting"
                   class="flex-none px-5 py-2 bg-white text-blue-600 font-semibold rounded-xl text-sm hover:bg-blue-50 transition-colors">

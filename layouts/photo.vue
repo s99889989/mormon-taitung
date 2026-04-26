@@ -3,8 +3,6 @@ const isDark = ref(true)
 const mobileMenuOpen = ref(false)
 const route = useRoute()
 
-watch(() => route.path, () => { mobileMenuOpen.value = false })
-
 onMounted(() => {
   const saved = localStorage.getItem('ysa_dark')
   if (saved !== null) isDark.value = saved === '1'
@@ -59,6 +57,22 @@ const toggleDropdown = (key: string) => {
   openDropdown.value = openDropdown.value === key ? null : key
 }
 
+// 路由切換時關閉所有 dropdown
+watch(() => route.path, () => {
+  openDropdown.value = null
+  mobileMenuOpen.value = false
+})
+
+// 點外部關閉 dropdown
+onMounted(() => {
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement
+    if (!target.closest('.nav-dropdown')) {
+      openDropdown.value = null
+    }
+  })
+})
+
 const buildPath = (year: string, eventKey: string, day: string, type: 'photo' | 'video') => {
   const folder = eventKey.includes('hualien') ? 'hualien' : eventKey.split('-')[1] ? `第${eventKey.split('-')[1]}回` : eventKey
   const pathArr = type === 'photo'
@@ -94,8 +108,8 @@ const buildHualienPath = (year: string, day: string, type: 'photo' | 'video') =>
 
         <!-- 桌機：年份 dropdown -->
         <div class="hidden md:flex items-center gap-1 flex-1 justify-center flex-wrap">
-          <div v-for="y in years" :key="y.year" class="relative">
-            <button @click="toggleDropdown(y.year)"
+          <div v-for="y in years" :key="y.year" class="relative nav-dropdown">
+            <button @click.stop="toggleDropdown(y.year)"
                     :class="isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'"
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
               {{ y.year }}
