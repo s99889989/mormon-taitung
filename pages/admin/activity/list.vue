@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
+import Link from '@tiptap/extension-link'
 
 definePageMeta({ layout: 'admin' })
 
@@ -58,12 +59,29 @@ const addTag = () => {
   tagInput.value = ''
 }
 
+// ── 連結 popup ────────────────────────────────────────────────────
+const linkPopup = reactive({ show: false, url: '' })
+const openLinkPopup = () => {
+  linkPopup.url = editor.value?.getAttributes('link').href || ''
+  linkPopup.show = true
+}
+const applyLink = () => {
+  if (!linkPopup.url.trim()) editor.value?.chain().focus().unsetLink().run()
+  else editor.value?.chain().focus().setLink({ href: linkPopup.url.trim(), target: '_blank' }).run()
+  linkPopup.show = false
+}
+const removeLink = () => {
+  editor.value?.chain().focus().unsetLink().run()
+  linkPopup.show = false
+}
+
 // ── Tiptap ────────────────────────────────────────────────────────
 const editor = useEditor({
   extensions: [
     StarterKit,
     Underline,
     TextAlign.configure({ types: ['heading', 'paragraph'] }),
+    Link.configure({ openOnClick: false, HTMLAttributes: { class: 'tiptap-link' } }),
   ],
   content: '',
   onUpdate: ({ editor }) => { form.info = editor.getHTML() },
@@ -447,6 +465,15 @@ const doDelete = async () => {
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5h11M9 12h11M9 19h11M5 5v.01M5 12v.01M5 19v.01"/></svg>
               </button>
               <div class="w-px h-4 bg-stone-200 mx-1"></div>
+              <!-- 連結按鈕 -->
+              <button type="button" @click="openLinkPopup"
+                      :class="editor?.isActive('link') ? 'bg-sky-100 text-sky-700' : 'text-stone-500 hover:bg-stone-200'"
+                      class="p-1.5 rounded transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                </svg>
+              </button>
+              <div class="w-px h-4 bg-stone-200 mx-1"></div>
               <button type="button" @click="editor?.chain().focus().undo().run()" class="p-1.5 rounded text-stone-500 hover:bg-stone-200 transition-colors">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
               </button>
@@ -455,6 +482,21 @@ const doDelete = async () => {
               </button>
             </div>
             <editor-content :editor="editor" class="tiptap-editor" />
+
+            <!-- 連結 popup -->
+            <div v-if="linkPopup.show"
+                 class="mt-2 p-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-zinc-800 flex gap-2 items-center">
+              <input v-model="linkPopup.url"
+                     placeholder="https://..."
+                     @keydown.enter.prevent="applyLink"
+                     @keydown.escape="linkPopup.show = false"
+                     class="flex-1 px-3 py-1.5 text-sm rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-900 text-stone-800 dark:text-stone-100 outline-none focus:ring-2 focus:ring-blue-400" />
+              <button type="button" @click="applyLink"
+                      class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">套用</button>
+              <button type="button" @click="removeLink"
+                      class="px-3 py-1.5 text-sm bg-stone-200 dark:bg-zinc-700 text-stone-600 dark:text-stone-300 rounded-lg hover:bg-stone-300 transition-colors whitespace-nowrap">移除</button>
+              <button type="button" @click="linkPopup.show = false" class="p-1.5 text-stone-400 hover:text-stone-600">✕</button>
+            </div>
           </div>
 
           <!-- 附件 -->
@@ -548,4 +590,8 @@ const doDelete = async () => {
 .tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
   content: '活動詳細內容…'; color: #a8a29e; pointer-events: none; float: left; height: 0;
 }
+.tiptap-editor .ProseMirror a.tiptap-link {
+  color: #3b82f6; text-decoration: underline; cursor: pointer;
+}
+.dark .tiptap-editor .ProseMirror a.tiptap-link { color: #60a5fa; }
 </style>

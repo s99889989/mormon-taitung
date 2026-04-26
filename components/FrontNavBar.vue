@@ -21,11 +21,11 @@ onMounted(() => {
 
 const navItems = [
   { to: '/front/activity/ActivityIndex', label: '活動' },
-  // { to: '/front/clean/CleanTime', label: '打掃' },
-  { to: '/front/english', label: '英文會話' },
+  { to: '/front/meeting', label: '聚會' },
+  // { to: '/front/english', label: '英文會話' },
+  { to: '/front/about', label: '認識我們' },
   { to: '/front/history', label: '支會歷史' },
   { to: '/front/link', label: '連結' },
-
 ]
 </script>
 
@@ -56,7 +56,7 @@ const navItems = [
           <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80" fill="none" stroke="#FFB830" stroke-width="5"/>
         </svg>
         <span :class="isDark ? 'text-white' : 'text-gray-900'"
-              class="text-2xl font-bold whitespace-nowrap">台東一支會</span>
+              class="text-xl font-bold whitespace-nowrap">台東一支會</span>
       </NuxtLink>
 
       <!-- 桌機導覽 -->
@@ -69,7 +69,7 @@ const navItems = [
                 ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
                 : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
             ]"
-              class="block px-4 py-2 rounded-lg text-xl font-medium transition-colors">
+              class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors">
             {{ item.label }}
           </NuxtLink>
         </li>
@@ -128,7 +128,7 @@ const navItems = [
                 ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
                 : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
             ]"
-              class="block px-4 py-2.5 rounded-lg text-lg font-medium transition-colors">
+              class="block px-4 py-2.5 rounded-lg text-base font-medium transition-colors">
             {{ item.label }}
           </NuxtLink>
         </li>

@@ -36,6 +36,7 @@ const navItems = [
   { to: '/admin/roll_call/list', label: '點名' },
   { to: '/admin/member/list', label: '成員' },
   { to: '/admin/family/list', label: '家庭' },
+  { to: '/admin/link/list', label: '連結' },
 ]
 </script>
 
