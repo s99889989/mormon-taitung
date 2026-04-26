@@ -1,4 +1,6 @@
 <script setup lang="js">
+definePageMeta({ layout: 'admin' })
+
 const props = defineProps({
   title: String,
   member_list: Array,

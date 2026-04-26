@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <!-- 六角底色 -->
+    <polygon points="50,2 93,26 93,74 50,98 7,74 7,26" fill="#0A2744"/>
+
+    <!-- 天空色塊（用梯形模擬，不用 clipPath） -->
+    <polygon points="7,26 93,26 93,54 7,54" fill="#1255A0"/>
+
+    <!-- 太陽 -->
+    <circle cx="50" cy="42" r="12" fill="#FFB830"/>
+    <circle cx="50" cy="42" r="7"  fill="#FFEC6E"/>
+
+    <!-- 山脈 -->
+    <polygon points="7,54 25,38 38,48 50,32 62,46 75,36 93,54 93,90 7,90" fill="#1B4D1B"/>
+
+    <!-- 海 -->
+    <polygon points="7,68 93,68 93,90 7,90" fill="#072560"/>
+
+    <!-- 十字架 -->
+    <rect x="46" y="28" width="8" height="26" fill="#FFFFFF" rx="1.5"/>
+    <rect x="38" y="36" width="24" height="8"  fill="#FFFFFF" rx="1.5"/>
+
+    <!-- 底部菱形紋 -->
+    <polygon points="50,84 55,79 50,74 45,79" fill="#FFD700"/>
+
+    <!-- 六角外框 -->
+    <polygon points="50,2 93,26 93,74 50,98 7,74 7,26" fill="none" stroke="#FFB830" stroke-width="2.5"/>
+</svg>

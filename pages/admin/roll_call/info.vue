@@ -1,4 +1,6 @@
 <script setup lang="js">
+definePageMeta({ layout: 'admin' })
+
 import {useRollCallStore} from "~/stores/roll_call";
 import html2canvas from 'html2canvas';
 const rollCallStore = useRollCallStore();

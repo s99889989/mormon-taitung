@@ -1,4 +1,6 @@
 <script setup lang="js">
+definePageMeta({ layout: 'admin' })
+
 import {useMembersStore} from "~/stores/members";
 import {useRollCallStore} from "~/stores/roll_call.js";
 import {initFlowbite} from "flowbite";

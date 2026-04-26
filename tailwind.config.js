@@ -12,7 +12,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        '3xl': '1800px', // 超寬螢幕，顯示 6 欄
+        '3xl': '1800px',
       },
     },
   },
@@ -20,4 +20,3 @@ export default {
     require('flowbite/plugin')
   ],
 }
-

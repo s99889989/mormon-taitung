@@ -1,4 +1,6 @@
 <script setup lang="js">
+definePageMeta({ layout: 'admin' })
+
 import {useActiveStore} from "~/stores/active";
 import {initFlowbite} from "flowbite";
 
