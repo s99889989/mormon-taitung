@@ -1,17 +1,23 @@
 <script setup lang="js">
+import { apiFetch } from '~/utils/api'
+
 definePageMeta({ layout: 'blank' })
 
-const route  = useRoute()
-const config = useRuntimeConfig()
-const slug   = route.params.slug
+const route = useRoute()
+const slug  = route.params.slug
 
-const { data: htmlContent, error } = await useFetch(
-    `${config.public.apiBase}/mormon/html-page/content/${slug}`,
-    {
-      responseType: 'text',
-      server: false,  // 只在客戶端執行，避免 SSR 端連不到 API
-    }
-)
+const htmlContent = ref('')
+const error       = ref(false)
+
+onMounted(async () => {
+  try {
+    const res = await apiFetch(`mormon/html-page/content/${slug}`)
+    if (!res.ok) { error.value = true; return }
+    htmlContent.value = await res.text()
+  } catch {
+    error.value = true
+  }
+})
 </script>
 
 <template>
