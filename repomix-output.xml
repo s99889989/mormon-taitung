@@ -152,6 +152,7 @@ tailwind.config.js
 tsconfig.json
 utils/api.js
 utils/date.js
+vercel.json
 </directory_structure>
 
 <files>
@@ -2111,6 +2112,12 @@ export const getCurrentTime = () => {
   const hours = String(now.getHours()).padStart(2, '0')
   const minutes = String(now.getMinutes()).padStart(2, '0')
   return `${hours}:${minutes}`
+}
+</file>
+
+<file path="vercel.json">
+{
+  "framework": "nuxtjs"
 }
 </file>
 

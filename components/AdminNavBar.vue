@@ -37,6 +37,7 @@ const navItems = [
   { to: '/admin/member/list', label: '成員' },
   { to: '/admin/family/list', label: '家庭' },
   { to: '/admin/photo/list', label: '照片' },
+  { to: '/admin/html/list', label: '網站' },
   { to: '/admin/link/list', label: '連結' },
 ]
 </script>
