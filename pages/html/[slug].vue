@@ -9,7 +9,7 @@ const { data: htmlContent, error } = await useFetch(
     `${config.public.apiBase}/mormon/html-page/content/${slug}`,
     {
       responseType: 'text',
-      // 404 預設會被 useFetch 當成 error，不需要額外處理
+      server: false,  // 只在客戶端執行，避免 SSR 端連不到 API
     }
 )
 </script>
