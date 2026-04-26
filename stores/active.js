@@ -26,7 +26,7 @@ export const useActiveStore = defineStore('active', () => {
   const data = reactive({
     search_year: '所有年份',
     search_tag: '',
-    search_visible: '',
+    search_visible: 'show',
     active_map: new Map(),
     active_list: [],
     edit_active: emptyActive(),
