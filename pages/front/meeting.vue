@@ -4,14 +4,14 @@ definePageMeta({ layout: 'default' })
 const meetings = [
   {
     name: '主日學',
-    time: '每週日 上午 10:00 – 11:00',
+    time: '每週日 上午 10:15 – 11:15',
     desc: '依年齡分班研讀聖經及其他經文，加深對福音的理解。',
     icon: '📖',
     open: true,
   },
   {
     name: '聖餐聚會',
-    time: '每週日 上午 11:00 – 12:00',
+    time: '每週日 上午 11:15 – 12:15',
     desc: '全體成員一起領受聖餐、聆聽講道、分享見證，是每週最重要的聚會。所有人都歡迎參加。',
     icon: '🍞',
     open: true,
