@@ -13,12 +13,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@nuxtjs/sitemap',
   ],
-
-  sitemap: {
-    siteUrl: 'https://jesuschristtaitung.netlify.app',
-  },
 
   pinia: {
     storesDirs: ['./stores/**'],
