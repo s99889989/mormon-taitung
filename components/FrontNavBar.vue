@@ -21,6 +21,7 @@ onMounted(() => {
 
 const navItems = [
   { to: '/front/activity/ActivityIndex', label: '活動' },
+  { to: '/front/calendar', label: '行事曆' },
   { to: '/front/meeting', label: '聚會' },
   // { to: '/front/english', label: '英文會話' },
   { to: '/front/about', label: '認識我們' },
