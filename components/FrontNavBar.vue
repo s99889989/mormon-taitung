@@ -57,7 +57,7 @@ const navItems = [
           <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80" fill="none" stroke="#FFB830" stroke-width="5"/>
         </svg>
         <span :class="isDark ? 'text-white' : 'text-gray-900'"
-              class="text-xl font-bold whitespace-nowrap">台東一支會</span>
+              class="text-2xl font-bold whitespace-nowrap">台東一支會</span>
       </NuxtLink>
 
       <!-- 桌機導覽 -->
@@ -70,7 +70,7 @@ const navItems = [
                 ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
                 : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
             ]"
-              class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+              class="block px-3 py-2 rounded-lg text-lg font-medium transition-colors">
             {{ item.label }}
           </NuxtLink>
         </li>
@@ -129,7 +129,7 @@ const navItems = [
                 ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
                 : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
             ]"
-              class="block px-4 py-2.5 rounded-lg text-base font-medium transition-colors">
+              class="block px-4 py-2.5 rounded-lg text-lg font-medium transition-colors">
             {{ item.label }}
           </NuxtLink>
         </li>
