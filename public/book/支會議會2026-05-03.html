@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台東一支會議會紀錄 — 2026年5月3日</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #3d3d5c;
+    --paper: #f5f0e8;
+    --paper-dark: #ede7d9;
+    --accent: #8b4513;
+    --accent-light: #c4843a;
+    --accent-muted: #d4a97440;
+    --rule: #c8b89a;
+    --green: #3a6b35;
+    --red: #8b1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 31px, var(--rule) 31px, var(--rule) 32px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 48px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .header-badge {
+    display: inline-block;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 16px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .header-meta {
+    font-size: 13px;
+    color: var(--ink-light);
+    letter-spacing: 0.1em;
+  }
+
+  /* Summary box */
+  .summary-box {
+    background: var(--paper-dark);
+    border-left: 4px solid var(--accent);
+    padding: 24px 28px;
+    margin-bottom: 48px;
+    animation: fadeDown 0.6s 0.1s ease both;
+  }
+
+  .summary-box h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .summary-box p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.9;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 44px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.25s; }
+  .section:nth-child(5) { animation-delay: 0.3s; }
+  .section:nth-child(6) { animation-delay: 0.35s; }
+  .section:nth-child(7) { animation-delay: 0.4s; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .section-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-muted);
+    border: 1px solid var(--accent-light);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-weight: 500;
+    margin-left: auto;
+  }
+
+  .tag-event { background: #e8f4e8; color: var(--green); border: 1px solid #a8d4a8; }
+  .tag-report { background: #e8eef8; color: #2c4a8b; border: 1px solid #a8bce8; }
+  .tag-action { background: #fff3e0; color: var(--accent); border: 1px solid #f0c080; }
+  .tag-mission { background: #fce8e8; color: var(--red); border: 1px solid #e8a0a0; }
+
+  .section-body {
+    padding-left: 40px;
+  }
+
+  /* Content items */
+  .item {
+    position: relative;
+    padding: 10px 0 10px 20px;
+    font-size: 14px;
+    color: var(--ink-light);
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent-light);
+    border-radius: 50%;
+  }
+
+  .item strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Action items */
+  .action-list {
+    margin-top: 8px;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--paper-dark);
+    border-left: 3px solid var(--accent-light);
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .action-who {
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 60px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .action-what {
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  /* Care list */
+  .care-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--ink-light);
+    border-bottom: 1px dotted var(--rule);
+    align-items: flex-start;
+  }
+
+  .care-name {
+    color: var(--ink);
+    font-weight: 500;
+    min-width: 80px;
+    font-size: 13px;
+  }
+
+  .care-note {
+    font-size: 13px;
+    color: #7a7a9a;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 12px;
+    color: #a0a0b8;
+    letter-spacing: 0.1em;
+  }
+
+  /* Prayer */
+  .prayer-block {
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    padding: 20px 28px;
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 2;
+    font-style: italic;
+    position: relative;
+  }
+
+  .prayer-block::before {
+    content: '「';
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2rem;
+    color: var(--rule);
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    line-height: 1;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0;
+    opacity: 0.4;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+  }
+  .divider-icon {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 20px 60px; }
+    .header h1 { font-size: 1.5rem; }
+    .section-body { padding-left: 20px; }
+    .action-who { min-width: 50px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="header-badge">台東一支會</div>
+    <h1>支會議會紀錄</h1>
+    <div class="header-meta">2026年5月3日（主日）・線上會議</div>
+  </header>
+
+  <!-- 摘要 -->
+  <div class="summary-box">
+    <h2>會議概要</h2>
+    <p>本次議會討論三大近期活動安排（5/23傳道之夜、5/24支會大會、6/6–7支聯會大會），
+    各組織工作報告，傳道事工進度，以及臨時動議關於男青年烏克麗麗課程。
+    散會前由林倩雯姐妹帶領閉幕祈禱。</p>
+  </div>
+
+  <!-- 一：近期活動 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">一</div>
+      <div class="section-title">近期活動安排</div>
+      <span class="section-tag tag-event">活動</span>
+    </div>
+    <div class="section-body">
+      <div class="item"><strong>5月23日（六）晚上：傳道之夜聚餐</strong>——支會大會前一晚，廣邀成員、傳教士及目道友參加，氣氛輕鬆，有助隔日大會人數。車輛引導由蔣定楚弟兄負責。</div>
+      <div class="item"><strong>5月24日（日）：支會大會</strong>——主領：郵寄會長。支聯會同工當天亦會拜訪，中午不另安排聚餐。</div>
+      <div class="item"><strong>5月11日（日）母親節活動</strong>——賴會長安排弟兄練習兩首聖詩，大提琴伴奏。花束費用由行政支出；數量由辭職會統計人數後轉告賴會長。母親節慶祝活動併入5/23聚餐。</div>
+      <div class="item"><strong>6月6–7日：支聯會大會</strong>——七十員官長老主領，已拍影片鼓勵參加。需調查人數、住宿交通保險及第二天午餐。</div>
+    </div>
+  </div>
+
+  <!-- 二：各組織報告 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">二</div>
+      <div class="section-title">各組織工作報告</div>
+      <span class="section-tag tag-report">報告</span>
+    </div>
+    <div class="section-body">
+
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">辭職會</div>
+        <div class="item">組織將重整，召募新志工，引入新戰略以增加活力，擴大對新成員的照應。</div>
+        <div class="item">林羅櫃內姐妹病後返家，仍未恢復聚會，需持續關心其身體及靈性狀況。</div>
+        <div class="item">侯姐妹腳部受傷；大成媽、生理幫內姐妹、張經理姐妹亦有膝蓋相關問題，需特別關懷。</div>
+        <div class="item">李思婷姐妹弟弟突然過世，已前往關心；邀請蘇婷婷讓其孩子由成員接送上教會。</div>
+        <div class="item">林慧穎姐妹近幾週有來聚會，出席穩定度仍需加強。</div>
+        <div class="item">聖殿家譜事工：楊玉滿姐妹外出中，待其返回後溝通家黨代替教儀事宜（建議由花蓮成員協助，勿將所有家黨一次送出）。</div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">初級會</div>
+        <div class="item">5/1已辦母親節卡片製作活動。</div>
+        <div class="item">5/10第二堂課安排洗禮預備會議（7歲兒童），主教確認可出席；Yoko、Fifi兩家小朋友為主要對象。</div>
+        <div class="item">月月（Fifi家）初步有5/17聚會後洗禮的打算，尚未確定。傳道方式以「分享」為主，避免過度勸說。</div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">單程（男女青年）</div>
+        <div class="item">5–6月辦家譜活動，配合支聯會7/4聖殿日。活動暫訂5/23或5/30，目標讓每位單程帶家長前往聖殿為祖先做教義。</div>
+        <div class="item">與家譜顧問楊姐妹已初步聯繫；楊姐妹（一韓姐妹）有意培訓單程成為家譜「種子」，協助成員處理家黨問題。</div>
+        <div class="item">單程出席近期稍少（兩三個），原因為工作繁忙，仍在協調時間。</div>
+      </div>
+
+      <div>
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">主日學</div>
+        <div class="item">4/19已辦教師訓練，效果良好；一支會出席較少，持續會與長定組教師未參加。</div>
+        <div class="item">9月起課程改為每週均有教師上台，每堂25分鐘，時間更緊，需加強訓練。</div>
+        <div class="item">下次訓練預定7月，盼各組織教師均能出席；若6月支聯會大會有安排訓練則配合。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 三：傳道事工 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">三</div>
+      <div class="section-title">傳道事工</div>
+      <span class="section-tag tag-mission">傳道</span>
+    </div>
+    <div class="section-body">
+      <div class="item"><strong>德森一家</strong>——曾來一次後未再出席，疑有「不受尊重」的感受；孩子較難帶動，德森工作輪班無法固定主日。由陳弟兄持續聯繫了解。</div>
+      <div class="item"><strong>傳道協調會</strong>——每週四早上10點，Yoko、賴會長與傳教士共同召開，已加入出席會成員，每次約20分鐘。</div>
+      <div class="item"><strong>家譜協調會</strong>——目前僅辦過一次；討論是否定期邀請楊玉滿姐妹參加支會議會，或另行召開，頻率待定。</div>
+      <div class="item"><strong>培科現況</strong>——長老目道友較多，有一位目標明確但因救護課程需等到6月才能到教會三次；部分成員距離較遠，採視訊方式進行。</div>
+      <div class="item"><strong>新朋友</strong>——今日主日學來了兩位男青年新朋友，其中一位13歲，住教堂附近（約2–3分鐘），本人及媽媽均有興趣，可邀請參加男青年活動。</div>
+    </div>
+  </div>
+
+  <!-- 四：臨時動議 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">四</div>
+      <div class="section-title">臨時動議</div>
+      <span class="section-tag tag-action">待辦</span>
+    </div>
+    <div class="section-body">
+      <div class="item"><strong>男青年烏克麗麗課程</strong>——賴會長主動提議在教堂教烏克麗麗，一個月一至兩次，每次約一小時。主教明日聯繫賴會長確認時間。</div>
+      <div class="item"><strong>FSY活動</strong>——今年7/13–18在台中亞洲大學舉辦，聖殿日計劃避開此日期，7月第二週（7/11前後）可行，待進一步確認。</div>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <!-- Action Items -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">⚡</div>
+      <div class="section-title">待辦事項彙整</div>
+      <span class="section-tag tag-action">Action Items</span>
+    </div>
+    <div class="section-body">
+      <div class="action-list">
+        <div class="action-item"><div class="action-who">主教</div><div class="action-what">明日聯繫賴會長確認烏克麗麗課程時間與頻率</div></div>
+        <div class="action-item"><div class="action-who">辭職會</div><div class="action-what">統計母親節花束需求人數，告知賴會長</div></div>
+        <div class="action-item"><div class="action-who">陳弟兄</div><div class="action-what">聯繫德森一家，了解未出席原因並提供協助</div></div>
+        <div class="action-item"><div class="action-who">Yoko</div><div class="action-what">楊玉滿姐妹返台後溝通家黨代替教儀事宜</div></div>
+        <div class="action-item"><div class="action-who">Yoko</div><div class="action-what">確認家譜協調會形式與召開頻率（待楊姐妹返台）</div></div>
+        <div class="action-item"><div class="action-who">主日學</div><div class="action-what">詢問支聯會6月大會是否安排教師訓練；若無，請7月盡早定日期</div></div>
+        <div class="action-item"><div class="action-who">單程負責人</div><div class="action-what">確認5月底/6月初家譜活動日期（23或30日），並與楊姐妹對接</div></div>
+        <div class="action-item"><div class="action-who">賴會長</div><div class="action-what">（轉告）錄製聖詩練習影片上傳，供弟兄在家預習</div></div>
+        <div class="action-item"><div class="action-who">各組</div><div class="action-what">調查6/6–7支聯會大會參加人數（含住宿交通保險及午餐）</div></div>
+        <div class="action-item"><div class="action-who">蔣定楚</div><div class="action-what">5/23傳道之夜車輛引導安排</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 閉幕禱告 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">禱</div>
+      <div class="section-title">閉幕祈禱</div>
+    </div>
+    <div class="section-body">
+      <div class="prayer-block">
+        林倩雯姐妹帶領。感謝天父賜智慧帶領各同工，祈求聖靈引導所有服事，
+        祝福有需要的成員在生活與教會中都能得到協助，並賜予健康的身體與聰明的智慧。
+        奉耶穌基督的名祈禱，阿們。
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    台東一支會議會 ・ 2026年5月3日 ・ 線上召開
+  </footer>
+
+</div>
+</body>
+</html>
