@@ -12,6 +12,16 @@ function stripHtml(html: string) {
   return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 }
 
+const allTags = computed(() => {
+  const tagSet = new Set<string>()
+  activeStore.normalList.forEach(a => {
+    if (Array.isArray(a.tags)) {
+      a.tags.forEach(t => tagSet.add(t))
+    }
+  })
+  return Array.from(tagSet)
+})
+
 const filteredList = computed(() => {
   const list = activeStore.normalList
   if (!selectedTag.value) return list
@@ -33,7 +43,7 @@ onMounted(async () => {
       <div class="w-12 h-1 bg-blue-600 rounded mb-5"></div>
 
       <!-- 標籤篩選列 -->
-      <div v-if="activeStore.frontCategoryTags.length" class="flex flex-wrap gap-2">
+      <div v-if="allTags.length" class="flex flex-wrap gap-2">
         <button
             @click="selectedTag = ''"
             :class="selectedTag === ''
@@ -43,7 +53,7 @@ onMounted(async () => {
           全部
         </button>
         <button
-            v-for="tag in activeStore.frontCategoryTags"
+            v-for="tag in allTags"
             :key="tag"
             @click="selectedTag = selectedTag === tag ? '' : tag"
             :class="selectedTag === tag
