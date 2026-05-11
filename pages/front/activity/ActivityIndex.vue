@@ -19,6 +19,7 @@ const allTags = computed(() => {
       a.tags.forEach(t => tagSet.add(t))
     }
   })
+
   return Array.from(tagSet)
 })
 
