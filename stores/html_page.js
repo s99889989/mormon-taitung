@@ -30,10 +30,21 @@ export const useHtmlPageStore = defineStore('html_page', () => {
     await refreshPages()
   }
 
+  const update = async (slug, title, file) => {
+    const formData = new FormData()
+    formData.append('title', title)
+    if (file) formData.append('file', file)
+    await apiFetch(`mormon/html-page/update/${slug}`, {
+      method: 'POST',
+      body: formData,
+    })
+    await refreshPages()
+  }
+
   const remove = async (slug) => {
     await apiFetch(`mormon/html-page/remove/${slug}`, { method: 'DELETE' })
     await refreshPages()
   }
 
-  return { data, refreshPages, upload, remove }
+  return { data, refreshPages, upload, update, remove }
 })

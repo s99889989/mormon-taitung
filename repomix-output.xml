@@ -85,17 +85,17 @@ pages/admin/roll_call/edit.vue
 pages/admin/roll_call/info.vue
 pages/admin/roll_call/list.vue
 pages/admin/setting/main.vue
+pages/book/BeStillMySoul.vue
+pages/book/singlesecond.vue
 pages/front/about.vue
 pages/front/activity/2023/0826/Information.vue
 pages/front/activity/2023/0826/Photo.vue
-pages/front/activity/2023/Activity-03-06.vue
 pages/front/activity/2023/Activity-08-11.vue
 pages/front/activity/ActivityIndex.vue
 pages/front/activity/detail.vue
 pages/front/activity/fixed/BoardGame.vue
 pages/front/activity/fixed/FamilyHome.vue
-pages/front/baptism/Baptism-2023-08-25.vue
-pages/front/baptism/BaptismIndex.vue
+pages/front/calendar.vue
 pages/front/clean/CleanTime.vue
 pages/front/english.vue
 pages/front/genealogy/GenealogyIndex.vue
@@ -113,19 +113,26 @@ pages/photo/gallery.vue
 pages/photo/home.vue
 plugins/click-outside.ts
 public/單成委員會會議紀錄_260426.html
-public/active/2023/3/6_1.jpg
 public/active/2023/8/11_1.jpg
 public/active/2023/8/11_2.jpg
 public/active/2023/8/25_1.jpg
 public/active/2023/8/26_1.jpg
 public/active/2023/8/26_2.jpg
 public/active/2023/8/26_3.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_1.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_2.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_3.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_4.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_5.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_6.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_7.jpg
+public/active/2026/single_adults/LINE_NOTE_260523_8.jpg
 public/active/fixed/board_game_1.jpg
 public/active/fixed/family_home_1.jpg
 public/active/fixed/family_home_2.jpg
 public/assets/icon/hat.png
 public/assets/icon/logo.ico
-public/baptism/洗禮-20230825.png
+public/book/支會議會2026-05-03.html
 public/clean/打掃表.jpg
 public/english/taidong.jpg
 public/favicon.ico
@@ -939,31 +946,467 @@ function toggleAgenda(header) {
 </html>
 </file>
 
-<file path=".gitignore">
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist
+<file path="public/book/支會議會2026-05-03.html">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台東一支會議會紀錄 — 2026年5月3日</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #3d3d5c;
+    --paper: #f5f0e8;
+    --paper-dark: #ede7d9;
+    --accent: #8b4513;
+    --accent-light: #c4843a;
+    --accent-muted: #d4a97440;
+    --rule: #c8b89a;
+    --green: #3a6b35;
+    --red: #8b1a1a;
+  }
 
-# Node dependencies
-node_modules
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-# Logs
-logs
-*.log
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
 
-# Misc
-.DS_Store
-.fleet
-.idea
+  /* Subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 31px, var(--rule) 31px, var(--rule) 32px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-# Local env files
-.env
-.env.*
-!.env.example
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 48px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .header-badge {
+    display: inline-block;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 16px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .header-meta {
+    font-size: 13px;
+    color: var(--ink-light);
+    letter-spacing: 0.1em;
+  }
+
+  /* Summary box */
+  .summary-box {
+    background: var(--paper-dark);
+    border-left: 4px solid var(--accent);
+    padding: 24px 28px;
+    margin-bottom: 48px;
+    animation: fadeDown 0.6s 0.1s ease both;
+  }
+
+  .summary-box h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .summary-box p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.9;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 44px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.25s; }
+  .section:nth-child(5) { animation-delay: 0.3s; }
+  .section:nth-child(6) { animation-delay: 0.35s; }
+  .section:nth-child(7) { animation-delay: 0.4s; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .section-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-muted);
+    border: 1px solid var(--accent-light);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-weight: 500;
+    margin-left: auto;
+  }
+
+  .tag-event { background: #e8f4e8; color: var(--green); border: 1px solid #a8d4a8; }
+  .tag-report { background: #e8eef8; color: #2c4a8b; border: 1px solid #a8bce8; }
+  .tag-action { background: #fff3e0; color: var(--accent); border: 1px solid #f0c080; }
+  .tag-mission { background: #fce8e8; color: var(--red); border: 1px solid #e8a0a0; }
+
+  .section-body {
+    padding-left: 40px;
+  }
+
+  /* Content items */
+  .item {
+    position: relative;
+    padding: 10px 0 10px 20px;
+    font-size: 14px;
+    color: var(--ink-light);
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent-light);
+    border-radius: 50%;
+  }
+
+  .item strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Action items */
+  .action-list {
+    margin-top: 8px;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--paper-dark);
+    border-left: 3px solid var(--accent-light);
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .action-who {
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 60px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .action-what {
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  /* Care list */
+  .care-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--ink-light);
+    border-bottom: 1px dotted var(--rule);
+    align-items: flex-start;
+  }
+
+  .care-name {
+    color: var(--ink);
+    font-weight: 500;
+    min-width: 80px;
+    font-size: 13px;
+  }
+
+  .care-note {
+    font-size: 13px;
+    color: #7a7a9a;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 12px;
+    color: #a0a0b8;
+    letter-spacing: 0.1em;
+  }
+
+  /* Prayer */
+  .prayer-block {
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    padding: 20px 28px;
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 2;
+    font-style: italic;
+    position: relative;
+  }
+
+  .prayer-block::before {
+    content: '「';
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2rem;
+    color: var(--rule);
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    line-height: 1;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0;
+    opacity: 0.4;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--accent);
+  }
+  .divider-icon {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 20px 60px; }
+    .header h1 { font-size: 1.5rem; }
+    .section-body { padding-left: 20px; }
+    .action-who { min-width: 50px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="header-badge">台東一支會</div>
+    <h1>支會議會紀錄</h1>
+    <div class="header-meta">2026年5月3日（主日）・線上會議</div>
+  </header>
+
+  <!-- 摘要 -->
+  <div class="summary-box">
+    <h2>會議概要</h2>
+    <p>本次議會討論三大近期活動安排（5/23傳道之夜、5/24支會大會、6/6–7支聯會大會），
+    各組織工作報告，傳道事工進度，以及臨時動議關於男青年烏克麗麗課程。</p>
+  </div>
+
+  <!-- 一：近期活動 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">一</div>
+      <div class="section-title">近期活動安排</div>
+      <span class="section-tag tag-event">活動</span>
+    </div>
+    <div class="section-body">
+      <div class="item"><strong>5月23日（六）晚上：傳道之夜聚餐</strong>——支會大會前一晚，廣邀成員、傳教士及目道友參加，氣氛輕鬆，有助隔日大會人數。車輛引導由蔣定楚弟兄負責。</div>
+      <div class="item"><strong>5月24日（日）：支會大會</strong>——主領：郵寄會長。支聯會同工當天亦會拜訪，中午不另安排聚餐。</div>
+      <div class="item"><strong>5月11日（日）母親節活動</strong>——賴會長安排弟兄練習兩首聖詩，大提琴伴奏。花束費用由行政支出；數量由辭職會統計人數後轉告賴會長。母親節慶祝活動併入5/23聚餐。</div>
+      <div class="item"><strong>6月6–7日：支聯會大會</strong>——七十員官長老主領，已拍影片鼓勵參加。需調查人數、住宿交通保險及第二天午餐。</div>
+    </div>
+  </div>
+
+  <!-- 二：各組織報告 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">二</div>
+      <div class="section-title">各組織工作報告</div>
+      <span class="section-tag tag-report">報告</span>
+    </div>
+    <div class="section-body">
+
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">辭職會</div>
+        <div class="item">組織將重整，召募新志工，引入新戰略以增加活力，擴大對新成員的照應。</div>
+        <div class="item">林羅櫃內姐妹病後返家，仍未恢復聚會，需持續關心其身體及靈性狀況。</div>
+        <div class="item">侯姐妹腳部受傷；大成媽、生理幫內姐妹、張經理姐妹亦有膝蓋相關問題，需特別關懷。</div>
+        <div class="item">李思婷姐妹弟弟突然過世，已前往關心；邀請蘇婷婷讓其孩子由成員接送上教會。</div>
+        <div class="item">林慧穎姐妹近幾週有來聚會，出席穩定度仍需加強。</div>
+        <div class="item">聖殿家譜事工：楊玉滿姐妹外出中，待其返回後溝通家黨代替教儀事宜（建議由花蓮成員協助，勿將所有家黨一次送出）。</div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">初級會</div>
+        <div class="item">5/1已辦母親節卡片製作活動。</div>
+        <div class="item">5/10第二堂課安排洗禮預備會議（7歲兒童），主教確認可出席；Yoko、Fifi兩家小朋友為主要對象。</div>
+        <div class="item">月月（Fifi家）初步有5/17聚會後洗禮的打算，尚未確定。傳道方式以「分享」為主，避免過度勸說。</div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">單程（男女青年）</div>
+        <div class="item">5–6月辦家譜活動，配合支聯會7/4聖殿日。活動暫訂5/23或5/30，目標讓每位單程帶家長前往聖殿為祖先做教義。</div>
+        <div class="item">與家譜顧問楊姐妹已初步聯繫；楊姐妹（一韓姐妹）有意培訓單程成為家譜「種子」，協助成員處理家黨問題。</div>
+        <div class="item">單程出席近期稍少（兩三個），原因為工作繁忙，仍在協調時間。</div>
+      </div>
+
+      <div>
+        <div style="font-size:12px;letter-spacing:0.15em;color:var(--accent);margin-bottom:8px;">主日學</div>
+        <div class="item">4/19已辦教師訓練，效果良好；一支會出席較少，持續會與長定組教師未參加。</div>
+        <div class="item">9月起課程改為每週均有教師上台，每堂25分鐘，時間更緊，需加強訓練。</div>
+        <div class="item">下次訓練預定7月，盼各組織教師均能出席；若6月支聯會大會有安排訓練則配合。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 三：傳道事工 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">三</div>
+      <div class="section-title">傳道事工</div>
+      <span class="section-tag tag-mission">傳道</span>
+    </div>
+    <div class="section-body">
+      <div class="item"><strong>德森一家</strong>——曾來一次後未再出席，疑有「不受尊重」的感受；孩子較難帶動，德森工作輪班無法固定主日。由陳弟兄持續聯繫了解。</div>
+      <div class="item"><strong>傳道協調會</strong>——每週四早上10點，Yoko、賴會長與傳教士共同召開，已加入出席會成員，每次約20分鐘。</div>
+      <div class="item"><strong>家譜協調會</strong>——目前僅辦過一次；討論是否定期邀請楊玉滿姐妹參加支會議會，或另行召開，頻率待定。</div>
+      <div class="item"><strong>培科現況</strong>——長老目道友較多，有一位目標明確但因救護課程需等到6月才能到教會三次；部分成員距離較遠，採視訊方式進行。</div>
+      <div class="item"><strong>新朋友</strong>——今日主日學來了兩位男青年新朋友，其中一位13歲，住教堂附近（約2–3分鐘），本人及媽媽均有興趣，可邀請參加男青年活動。</div>
+    </div>
+  </div>
+
+  <!-- 四：臨時動議 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">四</div>
+      <div class="section-title">臨時動議</div>
+      <span class="section-tag tag-action">待辦</span>
+    </div>
+    <div class="section-body">
+      <div class="item"><strong>男青年烏克麗麗課程</strong>——賴會長主動提議在教堂教烏克麗麗，一個月一至兩次，每次約一小時。主教明日聯繫賴會長確認時間。</div>
+      <div class="item"><strong>FSY活動</strong>——今年7/13–18在台中亞洲大學舉辦，聖殿日計劃避開此日期，7月第二週（7/11前後）可行，待進一步確認。</div>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <!-- Action Items -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">⚡</div>
+      <div class="section-title">待辦事項彙整</div>
+      <span class="section-tag tag-action">Action Items</span>
+    </div>
+    <div class="section-body">
+      <div class="action-list">
+        <div class="action-item"><div class="action-who">主教</div><div class="action-what">明日聯繫賴會長確認烏克麗麗課程時間與頻率</div></div>
+        <div class="action-item"><div class="action-who">辭職會</div><div class="action-what">統計母親節花束需求人數，告知賴會長</div></div>
+        <div class="action-item"><div class="action-who">陳弟兄</div><div class="action-what">聯繫德森一家，了解未出席原因並提供協助</div></div>
+        <div class="action-item"><div class="action-who">Yoko</div><div class="action-what">楊玉滿姐妹返台後溝通家黨代替教儀事宜</div></div>
+        <div class="action-item"><div class="action-who">Yoko</div><div class="action-what">確認家譜協調會形式與召開頻率（待楊姐妹返台）</div></div>
+        <div class="action-item"><div class="action-who">主日學</div><div class="action-what">詢問支聯會6月大會是否安排教師訓練；若無，請7月盡早定日期</div></div>
+        <div class="action-item"><div class="action-who">單程負責人</div><div class="action-what">確認5月底/6月初家譜活動日期（23或30日），並與楊姐妹對接</div></div>
+        <div class="action-item"><div class="action-who">賴會長</div><div class="action-what">（轉告）錄製聖詩練習影片上傳，供弟兄在家預習</div></div>
+        <div class="action-item"><div class="action-who">各組</div><div class="action-what">調查6/6–7支聯會大會參加人數（含住宿交通保險及午餐）</div></div>
+        <div class="action-item"><div class="action-who">蔣定楚</div><div class="action-what">5/23傳道之夜車輛引導安排</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    台東一支會議會 ・ 2026年5月3日 ・ 線上召開
+  </footer>
+
+</div>
+</body>
+</html>
 </file>
 
 <file path="add_admin_layout.mjs">
@@ -1486,301 +1929,6 @@ const handleSubmit = async () => {
 </template>
 </file>
 
-<file path="pages/admin/html/list.vue">
-<script setup lang="js">
-import { useHtmlPageStore } from '~/stores/html_page'
-
-definePageMeta({ layout: 'admin' })
-
-const htmlPageStore = useHtmlPageStore()
-const loading = ref(false)
-const saving  = ref(false)
-const toast   = reactive({ show: false, message: '', error: false })
-const modal    = reactive({ show: false })
-const showDeleteConfirm = ref(false)
-const deleteTarget = reactive({ slug: '', title: '' })
-
-const form = reactive({
-  slug:  '',
-  title: '',
-  file:  null,
-})
-const fileInputRef = ref(null)
-const fileName = ref('')
-
-const showToast = (msg, error = false) => {
-  toast.message = msg
-  toast.error   = error
-  toast.show    = true
-  setTimeout(() => toast.show = false, 2500)
-}
-
-onMounted(async () => {
-  loading.value = true
-  await htmlPageStore.refreshPages()
-  loading.value = false
-})
-
-const refresh = async () => {
-  loading.value = true
-  await htmlPageStore.refreshPages()
-  loading.value = false
-}
-
-const openAdd = () => {
-  form.slug  = ''
-  form.title = ''
-  form.file  = null
-  fileName.value = ''
-  modal.show = true
-}
-
-const onFileChange = (e) => {
-  const f = e.target.files[0]
-  if (!f) return
-  form.file = f
-  fileName.value = f.name
-  // 自動填入 slug（去掉副檔名）
-  if (!form.slug) {
-    form.slug = f.name.replace(/\.html?$/i, '').replace(/\s+/g, '-').toLowerCase()
-  }
-}
-
-const save = async () => {
-  if (!form.slug.trim()) { showToast('請填寫網址代稱 (slug)', true); return }
-  if (!form.title.trim()) { showToast('請填寫標題', true); return }
-  if (!form.file)         { showToast('請選擇 HTML 檔案', true); return }
-
-  // slug 只允許英數與 dash
-  if (!/^[a-z0-9\-_]+$/i.test(form.slug)) {
-    showToast('網址代稱只能使用英文、數字、橫線', true)
-    return
-  }
-
-  saving.value = true
-  try {
-    await htmlPageStore.upload(form.slug.trim(), form.title.trim(), form.file)
-    showToast('上傳成功')
-    modal.show = false
-  } catch {
-    showToast('上傳失敗', true)
-  } finally {
-    saving.value = false
-  }
-}
-
-const confirmDelete = (page) => {
-  deleteTarget.slug  = page.slug
-  deleteTarget.title = page.title
-  showDeleteConfirm.value = true
-}
-
-const doDelete = async () => {
-  await htmlPageStore.remove(deleteTarget.slug)
-  showDeleteConfirm.value = false
-  showToast('已刪除')
-}
-
-const copyUrl = (slug) => {
-  const url = `${window.location.origin}/html/${slug}`
-  navigator.clipboard.writeText(url)
-  showToast('網址已複製')
-}
-</script>
-
-<template>
-  <div class="dark:bg-black bg-gray-50 min-h-screen container-top">
-    <div class="max-w-3xl mx-auto px-4 py-5">
-
-      <!-- 工具列 -->
-      <div class="flex items-center justify-between mb-5">
-        <p class="text-black dark:text-white text-2xl sm:text-4xl font-bold">HTML 頁面管理</p>
-        <div class="flex gap-2">
-          <button @click="refresh"
-                  class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-            刷新
-          </button>
-          <button @click="openAdd"
-                  class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-            上傳 HTML
-          </button>
-        </div>
-      </div>
-
-      <!-- 讀取中 -->
-      <div v-if="loading" class="flex items-center justify-center py-20 gap-2 text-stone-400">
-        <div class="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-        載入中…
-      </div>
-
-      <!-- 無資料 -->
-      <div v-else-if="htmlPageStore.data.page_list.length === 0"
-           class="text-center py-16 text-stone-400 text-sm">
-        目前沒有頁面，點「上傳 HTML」開始新增
-      </div>
-
-      <!-- 列表 -->
-      <div v-else
-           class="bg-white dark:bg-zinc-900 rounded-2xl border border-stone-200 dark:border-stone-700 shadow-sm overflow-hidden">
-        <div v-for="(page, idx) in htmlPageStore.data.page_list" :key="page.slug">
-          <div class="flex items-center gap-3 px-4 py-3">
-            <!-- 圖示 -->
-            <div class="w-9 h-9 flex-none flex items-center justify-center text-2xl">📄</div>
-            <!-- 文字 -->
-            <div class="flex-1 min-w-0">
-              <p class="font-semibold text-sm sm:text-base text-stone-800 dark:text-stone-100 truncate">
-                {{ page.title }}
-              </p>
-              <p class="text-xs text-stone-400 truncate mt-0.5 font-mono">/html/{{ page.slug }}</p>
-            </div>
-            <!-- 操作 -->
-            <div class="flex gap-2 flex-none">
-              <a :href="`/html/${page.slug}`" target="_blank"
-                 class="px-2.5 py-1 text-xs rounded-lg border border-green-200 dark:border-green-800
-                        text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
-                查看
-              </a>
-              <button @click="copyUrl(page.slug)"
-                      class="px-2.5 py-1 text-xs rounded-lg border border-gray-200 dark:border-gray-700
-                             text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                複製網址
-              </button>
-              <button @click="confirmDelete(page)"
-                      class="px-2.5 py-1 text-xs rounded-lg border border-red-200 dark:border-red-800
-                             text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
-                刪除
-              </button>
-            </div>
-          </div>
-          <div v-if="idx < htmlPageStore.data.page_list.length - 1"
-               class="border-b border-dashed border-stone-100 dark:border-zinc-800 mx-4"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ════════ 上傳 Modal ════════ -->
-    <div v-if="modal.show"
-         class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-start sm:items-center justify-center z-50 p-0 sm:p-4">
-      <div class="bg-white dark:bg-zinc-900 rounded-b-3xl sm:rounded-2xl shadow-xl w-full sm:max-w-lg max-h-screen sm:max-h-[90vh] overflow-y-auto">
-
-        <div class="px-5 py-4 border-b border-stone-100 dark:border-stone-700 flex items-center justify-between sticky top-0 bg-white dark:bg-zinc-900 z-10">
-          <h3 class="font-bold text-base text-stone-800 dark:text-stone-100">上傳 HTML 頁面</h3>
-          <button @click="modal.show = false" class="text-stone-400 hover:text-stone-600 p-1">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
-
-        <div class="px-5 py-4 space-y-4">
-
-          <!-- 標題 -->
-          <div>
-            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-1">頁面標題 *</label>
-            <input v-model="form.title" placeholder="顯示用的標題"
-                   class="w-full px-3 py-2 text-sm rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-800 text-stone-800 dark:text-stone-100 outline-none focus:ring-2 focus:ring-blue-400"/>
-          </div>
-
-          <!-- Slug -->
-          <div>
-            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-1">
-              網址代稱 (slug) * <span class="font-normal text-stone-400">— 只能英文、數字、橫線</span>
-            </label>
-            <div class="flex items-center gap-1.5">
-              <span class="text-xs text-stone-400 font-mono whitespace-nowrap">/html/</span>
-              <input v-model="form.slug" placeholder="example-page"
-                     class="flex-1 px-3 py-2 text-sm rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-800 text-stone-800 dark:text-stone-100 outline-none focus:ring-2 focus:ring-blue-400 font-mono"/>
-            </div>
-          </div>
-
-          <!-- 檔案 -->
-          <div>
-            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-2">HTML 檔案 *</label>
-            <label
-                class="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed rounded-xl cursor-pointer transition-colors"
-                :class="form.file
-                  ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                  : 'border-stone-300 dark:border-stone-600 bg-stone-50 dark:bg-zinc-800 hover:bg-stone-100 dark:hover:bg-zinc-700'">
-              <div class="flex flex-col items-center gap-1 text-center px-4">
-                <svg class="w-7 h-7" :class="form.file ? 'text-blue-500' : 'text-stone-400'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0119 9.414V19a2 2 0 01-2 2z"/>
-                </svg>
-                <p v-if="!form.file" class="text-xs text-stone-500 dark:text-stone-400">
-                  點擊選擇 <span class="font-semibold text-blue-600">.html</span> 檔案
-                </p>
-                <p v-else class="text-xs font-semibold text-blue-600 truncate max-w-xs">{{ fileName }}</p>
-              </div>
-              <input ref="fileInputRef" type="file" accept=".html,.htm" class="hidden" @change="onFileChange"/>
-            </label>
-          </div>
-
-        </div>
-
-        <div class="px-5 py-4 border-t border-stone-100 dark:border-stone-700 flex gap-2 justify-end sticky bottom-0 bg-white dark:bg-zinc-900">
-          <button @click="modal.show = false"
-                  class="px-4 py-2 text-sm bg-stone-100 dark:bg-zinc-800 text-stone-600 dark:text-stone-300 rounded-xl hover:bg-stone-200 transition-colors">
-            取消
-          </button>
-          <button @click="save" :disabled="saving"
-                  class="px-4 py-2 text-sm bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center gap-1.5">
-            <div v-if="saving" class="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            上傳
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 刪除確認 -->
-    <div v-if="showDeleteConfirm"
-         class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
-        <p class="text-stone-500 dark:text-stone-400 mb-1">你確定要刪除</p>
-        <p class="text-xl font-black text-red-500 my-2">{{ deleteTarget.title }}</p>
-        <p class="text-stone-500 dark:text-stone-400 mb-6">嗎？</p>
-        <div class="flex justify-center gap-3">
-          <button @click="doDelete"
-                  class="px-5 py-2 text-sm font-medium bg-red-600 hover:bg-red-700 text-white rounded-xl transition-colors">
-            確定刪除
-          </button>
-          <button @click="showDeleteConfirm = false"
-                  class="px-5 py-2 text-sm font-medium bg-stone-100 dark:bg-zinc-800 text-stone-600 dark:text-stone-300 rounded-xl hover:bg-stone-200 transition-colors">
-            取消
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Toast -->
-    <Transition name="fade">
-      <div v-if="toast.show"
-           :class="toast.error ? 'bg-red-700' : 'bg-stone-800'"
-           class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 text-white text-sm px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 z-50">
-        <svg class="w-4 h-4 flex-shrink-0" :class="toast.error ? 'text-red-200' : 'text-green-400'" fill="none"
-             stroke="currentColor" viewBox="0 0 24 24">
-          <path v-if="!toast.error" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-        {{ toast.message }}
-      </div>
-    </Transition>
-  </div>
-</template>
-
-<style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-  transform: translateY(8px);
-}
-</style>
-</file>
-
 <file path="pages/admin/index.vue">
 <script setup lang="ts">
 definePageMeta({ layout: 'admin' })
@@ -2123,6 +2271,664 @@ const commonIcons = ['🔗', '⛪', '▶️', '🗣️', '🌳', '📖', '🎵',
 </style>
 </file>
 
+<file path="pages/book/BeStillMySoul.vue">
+<template>
+  <div class="bsms-wrap">
+    <header class="bsms-header">
+      <div class="bsms-title-en">Be Still My Soul</div>
+      <div class="bsms-title-zh">我靈鎮靜</div>
+      <div class="bsms-meta">Katharina von Schlegel · Jean Sibelius arr. Linda Pratt · SAB</div>
+    </header>
+
+    <!-- 聲部選擇 -->
+    <section class="bsms-section">
+      <div class="bsms-section-label">聲部選擇</div>
+      <div class="bsms-parts-row">
+        <button
+          v-for="p in PARTS"
+          :key="p.id"
+          class="bsms-part-btn"
+          :class="[`part-${p.id}`, { active: activeParts.has(p.id) }]"
+          @click="togglePart(p.id)"
+        >
+          <span class="part-label">{{ p.label }}</span>
+          <span class="part-sub">{{ p.sub }}</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 速度 & 音量 -->
+    <section class="bsms-section">
+      <div class="bsms-section-label">速度與音量</div>
+      <div class="bsms-sliders">
+        <div class="slider-row">
+          <span class="slider-label">速度</span>
+          <input type="range" min="40" max="100" step="1" v-model.number="tempo" class="bsms-slider" />
+          <span class="slider-val">{{ tempo }} <small>BPM</small></span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">聲部音量</span>
+          <input type="range" min="0" max="100" step="1" v-model.number="voiceVolPct" class="bsms-slider" />
+          <span class="slider-val">{{ voiceVolPct }}</span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">鋼琴音量</span>
+          <input type="range" min="0" max="100" step="1" v-model.number="pianoVolPct" class="bsms-slider" />
+          <span class="slider-val">{{ pianoVolPct }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 播放控制 -->
+    <section class="bsms-section">
+      <div class="bsms-controls">
+        <button class="bsms-play-btn" @click="togglePlay">
+          <svg v-if="!isPlaying" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M8 5v14l11-7z"/></svg>
+          <svg v-else viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+          {{ isPlaying ? '暫停' : '播放' }}
+        </button>
+        <button class="bsms-stop-btn" @click="stopAll(false)">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><rect x="4" y="4" width="16" height="16"/></svg>
+          停止
+        </button>
+        <span class="bsms-status" :class="{ playing: isPlaying }">{{ statusText }}</span>
+      </div>
+      <div class="bsms-progress-track">
+        <div class="bsms-progress-fill" :style="{ width: progressPct + '%' }"></div>
+      </div>
+    </section>
+
+    <!-- 歌詞 -->
+    <section class="bsms-lyrics">
+      <div class="bsms-section-label">歌詞 Lyrics</div>
+      <div
+        v-for="(v, i) in VERSES"
+        :key="i"
+        class="bsms-verse"
+        :class="{ active: activeVerse === i + 1 }"
+      >
+        <div class="verse-num">{{ i + 1 }}</div>
+        <div class="verse-body">
+          <div class="verse-en">{{ v.en }}</div>
+          <div class="verse-zh">{{ v.zh }}</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script setup>
+import { ref, watch, onUnmounted } from 'vue'
+
+/* ── 常數資料 ───────────────────────────────────── */
+const PARTS = [
+  { id: 'S',     label: 'Soprano', sub: '女高音' },
+  { id: 'A',     label: 'Alto',    sub: '女低音' },
+  { id: 'B',     label: 'Bass',    sub: '男低音' },
+  { id: 'piano', label: 'Piano',   sub: '鋼琴伴奏' },
+]
+
+const VERSES = [
+  { en: 'Be still, my soul: the Lord is on thy side; With patience bear thy cross of grief or pain.',
+    zh: '我靈鎮靜，主在你一旁；忍耐擔負你的憂傷之重。' },
+  { en: "Leave to thy God to order and provide; In ev'ry change he faithful will remain.",
+    zh: '但依天父安排任何事；獨變之中他懷信任不移。' },
+  { en: "Be still, my soul: thy best, thy heav'nly Friend Thru thorny ways leads to a joyful end.",
+    zh: '我靈鎮靜，你最好的友人，經過荊棘引你到歡樂之終。' },
+  { en: 'Be still, my soul: thy God doth undertake To guide the future as he has the past.',
+    zh: '我靈鎮靜，聖父必負擔任，未來引導，仍如過去情形。' },
+  { en: 'Thy hope, thy confidence let nothing shake; All now mysterious shall be bright at last.',
+    zh: '你的希望都望鎮心不動；目前奧秘，終必都要光明。' },
+  { en: 'Be still, my soul: when change and tears are past, All safe and blessed we shall meet at last.',
+    zh: '我靈鎮靜，世變淚痕都過；我們歡聚，在終必都平安。' },
+]
+
+// 音符資料（Bb大調，4/4拍，由樂譜手動編碼）
+const SCORE = {
+  S: [
+    { n: 'C5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'Eb5', d: 0.5 }, { n: 'F5', d: 1 },
+    { n: 'G5', d: 0.5 }, { n: 'Ab5', d: 0.5 }, { n: 'G5', d: 0.5 }, { n: 'F5', d: 1 },
+    { n: 'Eb5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Bb4', d: 1 },
+    { n: 'C5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'Eb5', d: 0.5 }, { n: 'F5', d: 1.5 },
+    { n: 'Eb5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Bb4', d: 1 },
+    { n: 'C5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'Eb5', d: 0.5 }, { n: 'G5', d: 1 },
+    { n: 'F5', d: 0.5 }, { n: 'Eb5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'C5', d: 1 },
+    { n: 'D5', d: 0.5 }, { n: 'Eb5', d: 0.5 }, { n: 'F5', d: 0.5 }, { n: 'G5', d: 1 },
+    { n: 'Ab5', d: 0.5 }, { n: 'G5', d: 0.5 }, { n: 'F5', d: 0.5 }, { n: 'Eb5', d: 1.5 },
+    { n: 'D5', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Bb4', d: 0.5 }, { n: 'C5', d: 2 },
+    { n: 'C5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'Eb5', d: 0.5 }, { n: 'F5', d: 1 },
+    { n: 'G5', d: 0.5 }, { n: 'Ab5', d: 0.5 }, { n: 'G5', d: 0.5 }, { n: 'F5', d: 1 },
+    { n: 'Eb5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Bb4', d: 2 },
+  ],
+  A: [
+    { n: 'G4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'G4', d: 0.5 }, { n: 'Ab4', d: 1 },
+    { n: 'Bb4', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Bb4', d: 0.5 }, { n: 'Ab4', d: 1 },
+    { n: 'G4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Eb4', d: 0.5 }, { n: 'G4', d: 1 },
+    { n: 'Ab4', d: 0.5 }, { n: 'Bb4', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Ab4', d: 1.5 },
+    { n: 'G4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Eb4', d: 0.5 }, { n: 'F4', d: 1 },
+    { n: 'G4', d: 0.5 }, { n: 'Ab4', d: 0.5 }, { n: 'Bb4', d: 0.5 }, { n: 'Eb5', d: 1 },
+    { n: 'C5', d: 0.5 }, { n: 'Bb4', d: 0.5 }, { n: 'Ab4', d: 0.5 }, { n: 'G4', d: 1 },
+    { n: 'Ab4', d: 0.5 }, { n: 'Bb4', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Eb5', d: 1 },
+    { n: 'F5', d: 0.5 }, { n: 'Eb5', d: 0.5 }, { n: 'D5', d: 0.5 }, { n: 'C5', d: 1.5 },
+    { n: 'Bb4', d: 0.5 }, { n: 'Ab4', d: 0.5 }, { n: 'G4', d: 0.5 }, { n: 'Ab4', d: 2 },
+    { n: 'G4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'G4', d: 0.5 }, { n: 'Ab4', d: 1 },
+    { n: 'Bb4', d: 0.5 }, { n: 'C5', d: 0.5 }, { n: 'Bb4', d: 0.5 }, { n: 'Ab4', d: 1 },
+    { n: 'G4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Eb4', d: 0.5 }, { n: 'Eb4', d: 2 },
+  ],
+  B: [
+    { n: 'C3', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'F3', d: 1 },
+    { n: 'Eb3', d: 0.5 }, { n: 'F3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'Ab3', d: 1 },
+    { n: 'Eb3', d: 0.5 }, { n: 'F3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'Eb3', d: 1 },
+    { n: 'Ab3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'F3', d: 0.5 }, { n: 'C4', d: 1.5 },
+    { n: 'Bb3', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'F3', d: 1 },
+    { n: 'Eb3', d: 0.5 }, { n: 'F3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'C4', d: 1 },
+    { n: 'Ab3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'F3', d: 0.5 }, { n: 'Eb3', d: 1 },
+    { n: 'F3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'Ab3', d: 0.5 }, { n: 'Bb3', d: 1 },
+    { n: 'C4', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'Ab3', d: 0.5 }, { n: 'G3', d: 1.5 },
+    { n: 'F3', d: 0.5 }, { n: 'Eb3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'C3', d: 2 },
+    { n: 'C3', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'F3', d: 1 },
+    { n: 'Eb3', d: 0.5 }, { n: 'F3', d: 0.5 }, { n: 'G3', d: 0.5 }, { n: 'Ab3', d: 1 },
+    { n: 'Bb3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'Eb3', d: 2 },
+  ],
+  piano: [
+    { n: 'F3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'F4', d: 1 },
+    { n: 'Eb4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'Bb3', d: 1 },
+    { n: 'C4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'G4', d: 0.5 }, { n: 'Eb4', d: 1 },
+    { n: 'F4', d: 0.5 }, { n: 'G4', d: 0.5 }, { n: 'Ab4', d: 0.5 }, { n: 'F4', d: 1.5 },
+    { n: 'Bb3', d: 0.5 }, { n: 'D4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Bb4', d: 1 },
+    { n: 'C4', d: 0.5 }, { n: 'Eb4', d: 0.5 }, { n: 'G4', d: 0.5 }, { n: 'C5', d: 1 },
+    { n: 'F3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'F4', d: 1 },
+    { n: 'Bb3', d: 0.5 }, { n: 'D4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Bb4', d: 1 },
+    { n: 'C4', d: 0.5 }, { n: 'Eb4', d: 0.5 }, { n: 'G4', d: 0.5 }, { n: 'C5', d: 1.5 },
+    { n: 'F3', d: 0.5 }, { n: 'Ab3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'F4', d: 2 },
+    { n: 'F3', d: 0.5 }, { n: 'C4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'F4', d: 1 },
+    { n: 'Eb4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'Bb3', d: 1 },
+    { n: 'C4', d: 0.5 }, { n: 'F4', d: 0.5 }, { n: 'Bb3', d: 0.5 }, { n: 'F3', d: 2 },
+  ],
+}
+
+// 每段歌詞對應的「拍子累計比例」（共約104拍）
+const VERSE_THRESHOLDS = [0, 0.12, 0.25, 0.42, 0.55, 0.72, 0.88]
+
+/* ── 響應式狀態 ─────────────────────────────────── */
+const activeParts  = ref(new Set(['S']))
+const tempo        = ref(72)
+const voiceVolPct  = ref(80)
+const pianoVolPct  = ref(50)
+const isPlaying    = ref(false)
+const progressPct  = ref(0)
+const activeVerse  = ref(0)
+const statusText   = ref('準備就緒')
+
+/* ── Web Audio 內部狀態 ─────────────────────────── */
+let audioCtx    = null
+let oscillators = []
+let gainNodes   = []
+let startedAt   = 0
+let totalSec    = 0
+let rafId       = null
+
+/* ── 音名轉頻率 ─────────────────────────────────── */
+const NOTE_FREQ = (() => {
+  const notes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+  const alias  = { 'Eb': 'D#', 'Ab': 'G#', 'Bb': 'A#', 'Db': 'C#', 'Gb': 'F#' }
+  return (name) => {
+    const m = name.match(/^([A-Gb#]+)(\d)$/)
+    if (!m) return 440
+    const note = alias[m[1]] ?? m[1]
+    const oct  = parseInt(m[2])
+    const semi = notes.indexOf(note) + (oct + 1) * 12
+    return 440 * Math.pow(2, (semi - 69) / 12)
+  }
+})()
+
+/* ── 工具：建立單音 oscillator ───────────────────── */
+function scheduleNote(ctx, freq, startT, durT, gainNode) {
+  const osc  = ctx.createOscillator()
+  const env  = ctx.createGain()
+  osc.type   = 'sine'
+  osc.frequency.value = freq
+  env.gain.setValueAtTime(0, startT)
+  env.gain.linearRampToValueAtTime(1, startT + 0.02)
+  env.gain.setValueAtTime(1, startT + durT * 0.85)
+  env.gain.linearRampToValueAtTime(0, startT + durT)
+  osc.connect(env)
+  env.connect(gainNode)
+  osc.start(startT)
+  osc.stop(startT + durT + 0.05)
+  return osc
+}
+
+/* ── 主邏輯 ─────────────────────────────────────── */
+function getSecPerBeat() { return 60 / tempo.value }
+
+function computeTotalSec() {
+  return SCORE.S.reduce((s, n) => s + n.d * getSecPerBeat(), 0)
+}
+
+function togglePart(id) {
+  const s = new Set(activeParts.value)
+  s.has(id) ? s.delete(id) : s.add(id)
+  activeParts.value = s
+  if (isPlaying.value) { stopAll(false); }
+}
+
+async function togglePlay() {
+  if (isPlaying.value) { stopAll(false); return }
+  if (!activeParts.value.size) { statusText.value = '請先選擇聲部'; return }
+
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+  oscillators = []
+  gainNodes   = []
+
+  const voiceGain = voiceVolPct.value / 100
+  const pianoGain = pianoVolPct.value / 100
+  const spb       = getSecPerBeat()
+  totalSec        = computeTotalSec()
+
+  activeParts.value.forEach((partId) => {
+    const masterGain = audioCtx.createGain()
+    masterGain.gain.value = partId === 'piano' ? pianoGain * 0.6 : voiceGain * 0.7
+    masterGain.connect(audioCtx.destination)
+    gainNodes.push(masterGain)
+
+    let t = audioCtx.currentTime + 0.1
+    SCORE[partId].forEach((note) => {
+      const dur  = note.d * spb
+      const freq = NOTE_FREQ(note.n)
+      const osc  = scheduleNote(audioCtx, freq, t, dur, masterGain)
+      oscillators.push(osc)
+      t += dur
+    })
+  })
+
+  startedAt  = audioCtx.currentTime + 0.1
+  isPlaying.value  = true
+  statusText.value = '播放中...'
+
+  const tick = () => {
+    if (!isPlaying.value) return
+    const elapsed = audioCtx.currentTime - startedAt
+    const pct = Math.min(elapsed / totalSec * 100, 100)
+    progressPct.value = pct
+
+    const ratio = elapsed / totalSec
+    let vIdx = 0
+    for (let i = VERSE_THRESHOLDS.length - 1; i >= 0; i--) {
+      if (ratio >= VERSE_THRESHOLDS[i]) { vIdx = i; break }
+    }
+    activeVerse.value = vIdx
+
+    if (pct >= 100) { stopAll(true); return }
+    rafId = requestAnimationFrame(tick)
+  }
+  rafId = requestAnimationFrame(tick)
+}
+
+function stopAll(finished) {
+  isPlaying.value = false
+  cancelAnimationFrame(rafId)
+  oscillators.forEach(o => { try { o.stop() } catch (_) {} })
+  oscillators = []
+  gainNodes   = []
+  if (audioCtx) { audioCtx.close(); audioCtx = null }
+  statusText.value  = finished ? '播放完畢 ✓' : '已停止'
+  activeVerse.value = 0
+  if (!finished) progressPct.value = 0
+}
+
+watch(tempo, () => { if (isPlaying.value) stopAll(false) })
+
+onUnmounted(() => stopAll(false))
+</script>
+
+<style scoped>
+/* 引入字體 */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400&display=swap');
+
+.bsms-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  background: #faf8f4;
+  min-height: 100vh;
+  font-family: 'Noto Serif TC', serif;
+  color: #2a2018;
+}
+
+/* ── 標題 ─── */
+.bsms-header { text-align: center; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #d8cec0; }
+.bsms-title-en { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; letter-spacing: 0.04em; color: #1a120a; line-height: 1.1; }
+.bsms-title-zh { font-size: 1.1rem; font-weight: 300; color: #7a6a58; margin-top: 4px; letter-spacing: 0.12em; }
+.bsms-meta { font-size: 0.75rem; color: #a89a88; margin-top: 8px; letter-spacing: 0.06em; }
+
+/* ── 區塊 ─── */
+.bsms-section { margin-bottom: 1.75rem; }
+.bsms-section-label { font-size: 0.72rem; letter-spacing: 0.14em; color: #a89a88; text-transform: uppercase; margin-bottom: 10px; }
+
+/* ── 聲部按鈕 ─── */
+.bsms-parts-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.bsms-part-btn {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 10px 18px; border-radius: 6px;
+  border: 1px solid #d0c5b5;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.18s;
+  min-width: 90px;
+}
+.bsms-part-btn:hover { border-color: #b0a090; background: #f5f0e8; }
+.part-label { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: #2a2018; line-height: 1; }
+.part-sub { font-size: 0.7rem; color: #a89a88; margin-top: 2px; }
+
+.part-S.active  { background: #eeeaff; border-color: #8878cc; }
+.part-S.active .part-label { color: #4a3a99; }
+.part-A.active  { background: #e4f5ed; border-color: #3a9a70; }
+.part-A.active .part-label { color: #1a6a48; }
+.part-B.active  { background: #fdeee8; border-color: #c06040; }
+.part-B.active .part-label { color: #883020; }
+.part-piano.active { background: #e8f0fd; border-color: #4a7acc; }
+.part-piano.active .part-label { color: #1a4a8a; }
+
+/* ── 滑桿 ─── */
+.bsms-sliders { display: flex; flex-direction: column; gap: 10px; }
+.slider-row { display: flex; align-items: center; gap: 10px; }
+.slider-label { font-size: 0.8rem; color: #7a6a58; white-space: nowrap; min-width: 68px; }
+.bsms-slider { flex: 1; accent-color: #8878cc; }
+.slider-val { font-size: 0.82rem; color: #2a2018; min-width: 44px; text-align: right; font-variant-numeric: tabular-nums; }
+.slider-val small { font-size: 0.65rem; color: #a89a88; margin-left: 2px; }
+
+/* ── 播放控制 ─── */
+.bsms-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.bsms-play-btn, .bsms-stop-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: 6px; border: 1px solid;
+  cursor: pointer; font-size: 0.9rem; transition: all 0.15s;
+  font-family: 'Noto Serif TC', serif;
+}
+.bsms-play-btn { background: #2a2018; border-color: #2a2018; color: #faf8f4; }
+.bsms-play-btn:hover { background: #3a3028; }
+.bsms-stop-btn { background: #fff; border-color: #d0c5b5; color: #5a4a38; }
+.bsms-stop-btn:hover { background: #f5f0e8; }
+.bsms-status { font-size: 0.78rem; color: #a89a88; margin-left: 4px; }
+.bsms-status.playing { color: #3a9a70; }
+
+/* ── 進度條 ─── */
+.bsms-progress-track { height: 3px; background: #e0d8cc; border-radius: 2px; overflow: hidden; }
+.bsms-progress-fill  { height: 100%; background: #8878cc; transition: width 0.25s linear; }
+
+/* ── 歌詞 ─── */
+.bsms-lyrics { border: 1px solid #d8cec0; border-radius: 8px; overflow: hidden; }
+.bsms-lyrics .bsms-section-label { padding: 10px 16px 10px; margin: 0; background: #f0ebe0; border-bottom: 1px solid #d8cec0; }
+.bsms-verse {
+  display: grid; grid-template-columns: 28px 1fr;
+  gap: 10px; padding: 12px 16px;
+  border-bottom: 1px solid #ede5d8;
+  transition: background 0.3s;
+}
+.bsms-verse:last-child { border-bottom: none; }
+.bsms-verse.active { background: #eeebff; }
+.verse-num { font-size: 0.72rem; color: #c0b0a0; padding-top: 3px; font-variant-numeric: tabular-nums; }
+.verse-en { font-size: 0.88rem; color: #2a2018; line-height: 1.65; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+.verse-zh { font-size: 0.78rem; color: #7a6a58; line-height: 1.65; margin-top: 2px; font-weight: 300; letter-spacing: 0.04em; }
+</style>
+</file>
+
+<file path="pages/book/singlesecond.vue">
+<template>
+  <div class="container-top bg-gray-100 dark:bg-gray-950 min-h-screen">
+    <div class="max-w-3xl mx-auto px-4">
+
+      <!-- Header -->
+      <div class="relative overflow-hidden bg-[#1a2e5a] rounded-2xl text-center px-6 py-8 mb-4">
+        <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-yellow-300/10 pointer-events-none"></div>
+        <div class="absolute -bottom-8 -left-8 w-28 h-28 rounded-full bg-red-600/20 pointer-events-none"></div>
+        <span class="relative inline-block bg-yellow-300 text-[#1a2e5a] text-sm font-bold px-4 py-1 rounded-full tracking-widest mb-3">
+          第二組 · 大會資訊
+        </span>
+        <h1 class="relative text-3xl md:text-4xl font-bold text-white mb-1">2026 全國年輕單成大會</h1>
+        <p class="relative text-base text-white/70">信賴祂</p>
+        <div class="relative mt-3 flex flex-col items-center gap-1 text-sm text-white/60">
+          <p>📅 6/18（四）– 6/20（六）</p>
+          <p>📍 台南十股文創園區</p>
+        </div>
+      </div>
+
+      <!-- 大會官方連結 -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">
+          官方連結
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="https://www.instagram.com/tw_ysac?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+             target="_blank"
+             class="flex items-center gap-3 flex-1 bg-gray-100 dark:bg-gray-800 rounded-xl px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <span class="text-2xl">📸</span>
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">官方 Instagram</p>
+              <p class="text-base font-bold text-[#1a2e5a] dark:text-blue-300">@tw_ysac</p>
+            </div>
+          </a>
+          <a href="https://line.me/R/ti/p/@373qqdfr"
+             target="_blank"
+             class="flex items-center gap-3 flex-1 bg-gray-100 dark:bg-gray-800 rounded-xl px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <span class="text-2xl">💬</span>
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">官方 LINE</p>
+              <p class="text-base font-bold text-[#1a2e5a] dark:text-blue-300">@373qqdfr</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 服裝規定 -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">
+          舞會服裝規定（第二天晚上）
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- 男生 -->
+          <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4">
+            <p class="text-base font-bold text-[#1a2e5a] dark:text-blue-300 mb-2">👔 男生</p>
+            <p class="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
+              藏青色襯衫<br>搭配黑色或米色褲子
+            </p>
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              <span class="text-sm font-medium px-3 py-0.5 rounded-full bg-[#1a2e5a] text-blue-200">藏青領帶</span>
+              <span class="text-sm font-medium px-3 py-0.5 rounded-full bg-yellow-300 text-yellow-900">黃色領帶</span>
+              <span class="text-sm font-medium px-3 py-0.5 rounded-full bg-red-700 text-red-100">紅色領帶</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+              沒有藏青上衣也無法取得者，可穿白色襯衫搭配彩色領帶／配件
+            </p>
+          </div>
+          <!-- 女生 -->
+          <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4">
+            <p class="text-base font-bold text-[#1a2e5a] dark:text-blue-300 mb-2">👗 女生</p>
+            <p class="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
+              藏青＋黃色<br>洋裝 或 上衣＋裙子
+            </p>
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              <span class="text-sm font-medium px-3 py-0.5 rounded-full bg-[#1a2e5a] text-blue-200">藏青</span>
+              <span class="text-sm font-medium px-3 py-0.5 rounded-full bg-yellow-300 text-yellow-900">黃色</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+              可參考白雪公主配色（藍色上衣＋黃色裙子）
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 服裝參考照 -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">
+          服裝參考照（1–4組）
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div v-for="img in images" :key="img.src" class="relative rounded-xl overflow-hidden aspect-[3/4] bg-gray-200 dark:bg-gray-800">
+            <img :src="img.src" :alt="img.alt" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 bg-[#1a2e5a]/80 text-white text-sm text-center py-1 px-1">
+              {{ img.label }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 大會領袖 -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">
+          大會領袖
+        </p>
+        <div v-for="(leader, i) in leaders" :key="leader.role"
+             :class="i < leaders.length - 1 ? 'border-b border-gray-200 dark:border-gray-700' : ''"
+             class="flex gap-3 py-2.5 text-base">
+          <span class="text-gray-500 dark:text-gray-400 w-28 flex-none">{{ leader.role }}</span>
+          <span class="text-gray-900 dark:text-gray-100 font-medium">{{ leader.name }}</span>
+        </div>
+      </div>
+
+      <!-- 聯絡人 -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">
+          聯絡人
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div v-for="c in contacts" :key="c.name"
+               class="bg-gray-100 dark:bg-gray-800 rounded-xl px-4 py-3">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{ c.role }}</p>
+            <p class="text-base font-bold text-[#1a2e5a] dark:text-blue-300">{{ c.name }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed" v-html="c.detail" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 大會行程 Timeline -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-5 border-b border-gray-200 dark:border-gray-700">
+          大會行程（6/18–6/20）
+        </p>
+
+        <div v-for="(day, di) in schedule" :key="day.date" class="mb-6 last:mb-0">
+          <!-- 日期標題 -->
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-2.5 h-2.5 rounded-full bg-[#1a2e5a] dark:bg-blue-400 flex-none"></div>
+            <p class="text-base font-bold text-[#1a2e5a] dark:text-blue-300">{{ day.date }}</p>
+          </div>
+
+          <!-- 時間軸 items -->
+          <div class="ml-[5px] pl-6 border-l-2"
+               :class="di < schedule.length - 1 ? 'border-gray-300 dark:border-gray-700' : 'border-transparent'">
+            <div v-for="(row, ri) in day.rows" :key="row.time" class="relative mb-4 last:mb-0">
+              <!-- 圓點 -->
+              <div class="absolute -left-[29px] top-[6px] w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 ring-2 ring-white dark:ring-gray-900"></div>
+              <!-- 內容 -->
+              <div class="flex flex-col sm:flex-row sm:items-start gap-0.5 sm:gap-3">
+                <span class="text-sm font-semibold text-gray-500 dark:text-gray-400 sm:w-24 flex-none">{{ row.time }}</span>
+                <div>
+                  <p class="text-base text-gray-900 dark:text-gray-100 font-medium">{{ row.desc }}</p>
+                  <p v-if="row.sub" class="text-sm text-gray-600 dark:text-gray-400 mt-0.5 leading-relaxed">{{ row.sub }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 各隊待辦 -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">
+          各隊待辦事項
+        </p>
+        <ul>
+          <li v-for="task in tasks" :key="task"
+              class="flex gap-3 py-2.5 text-base text-gray-800 dark:text-gray-200 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+            <span class="flex-none mt-0.5">🚩</span>
+            <span v-html="task" />
+          </li>
+        </ul>
+      </div>
+
+      <!-- 奇美連結 -->
+      <div class="bg-yellow-50 dark:bg-yellow-950/30 border border-yellow-300 dark:border-yellow-800 rounded-xl px-4 py-3 mb-4 text-base text-yellow-900 dark:text-yellow-300 leading-relaxed">
+        🏛 奇美博物館參觀資訊：
+        <a href="https://www.chimeimuseum.org/visit" target="_blank"
+           class="text-[#1a2e5a] dark:text-blue-400 underline underline-offset-2">
+          www.chimeimuseum.org/visit
+        </a>
+      </div>
+
+    </div>
+  </div>
+</template>
+
+<script setup>
+definePageMeta({layout: 'blank'})
+
+const BASE = '/active/2026/single_adults/'
+
+const images = [
+  {src: `${BASE}LINE_NOTE_260523_1.jpg`, alt: '男生領帶參考 1 — 黃色佩斯利領帶', label: '男 · 黃色領帶'},
+  {src: `${BASE}LINE_NOTE_260523_2.jpg`, alt: '男生領帶參考 2 — 藏青領帶套裝', label: '男 · 藏青領帶'},
+  {src: `${BASE}LINE_NOTE_260523_3.jpg`, alt: '男生領帶參考 3 — 紅色領帶', label: '男 · 紅色領帶'},
+  {src: `${BASE}LINE_NOTE_260523_4.jpg`, alt: '女生參考 1 — 藍外套黃裙', label: '女 · 藍外套黃裙'},
+  {src: `${BASE}LINE_NOTE_260523_5.jpg`, alt: '女生參考 2 — 白雪公主洋裝', label: '女 · 白雪公主裝'},
+  {src: `${BASE}LINE_NOTE_260523_6.jpg`, alt: '女生參考 3 — 藍上衣黃裙', label: '女 · 藍上衣黃裙'},
+  {src: `${BASE}LINE_NOTE_260523_7.jpg`, alt: '男生穿搭參考 1 — 藏青襯衫', label: '男 · 藏青襯衫 1'},
+  {src: `${BASE}LINE_NOTE_260523_8.jpg`, alt: '男生穿搭參考 2 — 藏青襯衫', label: '男 · 藏青襯衫 2'},
+]
+
+const leaders = [
+  {role: '區域七十員', name: '楊世寧會長'},
+  {role: '支聯會', name: '東台中支聯會 劉邦建會長'},
+]
+
+const contacts = [
+  {role: '總召', name: '王奎棟', detail: '0966-409-782<br>LINE: elderktw'},
+  {role: '總召', name: '黃靖媛', detail: '0907-716-873<br>LINE: ouo...ouo...ouo'},
+  {role: '隊輔長', name: '李詩琳', detail: '0938-917-066'},
+  {role: '醫護組', name: '郭之文', detail: '0908-785-673<br>LINE: justtypeit'},
+  {role: '醫護組', name: '陳心瑜', detail: '0979-812-876<br>LINE: chen10059158'},
+  {role: '醫護組', name: '陳怡璇', detail: '0975-110-191<br>LINE: ghj6722'},
+  {role: '場地組', name: '杜祐萱', detail: '0963-210-501<br>LINE: tra19930420'},
+]
+
+const schedule = [
+  {
+    date: '第一天 6/18（四）',
+    rows: [
+      {time: '13:30–14:00', desc: '報到'},
+      {time: '下午', desc: '大會開始'},
+    ],
+  },
+  {
+    date: '第二天 6/19（五）',
+    rows: [
+      {
+        time: '上午',
+        desc: '服務活動 ／ 課程',
+        sub: '吳宣澔、彥廷、恩淩 Sarah — 中高齡營養實務課程（限額50名，單獨行動至午餐）'
+      },
+      {time: '下午', desc: '奉行福音活動 — 奇美博物館', sub: '門票由大會支付，台南市民請攜帶身份證'},
+      {time: '18:00(預估)', desc: '舞會（白雪公主主題）', sub: '第二組著藏青＋黃色配色'},
+    ],
+  },
+  {
+    date: '第三天 6/20（六）',
+    rows: [
+      {time: '上午', desc: '大會活動'},
+      {time: '14:00(預估)', desc: '大會結束'},
+    ],
+  },
+]
+
+const tasks = [
+  '統計哪些人<strong>較晚到或較早離開</strong>，並附明確時間',
+  '統計持有<strong>台南市民卡</strong>的成員（台南人 / 在台南讀書），請攜帶身份證或學生證',
+  '邀請 <strong>18–22 歲</strong>成員攜帶可證明年紀的證件（身份證等）',
+]
+</script>
+</file>
+
 <file path="pages/front/activity/2023/0826/Information.vue">
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
@@ -2147,18 +2953,6 @@ definePageMeta({ layout: 'default' })
       <img class="w-full rounded-xl shadow" src="/active/2023/8/26_2.jpg" alt="旅遊照片" />
       <img class="w-full rounded-xl shadow" src="/active/2023/8/26_3.jpg" alt="旅遊照片" />
     </div>
-  </div>
-</template>
-</file>
-
-<file path="pages/front/activity/2023/Activity-03-06.vue">
-<script setup lang="ts">
-definePageMeta({ layout: 'default' })
-</script>
-<template>
-  <div class="max-w-3xl mx-auto px-4 py-6">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">電影-鈴芽之旅 (2023/3/6)</h1>
-    <img class="w-full rounded-xl shadow" src="/active/2023/3/6_1.jpg" alt="活動照片" />
   </div>
 </template>
 </file>
@@ -2205,44 +2999,448 @@ definePageMeta({ layout: 'default' })
 </template>
 </file>
 
-<file path="pages/front/baptism/Baptism-2023-08-25.vue">
+<file path="pages/front/calendar.vue">
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
-</script>
-<template>
-  <div class="max-w-3xl mx-auto px-4 py-6">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">洗禮 (2023-08-25)</h1>
-    <img class="w-full rounded-xl shadow" src="/baptism/洗禮-20230825.png" alt="洗禮照片" />
-  </div>
-</template>
-</file>
 
-<file path="pages/front/baptism/BaptismIndex.vue">
-<script setup lang="ts">
-definePageMeta({ layout: 'default' })
+// ════════════════════════════════════════════════════════
+//  Tab
+// ════════════════════════════════════════════════════════
+const activeTab = ref<'taitung' | 'hualien'>('taitung')
+
+// ════════════════════════════════════════════════════════
+//  台東一支會
+// ════════════════════════════════════════════════════════
+const tautungYears = ['2026', '2024']
+const tautungYear = ref('2026')
+
+const chineseMonths = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二']
+
+const tautungData: Record<string, Record<string, { activities: string[]; note?: string }>> = {
+  '2024': {
+    '一': { activities: ['01/06 種花趣', '01/20 支聯會聖殿日', '01/28 支聯會特別大會'] },
+    '二': { activities: ['02/02 聖徒騎來', '02/17 支聯會聖殿日', '02/25 家譜探索日預演', '02/28 家譜探索日'] },
+    '三': { activities: ['03/02 北區姐妹大會', '03/16 支聯會聖殿日', '03/30 復活節', '03/30 急救包＋食物儲藏'], note: '*二支會合辦' },
+    '四': { activities: ['04/13 總會大會', '04/20 理財講座', '04/27 鯉魚山健行'], note: '*二支會合辦' },
+    '五': { activities: ['05/04 母親節卡片製作', '05/18 支聯會聖殿日', '05/25 母親節酒精畫製作'], note: '*二支會合辦' },
+    '六': { activities: ['06/01 包粽子及夏季支聯會家人家庭晚會', '06/08~09 支聯會大會', '06/15 支聯會聖殿日（女青聖殿日）'] },
+    '七': { activities: ['07/06 搭火車去旅行', '07/20 支聯會聖殿日', '07/28 支會大會', '07/28 歡送蔡會長夫婦、盈君姐妹'], note: '*二支會合辦' },
+    '八': { activities: ['08/03 父親節禮物製作', '08/10 父親節活動', '08/17 支聯會聖殿日'] },
+    '九': { activities: ['09/07 籃球教學', '09/14 中秋節烤肉＆秋季聯會家人家庭晚會', '09/21 支聯會聖殿日'] },
+    '十': { activities: ['10/03 支會傳教士返鄉活動', '10/05 萬聖節點心製作及發送', '10/12 總會大會', '10/26 手工精油皂'] },
+    '十一': { activities: ['11/02 初級會音樂會', '11/09 支聯會姐妹大會（台東）', '11/23 感恩節'], note: '*二支會合辦' },
+    '十二': { activities: ['12/07 薑餅屋及家譜製作', '12/14~15 支聯會大會', '12/21 支聯會聖殿日社區服務', '12/21 聖誕節'] },
+  },
+  '2026': {
+    '一': { activities: ['1/24 各組織領袖台北開會', '1/30（五）慈助會：年節剪紙－教師/姜金玲'] },
+    '二': { activities: ['寒假', '2/7 初級會手作福氣紅包袋 春聯'] },
+    '三': { activities: ['3/07 全國姐妹大會', '3/21 男青年登都蘭山', '3/22 支會活動－「聖殿與家譜」家人家庭晚會', '初級會迦南拜訪長者'] },
+    '四': { activities: ['4/11~12 上半年度總會大會轉播、公共事務會議', '4/25 慈助會：烘焙活動－教師/林時君', '初級會復活節活動'] },
+    '五': { activities: ['5/09 母親節活動', '5/24 東一支會大會／傳道家人家庭晚會', '初級會母親節活動－渲染漸層花'] },
+    '六': { activities: ['6/06~07 花蓮支聯會大會', '6/19 上半年度支聯會慈助會活動－手作香水／教師：徐玲', '初級會歡慶端午節－水果冰粽'] },
+    '七': { activities: ['初級會認識先知', '慈助會（我在教會學到的事）'] },
+    '八': { activities: ['8/02 慈助會主辦支會活動－爸爸節活動', '初級會「爸」氣外露 父親節親子闖關遊戲'] },
+    '九': { activities: ['9/05 慈助會：料理－教師/侯簡瑞鳯', '9/25 支會活動－中秋節活動', '初級會享受幸福時光與電影有約'] },
+    '十': { activities: ['10/09~10 支聯會露營活動', '10/10~11 下半年度總會大會轉播', '初級會運動、教堂清潔'] },
+    '十一': { activities: ['11/21 東一主辦－感恩節活動', '11/28~29 支聯會大會', '初級會感謝有您愛地球、淨灘活動'] },
+    '十二': { activities: ['12/12 下半年度支聯會慈助會活動', '12/?? 東二主辦－聖誕節活動', '初級會光照世人聖誕花圈'] },
+  },
+}
+
+const tautungCurrentData = computed(() => tautungData[tautungYear.value] ?? {})
+
+const monthColors = [
+  'from-blue-50 to-blue-100 border-blue-200 dark:from-blue-900/20 dark:to-blue-900/40 dark:border-blue-700',
+  'from-orange-50 to-orange-100 border-orange-200 dark:from-orange-900/20 dark:to-orange-900/40 dark:border-orange-700',
+  'from-green-50 to-green-100 border-green-200 dark:from-green-900/20 dark:to-green-900/40 dark:border-green-700',
+  'from-pink-50 to-pink-100 border-pink-200 dark:from-pink-900/20 dark:to-pink-900/40 dark:border-pink-700',
+  'from-purple-50 to-purple-100 border-purple-200 dark:from-purple-900/20 dark:to-purple-900/40 dark:border-purple-700',
+  'from-yellow-50 to-yellow-100 border-yellow-200 dark:from-yellow-900/20 dark:to-yellow-900/40 dark:border-yellow-700',
+  'from-teal-50 to-teal-100 border-teal-200 dark:from-teal-900/20 dark:to-teal-900/40 dark:border-teal-700',
+  'from-amber-50 to-amber-100 border-amber-200 dark:from-amber-900/20 dark:to-amber-900/40 dark:border-amber-700',
+  'from-indigo-50 to-indigo-100 border-indigo-200 dark:from-indigo-900/20 dark:to-indigo-900/40 dark:border-indigo-700',
+  'from-rose-50 to-rose-100 border-rose-200 dark:from-rose-900/20 dark:to-rose-900/40 dark:border-rose-700',
+  'from-cyan-50 to-cyan-100 border-cyan-200 dark:from-cyan-900/20 dark:to-cyan-900/40 dark:border-cyan-700',
+  'from-lime-50 to-lime-100 border-lime-200 dark:from-lime-900/20 dark:to-lime-900/40 dark:border-lime-700',
+]
+
+// ════════════════════════════════════════════════════════
+//  花蓮支聯會
+// ════════════════════════════════════════════════════════
+const MAIN_CATS = [
+  '國定假日', '國定假日與補假', '總會', '總會大會', '全國性活動',
+  '支聯會聖殿日', '支聯會活動', '支聯會議會', '領導人會議', '訓練',
+  '高級諮議會議', '主教團會議', '支聯會主教議會', 'CCM',
+  '支聯會傳道議會', '財務稽核',
+  '花蓮一', '花蓮二', '花蓮三', '玉里', '台東一', '台東二', '台東三',
+]
+
+const CAT_COLORS: Record<string, string> = {
+  '國定假日': 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+  '國定假日與補假': 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+  '總會': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+  '總會大會': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+  '全國性活動': 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+  '支聯會聖殿日': 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
+  '支聯會活動': 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+  '支聯會議會': 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300',
+  '領導人會議': 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
+  '訓練': 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
+  '高級諮議會議': 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300',
+  '主教團會議': 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300',
+  '支聯會主教議會': 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300',
+  'CCM': 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300',
+  '支聯會傳道議會': 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300',
+  '財務稽核': 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+  '花蓮一': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+  '花蓮二': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+  '花蓮三': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+  '玉里': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+  '台東一': 'bg-lime-100 text-lime-700 dark:bg-lime-900/30 dark:text-lime-300',
+  '台東二': 'bg-lime-100 text-lime-700 dark:bg-lime-900/30 dark:text-lime-300',
+  '台東三': 'bg-lime-100 text-lime-700 dark:bg-lime-900/30 dark:text-lime-300',
+  '其他': 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300',
+}
+
+type YearData = Record<string, string[]>
+const hualienRawData: Record<string, YearData> = {
+  '2018': {
+    '國定假日與補假': ['12/30-1/1 元旦連假', '2/15-2/20 春節連假', '3/31 補上班', '4/4-4/8 連假', '', '6/16-18 連假', '', '', '9/22-24 連假', '', '', '12/29-1/1 連假、12/22 補上班'],
+    '總會大會': ['', '', '', '7/8 總會大會轉播', '19 聖職領導人大會', '9-10 支聯會大會', '', '25 聖職大會（花蓮）', '', '13-14 總會大會', '10-11 支聯會大會', ''],
+    '北區各支聯會活動': ['', '', '24 公共事務研習', '5-7 北區單成大會', '26 公共事務頒獎', '', '12-14 青年大會', '', '', '25-27 北區年輕單成大會', '', ''],
+    '支聯會聖殿日': ['20', '17', '17', '21', '19', '16', '21', '18', '15', '20', '17', '15'],
+    '支聯會活動': ['27 慈助會年度活動（台東玉里）', '224 全國聖徒盃籃球邀請賽、228 運動會', '10 慈助會年度活動（花蓮一二三）', '緊急應變暨72小時急救包', '26 慈助會會長團訓練、5月中旬家譜展', '', '', '25 籃球聖徒錦標賽（花蓮主辦）', '', '籃球聖徒錦標賽（台東）', '25 初級會聖餐演出、29 感恩節', ''],
+    '支聯會議會': ['', '', '', '28', '', '', '', '', '', '27', '', ''],
+    '訓練': ['13 支分會會長團及主教團會議', '', '', '14 自立大會', '12 支分會會長團及主教團會議', '', '', '4 支分會會長團及主教團會議', '', '', '', '8 支分會會長團及主教團會議'],
+    'CCM': ['23 CCM 會議', '區域訓練會議 2/10', '12 CCM 會議', '', '', '', '9 CCM 會議', '', '', '1 CCM 會議', '', ''],
+    '財務稽核': ['財務稽核訓練', '財務稽核', '', '', '', '', '15、22 財務稽核訓練', '財務稽核', '', '', '', ''],
+    '高級諮議會議': ['每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50'],
+  },
+  '2019': {
+    '國定假日與補假': ['12/29-1/1 元旦連假、1/19 補班', '2/2-2/10 春節連假、2/23 補班', '', '4/4-4/7 連假', '5/1 勞動節', '6/7-9 端午連假', '', '', '9/13-15 中秋連假', '10/10-13 國慶連假、10/5 補班', '', '12/29-1/1 連假、12/22 補上班'],
+    '總會大會': ['', '228 Meurs 會長主領爐邊聚會＠台東', '', '13-14 總會大會轉播', '25-26 支聯會大會', '6/9 關長老與支聯會會長團會議', '', '3 聖職大會暨領導人會議（玉里）', '', '12-13 總會大會、26-27 支聯會大會', '', ''],
+    '北區各支聯會活動': ['', '24 公共事務會議', '', '4-6 北區單成大會', '', '22 北區姊妹大會', '8-13 FSY、18-20 Mini MTC', '25-27 北區年輕單成大會', '', '', '', ''],
+    '支聯會聖殿日': ['19', '16', '16', '20', '18', '15', '20', '17', '14', '19', '16', '21'],
+    '支聯會活動': ['', '228 運動會', '', '', '', '', '', '', '', '', '初級會聖餐演出、感恩節', ''],
+    '支聯會議會': ['', '', '', '', '25', '', '', '', '', '26', '', ''],
+    '訓練': ['12 主教團暨男女青年會長團訓練', '', '財務稽核訓練（3/8 台東、3/9 花蓮）', '', '25 支分會會長團及主教團會議', '', '20 支分會會長團及主教團會議', '', '', '26 支分會會長團及主教團會議', '', ''],
+    'CCM': ['26 CCM 會議', '', '', '', '4 CCM 會議', '22 台北傳道部家庭晚餐會議', '20 台北傳道部家庭晚餐會議', '17 CCM 會議', '', '', '2 CCM 會議', '21 台北傳道部家庭晚餐會議'],
+    '財務稽核': ['14 稽核計畫會議', '', '15 稽核審查會議', '30 稽核結束及評定會議', '', '', '14 稽核計畫會議', '', '15 稽核審查會議', '30 稽核結束及評定會議', '', ''],
+    '高級諮議會議': ['每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50', '每月第二、四週日 12:15~12:50'],
+  },
+  '2020': {
+    '國定假日與補假': ['1/23-1/29 春節連假', '228~3/1 連假', '', '4/2-4/5 連假', '5/1~5/3 勞動節連假', '6/25-28 端午連假', '', '', '', '10/1-4 中秋連假、10/9-11 國慶連假、10/5 補班', '', ''],
+    '支聯會聖殿日': ['18', '15', '21', '18', '16', '20', '18', '15', '19', '17', '21', '19'],
+    '支聯會活動': ['', '228 爐邊聚會、229 運動會', '', '', '', '6、7 支聯會大會', '', '1 聖職領導人會議', '', '31、1 支聯會大會', '', ''],
+    '支聯會議會': ['', '', '', '', '25', '', '', '', '', '26', '', ''],
+    '訓練': ['12 主教團暨男女青年會長團訓練', '', '財務稽核訓練（台東/花蓮）', '', '25 支分會會長團及主教團會議', '', '20 支分會會長團及主教團會議', '', '', '26 支分會會長團及主教團會議', '', ''],
+    'CCM': ['', '8 CCM 會議', '7 台北傳道部家庭晚餐會議', '25 CCM 會議', '', '', '25 台北傳道部家庭晚餐會議', '15 CCM 會議', '', '24 CCM 會議', '2 CCM 會議', '12 台北傳道部家庭晚餐會議'],
+    '財務稽核': ['12 稽核計畫會議', '', '15 稽核審查會議', '30 稽核結束及評定會議', '', '', '14 稽核計畫會議', '', '15 稽核審查會議', '30 稽核結束及評定會議', '', ''],
+    '高級諮議會議': ['每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日'],
+  },
+  '2021': {
+    '國定假日與補假': ['2/10-2/16 春節連假', '2/27~3/1 連假', '', '4/2-4/5 連假', '5/1~5/3 勞動節連假', '6/25-28 端午連假', '', '', '', '10/1-4 中秋連假、10/9-11 國慶連假', '', ''],
+    '總會大會': ['', '2/6 亞洲區域領導人訓練會議', '', '11-12 總會大會轉播', '5/15 亞洲區域領導人訓練會議', '', '', '', '', '10-11 總會大會轉播', '', ''],
+    '支聯會聖殿日': ['16', '13', '20', '17', '15', '19', '17', '21', '18', '16', '20', '18'],
+    '支聯會活動': ['', '227 運動會＠玉里', '', '', '', '5、6 支聯會大會', '', '', '', '30、31 支聯會大會', '', ''],
+    '支聯會議會': ['', '', '', '', '2', '', '4 支聯會輔助組織會議', '', '', '16 支聯會議會暨成年領導人會議', '', ''],
+    '訓練': ['9 高級諮議/慈助會會長團訓練＠玉里', '', '6 聖職領導人會議（玉里）', '', '2 支分會會長團及主教團會議', '', '18 愛分享與邀請訓練（台東地區）', '29 支分會會長團及主教團會議', '', '23 支分會會長團及主教團會議', '', ''],
+    'CCM': ['', '20 CCM 會議', '6 台北傳道部家庭晚餐會議', '24 CCM 會議', '', '', '24 台北傳道部家庭晚餐會議', '28 CCM 會議', '', '22 CCM 會議', '', '13 台北傳道部家庭晚餐會議'],
+    '財務稽核': ['16 財務訓練暨稽核計畫會議', '', '15 稽核審查會議', '30 稽核結束及評定會議', '', '', '14 稽核計畫會議', '', '15 稽核審查會議', '30 稽核結束及評定會議', '', ''],
+    '高級諮議會議': ['每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日', '每月第二、四週日'],
+    '台東三': ['', '', '', '', '', '20 特別支會大會', '', '', '', '', '', ''],
+  },
+  '2022': {
+    '國定假日': ['', '1/29-2/6 春節連假', '26-28 228 連假', '', '2-5 清明連假、4/30-5/2 勞動節連假', '', '3-5 端午連假', '', '', '9-11 中秋連假', '8-10 國慶連假', ''],
+    '總會大會': ['', '', '', '', '9-10 總會大會轉播', '', '', '', '', '', '8-9 總會大會轉播', ''],
+    '全國性活動': ['', '', '', '26 北區姊妹大會', '21-23 年輕單成大會', '', '2-4 年輕單成大會', '11-16 FSY、21-23 北區 Mini MTC', '18-20 年輕單成大會', '9-10 北區單成大會', '6-8 年輕單成大會', ''],
+    '支聯會活動': ['', '26-27 聖徒騎來、2/26 運動會', '', '', '', '7-8 花蓮支聯會大會', '', '', '（男）女青年露營', '', '', ''],
+    '支聯會議會': ['', '', '20', '', '', '22', '', '', '21', '', '', '20'],
+    '領導人會議': ['', '8-9 亞洲區域領導人訓練會議', '', '5 聖職領導人會議＠玉里', '', '', '', '', '', '', '', '7 成年領導人委員會'],
+    '主教團會議': ['', '', '13', '', '', '1', '', '', '14', '', '23', ''],
+    'CCM': ['', '', '12 CCM 會議', '', '30 CCM 會議', '', '', '', '13 CCM 會議', '', '22 CCM 會議', ''],
+    '財務稽核': ['', '15 財務訓練暨稽核計畫會議', '', '13 稽核審查會議', '30 稽核結束及評定會議', '', '', '16 稽核計畫會議', '', '17 稽核審查會議', '30 稽核結束及評定會議', ''],
+    '高級諮議會議': ['', '3', '6', '6', '10', '1', '5', '3', '7', '4', '2', '6'],
+  },
+  '2023': {
+    '國定假日': ['', '1/20-1/29 春節連假（1/7 補班）', '25-28 228 連假（2/4、18 補班）', '3/25 補班', '1-5 清明連假、4/29-5/1 勞動節連假', '', '22-25 端午連假（6/17 補班）', '', '', '29-10/1 中秋連假（9/23 補班）', '7-10 國慶連假', ''],
+    '總會大會': ['', '', '', '', '15-16 總會大會轉播', '', '', '', '', '', '7-8 總會大會轉播', ''],
+    '全國性活動': ['', '', '', '4 北區姊妹大會、16-18 1st 年輕單成大會', '', '20 神的羔羊音樂劇', '22-24 2nd 年輕單成大會、北區單成大會', '13-15 北區青年大會、20-22 北區 Mini MTC', '18-19 北區男女青年學習營', '', '', '2-4 3rd 年輕單成大會'],
+    '支聯會聖殿日': ['', '', '', '', '', '20', '', '', '', '', '', ''],
+    '支聯會活動': ['', '', '27-28 支聯會露營活動（羅山）', '', '', '', '3-4 花蓮支聯會大會', '男女青優美之夜', '男女青露營活動', '', '14 家庭探索日（花蓮）', ''],
+    '支聯會議會': ['', '', '19', '', '', '28', '', '', '27', '', '', '26'],
+    '領導人會議': ['', '', '25 亞洲區域領導人訓練', '', '', '13 聖職領導人會議', '', '', '', '', '', ''],
+    '主教團會議': ['', '', '12', '', '30', '', '', '', '', '24', '', '19'],
+    'CCM': ['', '', '11 CCM 會議', '19 台北傳道部家庭會議', '29 CCM 會議', '', '', '', '', '16 CCM 會議', '', '11 CCM 會議'],
+    '財務稽核': ['', '14 財務暨稽核訓練會議', '', '4 稽核審查會議', '', '', '', '15 稽核計畫會議', '', '16 稽核審查會議', '30 稽核結束及評定會議', ''],
+    '高級諮議會議': ['', '8', '5', '5', '9', '7', '4', '2', '6', '3', '1', '5'],
+  },
+  '2024': {
+    '國定假日': ['', '12/30-1/1 元旦', '2/8-2/14 春節（2/17 補班）、2/28 228 紀念日', '', '4/4-4/7 清明連假', '5/1 五一勞動節', '6/8-6/10 端午連假', '', '', '9/17 中秋節', '10/10 國慶日', ''],
+    '總會': ['', '28 全球青少年活動', '4 全球年輕成人祈禱會、29-3/2 尋根科技家譜大會', '', '13-14 總會大會轉播', '5 全球年輕成人祈禱會', '', '', '', '', '12-13 總會大會轉播、27 全球青少年活動', '3 全球年輕成人祈禱會'],
+    '全國性活動': ['', '27 亞洲區域指導會議', '', '2 北區姊妹大會、30 神的羔羊音樂劇（台中）', '4-6 1st 年輕單成大會', '', '', '8-13 FSY、18-20 北區 Mini MTC、26-27 2nd 年輕單成大會', '10 北區青少年活動（運動日）', '', '10-12 3rd 年輕單成大會', ''],
+    '支聯會聖殿日': ['', '20（11:00）', '17（11:00）', '16（11:00）', '', '18（11:00）', '15（11:00）', '20（11:00）', '17（11:00）', '21（11:00）', '', ''],
+    '支聯會活動': ['', '', '2-3 聖徒騎來、28 家庭探索日（台東）', '30 支聯會慈助會週年慶', '20 理財講座（台東）、27 理財講座（花蓮）', '', '8 Mini FSY、8-9 花蓮支聯會大會', '', '', '', '', ''],
+    '支聯會議會': ['', '21', '', '24', '', '', '23', '21', '', '22', '', '17'],
+    '支聯會主教議會': ['', '', '', '30', '', '26', '', '', '', '8', '', '10'],
+    '支聯會傳道議會': ['', '7', '4', '3', '7', '5', '2', '7', '4', '1', '6', '10'],
+    '高級諮議會議': ['', '7', '4', '3', '7', '5', '2', '7', '4', '1', '6', '17'],
+    'CCM': ['', '', '', '23（原3/16）', '', '25（原4/27）', '', '', '31', '', '26', ''],
+    '花蓮一': ['', '', '18 高級諮議拜訪', '', '21 高級諮議拜訪', '', '', '', '11 高級諮議拜訪', '', '20 高級諮議拜訪', '10 支會大會'],
+  },
+  '2025': {
+    '國定假日': ['', '1/1 元旦、1/25-2/2 春節', '2/17 補班、2/28-3/2 228 連假', '', '4/3-4/6 清明連假', '5/1 五一勞動節、5/30-6/1 端午連假', '', '', '', '', '10/4-10/6 中秋連假、10/10-10/12 國慶連假', ''],
+    '總會': ['', '5 全球青少年活動、23 福音進修班年度訓練轉播', '2 全球年輕成人祈禱會、15 兒童朋友對朋友活動', '6 聖殿和家譜教導、6-8 尋根科技家譜大會、16 全球慈助會祈禱會', '12-13 總會大會轉播', '4 全球年輕成人祈禱會', '10 男青年組織150週年慶祝活動', '', '7 青少年音樂節', '6 兒童朋友對朋友活動', '11-12 總會大會轉播、26 全球青少年活動', '2 全球年輕成人祈禱會'],
+    '全國性活動': ['', '', '', '8 北區姊妹大會、27-29 1st 年輕單成大會、28-29 神的羔羊音樂劇', '3-6 單成大會（36+）', '18 點亮家譜光明燈', '', '2-5 北區青年大會、17-19 2nd 年輕單成大會', '10 北區青少年活動（運動日）', '', '9-11 3rd 年輕單成大會、24-26 單成大會（36+）', '8-9 溫暖人間頒獎'],
+    '支聯會聖殿日': ['', '18（11:00）', '15（11:00）', '15（11:00）', '', '17（11:00）', '21（11:00）', '19（11:00）', '16（11:00）', '6（11:30）', '4（11:30）', '1（11:30）'],
+    '支聯會活動': ['', '11 澄聲合唱團演出（花蓮）', '27-28 郝安迪弟兄身心健康課程', '', '', '', '7-8 花蓮支聯會大會', '', '', '', '10-11 支聯會露營', '1-2 支聯會大會'],
+    '領導人會議': ['', '', '', '1 區域領導人', '', '', '', '', '', '', '', ''],
+    '支聯會議會': ['', '12', '', '16', '', '', '15', '13', '', '14', '', '16'],
+    '支聯會主教議會': ['', '19', '', '', '', '25', '', '', '31', '', '26', ''],
+    '支聯會傳道議會': ['', '19', '9', '2', '6', '4', '1', '6', '3', '7', '5', '9'],
+    '高級諮議會議': ['', '12', '9', '16', '6', '4', '1', '13', '3', '14', '5', '16'],
+    'CCM': ['', '18', '', '', '', '3、15', '', '', '30', '', '25', ''],
+    '台東一': ['', '', '', '', '', '', '22 支會大會', '', '', '', '', ''],
+    '台東二': ['', '', '', '', '', '', '', '', '', '28 支會大會', '', ''],
+    '花蓮一': ['', '', '', '', '', '', '', '', '', '', '19 支會大會', ''],
+    '花蓮二': ['', '', '', '9 支會大會', '', '', '', '', '', '', '', ''],
+    '玉里': ['', '', '', '', '', '25 分會大會', '', '', '', '', '', ''],
+  },
+  '2026': {
+    '國定假日': ['', '1/1 元旦', '2/14-2/22 春節、2/27-3/1 228 連假', '', '4/3-4/6 清明連假', '5/1-5/3 勞動節連假', '6/19-6/21 端午連假', '', '', '9/25-9/28 中秋連假', '10/9-10/11 國慶連假、10/24-10/26 光復節連假', '12/25-12/27 行憲紀念日連假'],
+    '總會': ['', '', '', '', '11-12 總會大會轉播', '', '', '', '', '', '10-11 總會大會轉播', ''],
+    '全國性活動': ['', '', '', '7 台灣姊妹大會、28 青少年和家長的 FSY 祈禱會', '', '', '18-20 全國年輕單成大會', '13-18 FSY、25 FSY 回娘家', '15 點亮家譜光明燈暨科技尋根、20-22 Mini MTC、27-29 特別全國單成大會（18-23歲）', '', '8-10 全國年輕單成大會、北區單成大會', '28 青少年音樂季'],
+    '支聯會聖殿日': ['', '3（11:30）', '7（11:30）', '7（11:30）', '4（11:30）', '2（11:30）', '6（11:30）', '4（11:30）', '1（11:30）', '5（11:30）', '3（11:30）', '7（11:30）'],
+    '支聯會活動': ['', '29-31 跨支聯會青少年露營', '', '', '', '', '6-7 花蓮支聯會大會', '', '', '', '9-10 支聯會露營', '28-29 支聯會大會'],
+    '領導人會議': ['', '24 區域領導人會議', '', '14 領導人指示會議', '', '', '', '', '', '', '', ''],
+    '支聯會議會': ['', '18', '', '8', '', '17', '', '12', '', '13', '', '8'],
+    '支聯會主教議會': ['', '', '8', '', '', '10', '', '', '30', '', '25', ''],
+    '支聯會傳道議會': ['', '4', '1', '1', '12', '3', '14', '5', '2', '6', '4', '1'],
+    '高級諮議會議': ['', '18', '1', '8', '12', '17', '14', '12', '2', '13', '4', '8'],
+    'CCM': ['', '', '7', '', '', '9', '', '', '29', '', '24', ''],
+    '財務稽核': ['', '10 財務政策訓練暨稽核計畫會議', '', '8 稽核審查會議', '5 稽核結束和評定會議', '', '', '11 稽核計畫會議', '', '6 稽核審查會議', '4 稽核結束和評定會議', ''],
+    '台東一': ['', '', '', '', '', '24 支會大會', '', '', '', '', '', ''],
+    '台東二': ['', '', '', '', '', '', '', '', '', '27 支會大會', '', ''],
+    '花蓮一': ['', '', '', '', '', '', '', '', '', '', '25 支會大會', ''],
+    '花蓮二': ['', '', '', '8 支會大會', '', '', '', '', '', '', '', ''],
+    '玉里': ['', '', '', '', '26 分會大會', '', '', '', '', '', '', ''],
+  },
+}
+
+const SKIP_PREFIXES = ['註：', '備註', '2.', '聚會時間', '8:30']
+function isValidCat(cat: string) {
+  return !SKIP_PREFIXES.some(p => cat.startsWith(p)) && cat.length <= 20
+}
+
+const hualienYears = Object.keys(hualienRawData).sort((a, b) => Number(b) - Number(a))
+const hualienYear = ref('2026')
+const selectedMonth = ref<number | null>(null)
+
+const hualienCategories = computed(() => {
+  const catSet = new Set(Object.keys(hualienRawData[hualienYear.value] ?? {}).filter(isValidCat))
+  const ordered = MAIN_CATS.filter(c => catSet.has(c))
+  const rest = [...catSet].filter(c => !MAIN_CATS.includes(c))
+  return [...ordered, ...rest]
+})
+
+function catColor(cat: string): string {
+  for (const key of Object.keys(CAT_COLORS)) {
+    if (cat === key || cat.startsWith(key)) return CAT_COLORS[key]
+  }
+  return CAT_COLORS['其他']
+}
+
+const MONTHS_LABEL = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+
+const monthCatItems = computed(() => {
+  if (selectedMonth.value === null) return []
+  const m = selectedMonth.value
+  const data = hualienRawData[hualienYear.value] ?? {}
+  return hualienCategories.value
+      .map(cat => ({ cat, text: (data[cat]?.[m] ?? '').trim() }))
+      .filter(item => item.text)
+})
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto px-4 py-6">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">洗禮列表</h1>
-    <div class="overflow-x-auto rounded-xl border border-gray-300 dark:border-gray-600">
-      <table class="w-full text-left">
-        <thead class="bg-green-100 dark:bg-green-900">
-          <tr>
-            <th class="px-4 py-3 text-sm font-semibold text-gray-800 dark:text-gray-100 border-b border-gray-300 dark:border-gray-600">#</th>
-            <th class="px-4 py-3 text-sm font-semibold text-gray-800 dark:text-gray-100 border-b border-gray-300 dark:border-gray-600">時間</th>
-            <th class="px-4 py-3 text-sm font-semibold text-gray-800 dark:text-gray-100 border-b border-gray-300 dark:border-gray-600">詳細訊息</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="even:bg-gray-50 dark:even:bg-gray-800">
-            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">1</td>
-            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">8-25-星期五</td>
-            <td class="px-4 py-3 text-sm"><NuxtLink class="text-blue-600 dark:text-blue-400 hover:underline" to="/front/baptism/Baptism-2023-08-25">請點擊</NuxtLink></td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="min-h-screen pb-20 dark:bg-gray-900 transition-colors">
+
+    <!-- 頁首 -->
+    <div class="pt-20 pb-4 px-4 text-center">
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">行事曆</h1>
     </div>
+
+    <!-- Tab 切換 -->
+    <div class="flex justify-center mb-6 px-4">
+      <div class="inline-flex rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 p-1 gap-1">
+        <button
+            @click="activeTab = 'taitung'"
+            :class="[
+            'px-5 py-2 rounded-lg text-sm font-semibold transition-all',
+            activeTab === 'taitung'
+              ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-300 shadow-sm'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200',
+          ]"
+        >台東一支會</button>
+        <button
+            @click="activeTab = 'hualien'"
+            :class="[
+            'px-5 py-2 rounded-lg text-sm font-semibold transition-all',
+            activeTab === 'hualien'
+              ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-300 shadow-sm'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200',
+          ]"
+        >花蓮支聯會</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         台東一支會 Tab
+    ══════════════════════════════════════ -->
+    <div v-if="activeTab === 'taitung'">
+      <div class="flex justify-center gap-3 mb-8 px-4">
+        <button
+            v-for="year in tautungYears"
+            :key="year"
+            @click="tautungYear = year"
+            :class="[
+            'px-6 py-2 rounded-full text-sm font-semibold border transition-all',
+            tautungYear === year
+              ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+              : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400',
+          ]"
+        >{{ year }} 年</button>
+      </div>
+
+      <div class="max-w-screen-lg mx-auto px-4 grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
+        <div
+            v-for="(month, idx) in chineseMonths"
+            :key="month"
+            :class="['rounded-2xl border bg-gradient-to-br p-4 shadow-sm', monthColors[idx]]"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl font-bold text-gray-700 dark:text-gray-200">{{ month }}月</span>
+            <span
+                v-if="tautungCurrentData[month]?.note"
+                class="text-xs bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-300 px-2 py-0.5 rounded-full border border-red-200 dark:border-red-700"
+            >{{ tautungCurrentData[month].note }}</span>
+          </div>
+          <ul v-if="tautungCurrentData[month]?.activities?.length" class="space-y-1.5">
+            <li
+                v-for="(act, i) in tautungCurrentData[month].activities"
+                :key="i"
+                class="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300"
+            >
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 flex-none"></span>
+              <span>{{ act }}</span>
+            </li>
+          </ul>
+          <p v-else class="text-sm text-gray-400 dark:text-gray-500 italic">（待確認）</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         花蓮支聯會 Tab
+    ══════════════════════════════════════ -->
+    <div v-if="activeTab === 'hualien'">
+      <!-- 年份 -->
+      <div class="flex flex-wrap justify-center gap-2 mb-5 px-4">
+        <button
+            v-for="year in hualienYears"
+            :key="year"
+            @click="hualienYear = year; selectedMonth = null"
+            :class="[
+            'px-4 py-1.5 rounded-full text-sm font-semibold border transition-all',
+            hualienYear === year
+              ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+              : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400',
+          ]"
+        >{{ year }}</button>
+      </div>
+
+      <div class="max-w-screen-xl mx-auto px-4">
+        <!-- 月份快速選 -->
+        <div class="flex flex-wrap gap-2 mb-5 justify-center">
+          <button
+              v-for="(m, idx) in MONTHS_LABEL"
+              :key="m"
+              @click="selectedMonth = selectedMonth === idx ? null : idx"
+              :class="[
+              'px-3 py-1 rounded-full text-xs font-medium border transition-all',
+              selectedMonth === idx
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400',
+            ]"
+          >{{ m }}</button>
+        </div>
+
+        <!-- 月份面板 -->
+        <div
+            v-if="selectedMonth !== null"
+            class="mb-5 rounded-2xl border border-blue-200 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 p-5"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-blue-700 dark:text-blue-300">
+              {{ hualienYear }} 年 {{ MONTHS_LABEL[selectedMonth] }}
+            </h2>
+            <button @click="selectedMonth = null" class="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">✕ 關閉</button>
+          </div>
+          <div v-if="monthCatItems.length" class="space-y-2">
+            <div v-for="item in monthCatItems" :key="item.cat" class="flex gap-3 items-start">
+              <span :class="['flex-none text-xs px-2 py-0.5 rounded-full font-medium mt-0.5', catColor(item.cat)]">{{ item.cat }}</span>
+              <span class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">{{ item.text }}</span>
+            </div>
+          </div>
+          <p v-else class="text-sm text-gray-400 italic">本月無資料</p>
+        </div>
+
+        <!-- 表格 -->
+        <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+          <table class="w-full text-xs min-w-[900px]">
+            <thead>
+            <tr class="bg-gray-100 dark:bg-gray-800">
+              <th class="sticky left-0 bg-gray-100 dark:bg-gray-800 px-3 py-2 text-left font-semibold text-gray-600 dark:text-gray-300 w-28 z-10">類別</th>
+              <th
+                  v-for="(m, idx) in MONTHS_LABEL"
+                  :key="m"
+                  @click="selectedMonth = selectedMonth === idx ? null : idx"
+                  :class="[
+                    'px-2 py-2 text-center font-semibold cursor-pointer transition-colors w-[7%]',
+                    selectedMonth === idx
+                      ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
+                  ]"
+              >{{ m }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                v-for="(cat, rowIdx) in hualienCategories"
+                :key="cat"
+                :class="rowIdx % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800/50'"
+            >
+              <td
+                  class="sticky left-0 px-3 py-2 z-10"
+                  :class="rowIdx % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800/50'"
+              >
+                <span :class="['inline-block text-xs px-1.5 py-0.5 rounded-full font-medium leading-snug', catColor(cat)]">{{ cat }}</span>
+              </td>
+              <td
+                  v-for="(m, mIdx) in MONTHS_LABEL"
+                  :key="m"
+                  :class="[
+                    'px-2 py-2 align-top text-gray-700 dark:text-gray-300 whitespace-pre-line leading-snug',
+                    selectedMonth === mIdx ? 'bg-blue-50 dark:bg-blue-900/20' : '',
+                  ]"
+              >{{ (hualienRawData[hualienYear]?.[cat]?.[mIdx] ?? '').trim() }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 </file>
@@ -3119,12 +4317,23 @@ export const useHtmlPageStore = defineStore('html_page', () => {
     await refreshPages()
   }
 
+  const update = async (slug, title, file) => {
+    const formData = new FormData()
+    formData.append('title', title)
+    if (file) formData.append('file', file)
+    await apiFetch(`mormon/html-page/update/${slug}`, {
+      method: 'POST',
+      body: formData,
+    })
+    await refreshPages()
+  }
+
   const remove = async (slug) => {
     await apiFetch(`mormon/html-page/remove/${slug}`, { method: 'DELETE' })
     await refreshPages()
   }
 
-  return { data, refreshPages, upload, remove }
+  return { data, refreshPages, upload, update, remove }
 })
 </file>
 
@@ -3271,6 +4480,34 @@ export const getCurrentTime = () => {
 {
   "framework": "nuxtjs"
 }
+</file>
+
+<file path=".gitignore">
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+repomix-output.xml
 </file>
 
 <file path="components/Lexical.vue">
@@ -3774,6 +5011,340 @@ const buildHualienPath = (year: string, day: string, type: 'photo' | 'video') =>
     </div>
   </div>
 </template>
+</file>
+
+<file path="pages/admin/html/list.vue">
+<script setup lang="js">
+import { useHtmlPageStore } from '~/stores/html_page'
+
+definePageMeta({ layout: 'admin' })
+
+const htmlPageStore = useHtmlPageStore()
+const loading = ref(false)
+const saving  = ref(false)
+const toast   = reactive({ show: false, message: '', error: false })
+const modal    = reactive({ show: false, mode: 'add' }) // mode: 'add' | 'edit'
+const showDeleteConfirm = ref(false)
+const deleteTarget = reactive({ slug: '', title: '' })
+
+const form = reactive({
+  slug:  '',
+  title: '',
+  file:  null,
+})
+const fileInputRef = ref(null)
+const fileName = ref('')
+
+const showToast = (msg, error = false) => {
+  toast.message = msg
+  toast.error   = error
+  toast.show    = true
+  setTimeout(() => toast.show = false, 2500)
+}
+
+onMounted(async () => {
+  loading.value = true
+  await htmlPageStore.refreshPages()
+  loading.value = false
+})
+
+const refresh = async () => {
+  loading.value = true
+  await htmlPageStore.refreshPages()
+  loading.value = false
+}
+
+const openAdd = () => {
+  modal.mode     = 'add'
+  form.slug      = ''
+  form.title     = ''
+  form.file      = null
+  fileName.value = ''
+  modal.show     = true
+}
+
+const openEdit = (page) => {
+  modal.mode     = 'edit'
+  form.slug      = page.slug
+  form.title     = page.title
+  form.file      = null
+  fileName.value = ''
+  modal.show     = true
+}
+
+const onFileChange = (e) => {
+  const f = e.target.files[0]
+  if (!f) return
+  form.file = f
+  fileName.value = f.name
+  // 新增模式才自動填入 slug
+  if (modal.mode === 'add' && !form.slug) {
+    form.slug = f.name.replace(/\.html?$/i, '').replace(/\s+/g, '-').toLowerCase()
+  }
+}
+
+const save = async () => {
+  if (!form.title.trim()) { showToast('請填寫標題', true); return }
+
+  if (modal.mode === 'add') {
+    if (!form.slug.trim())   { showToast('請填寫網址代稱 (slug)', true); return }
+    if (!form.file)          { showToast('請選擇 HTML 檔案', true); return }
+    if (!/^[a-z0-9\-_]+$/i.test(form.slug)) {
+      showToast('網址代稱只能使用英文、數字、橫線', true)
+      return
+    }
+    saving.value = true
+    try {
+      await htmlPageStore.upload(form.slug.trim(), form.title.trim(), form.file)
+      showToast('上傳成功')
+      modal.show = false
+    } catch {
+      showToast('上傳失敗', true)
+    } finally {
+      saving.value = false
+    }
+  } else {
+    // 編輯模式
+    saving.value = true
+    try {
+      await htmlPageStore.update(form.slug, form.title.trim(), form.file)
+      showToast('儲存成功')
+      modal.show = false
+    } catch {
+      showToast('儲存失敗', true)
+    } finally {
+      saving.value = false
+    }
+  }
+}
+
+const confirmDelete = (page) => {
+  deleteTarget.slug  = page.slug
+  deleteTarget.title = page.title
+  showDeleteConfirm.value = true
+}
+
+const doDelete = async () => {
+  await htmlPageStore.remove(deleteTarget.slug)
+  showDeleteConfirm.value = false
+  showToast('已刪除')
+}
+
+const copyUrl = (slug) => {
+  const url = `${window.location.origin}/html/${slug}`
+  navigator.clipboard.writeText(url)
+  showToast('網址已複製')
+}
+</script>
+
+<template>
+  <div class="dark:bg-black bg-gray-50 min-h-screen container-top">
+    <div class="max-w-3xl mx-auto px-4 py-5">
+
+      <!-- 工具列 -->
+      <div class="flex items-center justify-between mb-5">
+        <p class="text-black dark:text-white text-2xl sm:text-4xl font-bold">HTML 頁面管理</p>
+        <div class="flex gap-2">
+          <button @click="refresh"
+                  class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            刷新
+          </button>
+          <button @click="openAdd"
+                  class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            上傳 HTML
+          </button>
+        </div>
+      </div>
+
+      <!-- 讀取中 -->
+      <div v-if="loading" class="flex items-center justify-center py-20 gap-2 text-stone-400">
+        <div class="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        載入中…
+      </div>
+
+      <!-- 無資料 -->
+      <div v-else-if="htmlPageStore.data.page_list.length === 0"
+           class="text-center py-16 text-stone-400 text-sm">
+        目前沒有頁面，點「上傳 HTML」開始新增
+      </div>
+
+      <!-- 列表 -->
+      <div v-else
+           class="bg-white dark:bg-zinc-900 rounded-2xl border border-stone-200 dark:border-stone-700 shadow-sm overflow-hidden">
+        <div v-for="(page, idx) in htmlPageStore.data.page_list" :key="page.slug">
+          <div class="flex items-center gap-3 px-4 py-3">
+            <!-- 圖示 -->
+            <div class="w-9 h-9 flex-none flex items-center justify-center text-2xl">📄</div>
+            <!-- 文字 -->
+            <div class="flex-1 min-w-0">
+              <p class="font-semibold text-sm sm:text-base text-stone-800 dark:text-stone-100 truncate">
+                {{ page.title }}
+              </p>
+              <p class="text-xs text-stone-400 truncate mt-0.5 font-mono">/html/{{ page.slug }}</p>
+            </div>
+            <!-- 操作 -->
+            <div class="flex gap-2 flex-none">
+              <a :href="`/html/${page.slug}`" target="_blank"
+                 class="px-2.5 py-1 text-xs rounded-lg border border-green-200 dark:border-green-800
+                        text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
+                查看
+              </a>
+              <button @click="copyUrl(page.slug)"
+                      class="px-2.5 py-1 text-xs rounded-lg border border-gray-200 dark:border-gray-700
+                             text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                複製網址
+              </button>
+              <button @click="openEdit(page)"
+                      class="px-2.5 py-1 text-xs rounded-lg border border-blue-200 dark:border-blue-800
+                             text-blue-500 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                編輯
+              </button>
+              <button @click="confirmDelete(page)"
+                      class="px-2.5 py-1 text-xs rounded-lg border border-red-200 dark:border-red-800
+                             text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+                刪除
+              </button>
+            </div>
+          </div>
+          <div v-if="idx < htmlPageStore.data.page_list.length - 1"
+               class="border-b border-dashed border-stone-100 dark:border-zinc-800 mx-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ 新增 / 編輯 Modal ════════ -->
+    <div v-if="modal.show"
+         class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-start sm:items-center justify-center z-50 p-0 sm:p-4">
+      <div class="bg-white dark:bg-zinc-900 rounded-b-3xl sm:rounded-2xl shadow-xl w-full sm:max-w-lg max-h-screen sm:max-h-[90vh] overflow-y-auto">
+
+        <div class="px-5 py-4 border-b border-stone-100 dark:border-stone-700 flex items-center justify-between sticky top-0 bg-white dark:bg-zinc-900 z-10">
+          <h3 class="font-bold text-base text-stone-800 dark:text-stone-100">
+            {{ modal.mode === 'edit' ? '編輯 HTML 頁面' : '上傳 HTML 頁面' }}
+          </h3>
+          <button @click="modal.show = false" class="text-stone-400 hover:text-stone-600 p-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="px-5 py-4 space-y-4">
+
+          <!-- 標題 -->
+          <div>
+            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-1">頁面標題 *</label>
+            <input v-model="form.title" placeholder="顯示用的標題"
+                   class="w-full px-3 py-2 text-sm rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-800 text-stone-800 dark:text-stone-100 outline-none focus:ring-2 focus:ring-blue-400"/>
+          </div>
+
+          <!-- Slug（編輯模式唯讀） -->
+          <div>
+            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-1">
+              網址代稱 (slug)
+              <span v-if="modal.mode === 'add'" class="font-normal text-stone-400">* — 只能英文、數字、橫線</span>
+              <span v-else class="font-normal text-stone-400">— 建立後不可更改</span>
+            </label>
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs text-stone-400 font-mono whitespace-nowrap">/html/</span>
+              <input v-model="form.slug" placeholder="example-page"
+                     :disabled="modal.mode === 'edit'"
+                     class="flex-1 px-3 py-2 text-sm rounded-xl border font-mono outline-none transition-colors"
+                     :class="modal.mode === 'edit'
+                       ? 'border-stone-100 dark:border-stone-700 bg-stone-50 dark:bg-zinc-800/50 text-stone-400 dark:text-stone-500 cursor-not-allowed'
+                       : 'border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-800 text-stone-800 dark:text-stone-100 focus:ring-2 focus:ring-blue-400'"/>
+            </div>
+          </div>
+
+          <!-- 檔案 -->
+          <div>
+            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-2">
+              HTML 檔案
+              <span v-if="modal.mode === 'add'" class="font-normal text-stone-400">*</span>
+              <span v-else class="font-normal text-stone-400">— 不選則保留原有內容</span>
+            </label>
+            <label
+                class="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed rounded-xl cursor-pointer transition-colors"
+                :class="form.file
+                  ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                  : 'border-stone-300 dark:border-stone-600 bg-stone-50 dark:bg-zinc-800 hover:bg-stone-100 dark:hover:bg-zinc-700'">
+              <div class="flex flex-col items-center gap-1 text-center px-4">
+                <svg class="w-7 h-7" :class="form.file ? 'text-blue-500' : 'text-stone-400'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0119 9.414V19a2 2 0 01-2 2z"/>
+                </svg>
+                <p v-if="!form.file" class="text-xs text-stone-500 dark:text-stone-400">
+                  點擊選擇 <span class="font-semibold text-blue-600">.html</span> 檔案
+                </p>
+                <p v-else class="text-xs font-semibold text-blue-600 truncate max-w-xs">{{ fileName }}</p>
+              </div>
+              <input ref="fileInputRef" type="file" accept=".html,.htm" class="hidden" @change="onFileChange"/>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="px-5 py-4 border-t border-stone-100 dark:border-stone-700 flex gap-2 justify-end sticky bottom-0 bg-white dark:bg-zinc-900">
+          <button @click="modal.show = false"
+                  class="px-4 py-2 text-sm bg-stone-100 dark:bg-zinc-800 text-stone-600 dark:text-stone-300 rounded-xl hover:bg-stone-200 transition-colors">
+            取消
+          </button>
+          <button @click="save" :disabled="saving"
+                  class="px-4 py-2 text-sm bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center gap-1.5">
+            <div v-if="saving" class="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            {{ modal.mode === 'edit' ? '儲存' : '上傳' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 刪除確認 -->
+    <div v-if="showDeleteConfirm"
+         class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
+        <p class="text-stone-500 dark:text-stone-400 mb-1">你確定要刪除</p>
+        <p class="text-xl font-black text-red-500 my-2">{{ deleteTarget.title }}</p>
+        <p class="text-stone-500 dark:text-stone-400 mb-6">嗎？</p>
+        <div class="flex justify-center gap-3">
+          <button @click="doDelete"
+                  class="px-5 py-2 text-sm font-medium bg-red-600 hover:bg-red-700 text-white rounded-xl transition-colors">
+            確定刪除
+          </button>
+          <button @click="showDeleteConfirm = false"
+                  class="px-5 py-2 text-sm font-medium bg-stone-100 dark:bg-zinc-800 text-stone-600 dark:text-stone-300 rounded-xl hover:bg-stone-200 transition-colors">
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <Transition name="fade">
+      <div v-if="toast.show"
+           :class="toast.error ? 'bg-red-700' : 'bg-stone-800'"
+           class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 text-white text-sm px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 z-50">
+        <svg class="w-4 h-4 flex-shrink-0" :class="toast.error ? 'text-red-200' : 'text-green-400'" fill="none"
+             stroke="currentColor" viewBox="0 0 24 24">
+          <path v-if="!toast.error" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+        {{ toast.message }}
+      </div>
+    </Transition>
+  </div>
+</template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+</style>
 </file>
 
 <file path="pages/admin/photo/list.vue">
@@ -4552,117 +6123,6 @@ const beliefs = [
 </template>
 </file>
 
-<file path="pages/front/activity/ActivityIndex.vue">
-<script setup lang="ts">
-definePageMeta({ layout: 'default' })
-
-import { useActiveStore } from '~/stores/active'
-
-const activeStore = useActiveStore()
-const loading = ref(true)
-const selectedTag = ref('')
-
-function stripHtml(html: string) {
-  if (!html) return ''
-  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-}
-
-const filteredList = computed(() => {
-  const list = activeStore.normalList
-  if (!selectedTag.value) return list
-  return list.filter(a => Array.isArray(a.tags) && a.tags.includes(selectedTag.value))
-})
-
-onMounted(async () => {
-  await activeStore.refreshActive()
-  loading.value = false
-})
-</script>
-
-<template>
-  <div class="max-w-4xl mx-auto px-4 py-8">
-
-    <!-- 標題 + 標籤篩選 -->
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">活動</h1>
-      <div class="w-12 h-1 bg-blue-600 rounded mb-5"></div>
-
-      <!-- 標籤篩選列 -->
-      <div v-if="activeStore.frontCategoryTags.length" class="flex flex-wrap gap-2">
-        <button
-            @click="selectedTag = ''"
-            :class="selectedTag === ''
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'"
-            class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors">
-          全部
-        </button>
-        <button
-            v-for="tag in activeStore.frontCategoryTags"
-            :key="tag"
-            @click="selectedTag = selectedTag === tag ? '' : tag"
-            :class="selectedTag === tag
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'"
-            class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors">
-          {{ tag }}
-        </button>
-      </div>
-    </div>
-
-    <!-- 讀取中 -->
-    <div v-if="loading" class="flex justify-center py-20">
-      <div class="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-    </div>
-
-    <!-- 無資料 -->
-    <div v-else-if="filteredList.length === 0"
-         class="text-center py-20 text-gray-400 dark:text-gray-500">
-      {{ selectedTag ? `沒有「${selectedTag}」分類的活動` : '目前沒有活動' }}
-    </div>
-
-    <!-- 卡片格狀 -->
-    <div v-else class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))">
-      <NuxtLink
-          v-for="active in filteredList"
-          :key="`${active.date}-${active.time}`"
-          :to="`/front/activity/detail?date=${active.date}&time=${active.time}`"
-          class="group bg-white dark:bg-gray-800/60 rounded-2xl border border-gray-200 dark:border-gray-700
-               hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col">
-
-        <!-- 封面圖 -->
-        <div class="w-full aspect-video bg-gray-100 dark:bg-gray-700 overflow-hidden flex-none">
-          <img v-if="active.images && active.images.length > 0"
-               :src="active.images[0]" :alt="active.name"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-          <div v-else class="w-full h-full flex items-center justify-center text-4xl">🎉</div>
-        </div>
-
-        <!-- 內容 -->
-        <div class="p-4 flex flex-col flex-1">
-          <p class="text-xs text-gray-400 dark:text-gray-500 mb-1">{{ active.date }}</p>
-          <p class="font-bold text-base text-gray-900 dark:text-white leading-snug mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-            {{ active.name }}
-          </p>
-          <p v-if="active.info" class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 flex-1">
-            {{ stripHtml(active.info) }}
-          </p>
-
-          <!-- 標籤 -->
-          <div v-if="active.tags && active.tags.length" class="flex flex-wrap gap-1.5 mt-3">
-            <span v-for="tag in active.tags" :key="tag"
-                  class="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
-              {{ tag }}
-            </span>
-          </div>
-        </div>
-      </NuxtLink>
-    </div>
-
-  </div>
-</template>
-</file>
-
 <file path="pages/front/activity/detail.vue">
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
@@ -4944,147 +6404,6 @@ export const useDarkModeStore = defineStore('dark_mode', () => {
 
   return { data, init, change_dark_mode }
 })
-</file>
-
-<file path="components/FrontNavBar.vue">
-<script setup lang="ts">
-const props = defineProps<{ isDark: boolean }>()
-const emit = defineEmits(['toggle-dark'])
-
-const route = useRoute()
-const mobileMenuOpen = ref(false)
-const isActive = (path: string) => route.path.startsWith(path)
-
-watch(() => route.path, () => { mobileMenuOpen.value = false })
-
-watch(() => props.isDark, (val) => {
-  if (import.meta.client) {
-    document.documentElement.classList.toggle('dark', val)
-  }
-})
-
-onMounted(() => {
-  if (props.isDark) document.documentElement.classList.add('dark')
-  else document.documentElement.classList.remove('dark')
-})
-
-const navItems = [
-  { to: '/front/activity/ActivityIndex', label: '活動' },
-  { to: '/front/meeting', label: '聚會' },
-  // { to: '/front/english', label: '英文會話' },
-  { to: '/front/about', label: '認識我們' },
-  { to: '/front/history', label: '支會歷史' },
-  { to: '/front/link', label: '連結' },
-]
-</script>
-
-<template>
-  <nav :class="isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'"
-       class="fixed w-full z-40 border-b transition-colors">
-    <div class="max-w-screen-xl flex items-center justify-between mx-auto px-4 py-3">
-
-      <!-- Logo -->
-      <NuxtLink to="/" class="flex items-center gap-2 flex-none">
-        <svg class="h-8 w-8 flex-none" viewBox="-160 -160 320 320" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <clipPath id="hex-nav">
-              <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80"/>
-            </clipPath>
-          </defs>
-          <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80" fill="#0A2744"/>
-          <rect x="-139" y="-160" width="278" height="182" fill="#1255A0" clip-path="url(#hex-nav)"/>
-          <circle cx="0" cy="-22" r="36" fill="#FFB830" clip-path="url(#hex-nav)"/>
-          <circle cx="0" cy="-22" r="24" fill="#FFEC6E" clip-path="url(#hex-nav)"/>
-          <circle cx="0" cy="-22" r="14" fill="#FFFDE0" clip-path="url(#hex-nav)"/>
-          <polygon points="-139,28 -100,-30 -68,10 -32,-52 0,-10 32,-44 68,8 100,-20 139,28 139,160 -139,160" fill="#1B4D1B" clip-path="url(#hex-nav)"/>
-          <path d="M-139,62 Q-104,46 -70,62 Q-35,78 0,62 Q35,46 70,62 Q104,78 139,62 L139,160 L-139,160 Z" fill="#1255A0" clip-path="url(#hex-nav)"/>
-          <path d="M-139,100 Q-104,86 -70,100 Q-35,114 0,100 Q35,86 70,100 Q104,114 139,100 L139,160 L-139,160 Z" fill="#072560" clip-path="url(#hex-nav)"/>
-          <rect x="-10" y="-60" width="20" height="66" fill="#FFFFFF" rx="4"/>
-          <rect x="-36" y="-38" width="72" height="20" fill="#FFFFFF" rx="4"/>
-          <polygon points="0,128 14,114 0,100 -14,114" fill="#FFD700" clip-path="url(#hex-nav)"/>
-          <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80" fill="none" stroke="#FFB830" stroke-width="5"/>
-        </svg>
-        <span :class="isDark ? 'text-white' : 'text-gray-900'"
-              class="text-xl font-bold whitespace-nowrap">台東一支會</span>
-      </NuxtLink>
-
-      <!-- 桌機導覽 -->
-      <ul class="hidden md:flex items-center gap-1">
-        <li v-for="item in navItems" :key="item.to">
-          <NuxtLink
-              :to="item.to"
-              :class="[
-              isActive(item.to)
-                ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
-                : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
-            ]"
-              class="block px-3 py-2 rounded-lg text-sm font-medium transition-colors">
-            {{ item.label }}
-          </NuxtLink>
-        </li>
-
-        <!-- 暗色切換 -->
-        <li>
-          <button
-              @click="emit('toggle-dark')"
-              :class="isDark ? 'text-yellow-400 hover:bg-gray-700' : 'text-gray-500 hover:bg-gray-100'"
-              class="p-2 rounded-lg transition-colors">
-            <svg v-if="isDark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
-            </svg>
-            <svg v-else class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-            </svg>
-          </button>
-        </li>
-      </ul>
-
-      <!-- 手機右側：暗色 + 漢堡 -->
-      <div class="flex items-center gap-2 md:hidden">
-        <button
-            @click="emit('toggle-dark')"
-            :class="isDark ? 'text-yellow-400 hover:bg-gray-700' : 'text-gray-500 hover:bg-gray-100'"
-            class="p-2 rounded-lg transition-colors">
-          <svg v-if="isDark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
-          </svg>
-          <svg v-else class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-          </svg>
-        </button>
-        <button
-            @click="mobileMenuOpen = !mobileMenuOpen"
-            :class="isDark ? 'text-gray-400 hover:bg-gray-700' : 'text-gray-500 hover:bg-gray-100'"
-            class="p-2 rounded-lg transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- 手機選單 -->
-    <div v-if="mobileMenuOpen"
-         :class="isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'"
-         class="md:hidden border-t px-4 pb-3">
-      <ul class="flex flex-col gap-1 pt-2">
-        <li v-for="item in navItems" :key="item.to">
-          <NuxtLink
-              :to="item.to"
-              :class="[
-              isActive(item.to)
-                ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
-                : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
-            ]"
-              class="block px-4 py-2.5 rounded-lg text-base font-medium transition-colors">
-            {{ item.label }}
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</template>
 </file>
 
 <file path="components/InsertPicture.vue">
@@ -6674,6 +7993,128 @@ const props = defineProps({
 </style>
 </file>
 
+<file path="pages/front/activity/ActivityIndex.vue">
+<script setup lang="ts">
+definePageMeta({ layout: 'default' })
+
+import { useActiveStore } from '~/stores/active'
+
+const activeStore = useActiveStore()
+const loading = ref(true)
+const selectedTag = ref('')
+
+function stripHtml(html: string) {
+  if (!html) return ''
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+const allTags = computed(() => {
+  const tagSet = new Set<string>()
+  activeStore.normalList.forEach(a => {
+    if (Array.isArray(a.tags)) {
+      a.tags.forEach(t => tagSet.add(t))
+    }
+  })
+
+  return Array.from(tagSet)
+})
+
+const filteredList = computed(() => {
+  const list = activeStore.normalList
+  if (!selectedTag.value) return list
+  return list.filter(a => Array.isArray(a.tags) && a.tags.includes(selectedTag.value))
+})
+
+onMounted(async () => {
+  await activeStore.refreshActive()
+  loading.value = false
+})
+</script>
+
+<template>
+  <div class="max-w-4xl mx-auto px-4 py-8">
+
+    <!-- 標題 + 標籤篩選 -->
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">活動</h1>
+      <div class="w-12 h-1 bg-blue-600 rounded mb-5"></div>
+
+      <!-- 標籤篩選列 -->
+      <div v-if="allTags.length" class="flex flex-wrap gap-2">
+        <button
+            @click="selectedTag = ''"
+            :class="selectedTag === ''
+            ? 'bg-blue-600 text-white'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'"
+            class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors">
+          全部
+        </button>
+        <button
+            v-for="tag in allTags"
+            :key="tag"
+            @click="selectedTag = selectedTag === tag ? '' : tag"
+            :class="selectedTag === tag
+            ? 'bg-blue-600 text-white'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'"
+            class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors">
+          {{ tag }}
+        </button>
+      </div>
+    </div>
+
+    <!-- 讀取中 -->
+    <div v-if="loading" class="flex justify-center py-20">
+      <div class="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <!-- 無資料 -->
+    <div v-else-if="filteredList.length === 0"
+         class="text-center py-20 text-gray-400 dark:text-gray-500">
+      {{ selectedTag ? `沒有「${selectedTag}」分類的活動` : '目前沒有活動' }}
+    </div>
+
+    <!-- 卡片格狀 -->
+    <div v-else class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))">
+      <NuxtLink
+          v-for="active in filteredList"
+          :key="`${active.date}-${active.time}`"
+          :to="`/front/activity/detail?date=${active.date}&time=${active.time}`"
+          class="group bg-white dark:bg-gray-800/60 rounded-2xl border border-gray-200 dark:border-gray-700
+               hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col">
+
+        <!-- 封面圖 -->
+        <div class="w-full aspect-video bg-gray-100 dark:bg-gray-700 overflow-hidden flex-none">
+          <img v-if="active.images && active.images.length > 0"
+               :src="active.images[0]" :alt="active.name"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <div v-else class="w-full h-full flex items-center justify-center text-4xl">🎉</div>
+        </div>
+
+        <!-- 內容 -->
+        <div class="p-4 flex flex-col flex-1">
+          <p class="text-xs text-gray-400 dark:text-gray-500 mb-1">{{ active.date }}</p>
+          <p class="font-bold text-base text-gray-900 dark:text-white leading-snug mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            {{ active.name }}
+          </p>
+          <p v-if="active.info" class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 flex-1">
+            {{ stripHtml(active.info) }}
+          </p>
+
+          <!-- 標籤 -->
+          <div v-if="active.tags && active.tags.length" class="flex flex-wrap gap-1.5 mt-3">
+            <span v-for="tag in active.tags" :key="tag"
+                  class="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+              {{ tag }}
+            </span>
+          </div>
+        </div>
+      </NuxtLink>
+    </div>
+
+  </div>
+</template>
+</file>
+
 <file path="pages/html/[slug].vue">
 <script setup lang="js">
 import { apiFetch } from '~/utils/api'
@@ -6874,6 +8315,148 @@ export default {
     require('flowbite/plugin')
   ],
 }
+</file>
+
+<file path="components/FrontNavBar.vue">
+<script setup lang="ts">
+const props = defineProps<{ isDark: boolean }>()
+const emit = defineEmits(['toggle-dark'])
+
+const route = useRoute()
+const mobileMenuOpen = ref(false)
+const isActive = (path: string) => route.path.startsWith(path)
+
+watch(() => route.path, () => { mobileMenuOpen.value = false })
+
+watch(() => props.isDark, (val) => {
+  if (import.meta.client) {
+    document.documentElement.classList.toggle('dark', val)
+  }
+})
+
+onMounted(() => {
+  if (props.isDark) document.documentElement.classList.add('dark')
+  else document.documentElement.classList.remove('dark')
+})
+
+const navItems = [
+  { to: '/front/activity/ActivityIndex', label: '活動' },
+  { to: '/front/calendar', label: '行事曆' },
+  { to: '/front/meeting', label: '聚會' },
+  // { to: '/front/english', label: '英文會話' },
+  { to: '/front/about', label: '認識我們' },
+  { to: '/front/history', label: '支會歷史' },
+  { to: '/front/link', label: '連結' },
+]
+</script>
+
+<template>
+  <nav :class="isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'"
+       class="fixed w-full z-40 border-b transition-colors">
+    <div class="max-w-screen-xl flex items-center justify-between mx-auto px-4 py-3">
+
+      <!-- Logo -->
+      <NuxtLink to="/" class="flex items-center gap-2 flex-none">
+        <svg class="h-8 w-8 flex-none" viewBox="-160 -160 320 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="hex-nav">
+              <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80"/>
+            </clipPath>
+          </defs>
+          <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80" fill="#0A2744"/>
+          <rect x="-139" y="-160" width="278" height="182" fill="#1255A0" clip-path="url(#hex-nav)"/>
+          <circle cx="0" cy="-22" r="36" fill="#FFB830" clip-path="url(#hex-nav)"/>
+          <circle cx="0" cy="-22" r="24" fill="#FFEC6E" clip-path="url(#hex-nav)"/>
+          <circle cx="0" cy="-22" r="14" fill="#FFFDE0" clip-path="url(#hex-nav)"/>
+          <polygon points="-139,28 -100,-30 -68,10 -32,-52 0,-10 32,-44 68,8 100,-20 139,28 139,160 -139,160" fill="#1B4D1B" clip-path="url(#hex-nav)"/>
+          <path d="M-139,62 Q-104,46 -70,62 Q-35,78 0,62 Q35,46 70,62 Q104,78 139,62 L139,160 L-139,160 Z" fill="#1255A0" clip-path="url(#hex-nav)"/>
+          <path d="M-139,100 Q-104,86 -70,100 Q-35,114 0,100 Q35,86 70,100 Q104,114 139,100 L139,160 L-139,160 Z" fill="#072560" clip-path="url(#hex-nav)"/>
+          <rect x="-10" y="-60" width="20" height="66" fill="#FFFFFF" rx="4"/>
+          <rect x="-36" y="-38" width="72" height="20" fill="#FFFFFF" rx="4"/>
+          <polygon points="0,128 14,114 0,100 -14,114" fill="#FFD700" clip-path="url(#hex-nav)"/>
+          <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80" fill="none" stroke="#FFB830" stroke-width="5"/>
+        </svg>
+        <span :class="isDark ? 'text-white' : 'text-gray-900'"
+              class="text-2xl font-bold whitespace-nowrap">台東一支會</span>
+      </NuxtLink>
+
+      <!-- 桌機導覽 -->
+      <ul class="hidden md:flex items-center gap-1">
+        <li v-for="item in navItems" :key="item.to">
+          <NuxtLink
+              :to="item.to"
+              :class="[
+              isActive(item.to)
+                ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
+                : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
+            ]"
+              class="block px-3 py-2 rounded-lg text-lg font-medium transition-colors">
+            {{ item.label }}
+          </NuxtLink>
+        </li>
+
+        <!-- 暗色切換 -->
+        <li>
+          <button
+              @click="emit('toggle-dark')"
+              :class="isDark ? 'text-yellow-400 hover:bg-gray-700' : 'text-gray-500 hover:bg-gray-100'"
+              class="p-2 rounded-lg transition-colors">
+            <svg v-if="isDark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+            <svg v-else class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 手機右側：暗色 + 漢堡 -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button
+            @click="emit('toggle-dark')"
+            :class="isDark ? 'text-yellow-400 hover:bg-gray-700' : 'text-gray-500 hover:bg-gray-100'"
+            class="p-2 rounded-lg transition-colors">
+          <svg v-if="isDark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+          </svg>
+          <svg v-else class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+          </svg>
+        </button>
+        <button
+            @click="mobileMenuOpen = !mobileMenuOpen"
+            :class="isDark ? 'text-gray-400 hover:bg-gray-700' : 'text-gray-500 hover:bg-gray-100'"
+            class="p-2 rounded-lg transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 手機選單 -->
+    <div v-if="mobileMenuOpen"
+         :class="isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'"
+         class="md:hidden border-t px-4 pb-3">
+      <ul class="flex flex-col gap-1 pt-2">
+        <li v-for="item in navItems" :key="item.to">
+          <NuxtLink
+              :to="item.to"
+              :class="[
+              isActive(item.to)
+                ? (isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-50')
+                : (isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100')
+            ]"
+              class="block px-4 py-2.5 rounded-lg text-lg font-medium transition-colors">
+            {{ item.label }}
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
 </file>
 
 <file path="pages/admin/activity/edit.vue">
