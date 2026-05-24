@@ -9,22 +9,34 @@ const customer = computed(() => customerStore.data.customer)
 
 const route = useRoute()
 const mobileMenuOpen = ref(false)
-const showDropdown = ref(false)
-const dropdownRef = ref<HTMLElement | null>(null)
+
+// 桌機頭像下拉
+const desktopDropdownOpen = ref(false)
+const desktopDropdownRef = ref<HTMLElement | null>(null)
+
+// 手機頭像下拉
+const mobileAvatarOpen = ref(false)
 
 const isActive = (path: string) => route.path.startsWith(path)
 
 watch(() => route.path, () => {
   mobileMenuOpen.value = false
-  showDropdown.value = false
+  desktopDropdownOpen.value = false
+  mobileAvatarOpen.value = false
 })
 
+const onClickOutside = (e: MouseEvent) => {
+  if (desktopDropdownRef.value && !desktopDropdownRef.value.contains(e.target as Node)) {
+    desktopDropdownOpen.value = false
+  }
+}
+
 onMounted(() => {
-  document.addEventListener('click', (e) => {
-    if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
-      showDropdown.value = false
-    }
-  })
+  document.addEventListener('click', onClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', onClickOutside)
 })
 
 const handleLogout = async () => {
@@ -50,7 +62,7 @@ const navItems = [
     <div class="flex flex-row items-center px-4 py-3 gap-4">
 
       <!-- Logo -->
-      <NuxtLink to="/" class="flex items-center gap-2 flex-none">
+      <NuxtLink to="/staff/home" class="flex items-center gap-2 flex-none">
         <img src="/assets/icon/hat.png" class="h-8" alt="Logo" />
         <span class="text-xl font-semibold whitespace-nowrap dark:text-white">台東一支會</span>
       </NuxtLink>
@@ -79,12 +91,12 @@ const navItems = [
       </ul>
 
       <!-- 桌機頭像下拉 -->
-      <div class="hidden md:block relative flex-none" ref="dropdownRef">
+      <div class="hidden md:block relative flex-none" ref="desktopDropdownRef">
         <button
-            @click.stop="showDropdown = !showDropdown"
+            @click.stop="desktopDropdownOpen = !desktopDropdownOpen"
             class="w-9 h-9 rounded-full overflow-hidden border-2 border-blue-500
                    flex items-center justify-center hover:opacity-80 transition-opacity">
-          <img v-if="customer?.picture" :src="customer.picture" :alt="customer.name"
+          <img v-if="customer?.picture" :src="customer.picture" :alt="customer?.name"
                class="w-full h-full object-cover">
           <span v-else
                 class="w-full h-full flex items-center justify-center bg-blue-600 text-white font-bold text-sm">
@@ -92,50 +104,70 @@ const navItems = [
           </span>
         </button>
 
-        <div v-if="showDropdown"
-             class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200
-                    dark:border-gray-700 rounded-xl shadow-lg py-1 z-50">
-          <!-- 使用者資訊 -->
-          <div class="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
-            <p class="text-sm font-semibold text-gray-800 dark:text-white truncate">
-              {{ customer?.name || '幹部' }}
-            </p>
-            <p class="text-xs text-gray-500 dark:text-gray-400 truncate">
-              {{ customer?.role }}
-            </p>
+        <Transition
+            enter-active-class="transition ease-out duration-150"
+            enter-from-class="opacity-0 scale-95 -translate-y-1"
+            enter-to-class="opacity-100 scale-100 translate-y-0"
+            leave-active-class="transition ease-in duration-100"
+            leave-from-class="opacity-100 scale-100 translate-y-0"
+            leave-to-class="opacity-0 scale-95 -translate-y-1">
+          <div v-if="desktopDropdownOpen"
+               class="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-800 border border-gray-200
+                      dark:border-gray-700 rounded-2xl shadow-xl py-1 z-50 overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-none">
+                <img v-if="customer?.picture" :src="customer.picture" :alt="customer?.name"
+                     class="w-full h-full object-cover">
+                <span v-else
+                      class="w-full h-full flex items-center justify-center bg-blue-600 text-white font-bold text-xs">
+                  {{ customer?.name?.charAt(0)?.toUpperCase() || '幹' }}
+                </span>
+              </div>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800 dark:text-white truncate">{{ customer?.name || '幹部' }}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">{{ customer?.role }}</p>
+              </div>
+            </div>
+            <NuxtLink target="_blank" to="/" @click="desktopDropdownOpen = false"
+                      class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
+                             hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <i class="fa-solid fa-house w-4"></i>查看前台
+            </NuxtLink>
+            <NuxtLink target="_blank" to="/photo/home" @click="desktopDropdownOpen = false"
+                      class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
+                             hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <i class="fa-solid fa-image w-4"></i>查看照片
+            </NuxtLink>
+
+            <div class="border-t border-gray-100 dark:border-gray-700 mt-1 pt-1">
+              <button @click="handleLogout"
+                      class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400
+                             hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                <i class="fa-solid fa-right-from-bracket w-4"></i>登出
+              </button>
+            </div>
           </div>
-          <NuxtLink target="_blank" to="/" @click="showDropdown = false"
-                    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
-                     hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-            <i class="fa-solid fa-house w-4"></i>
-            查看前台
-          </NuxtLink>
-          <NuxtLink target="_blank" to="/photo/home" @click="showDropdown = false"
-                    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
-                     hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-            <i class="fa-solid fa-image w-4"></i>
-            查看照片
-          </NuxtLink>
-          <NuxtLink to="/staff/setting/main" @click="showDropdown = false"
-                    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
-                     hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-            <i class="fa-solid fa-gear w-4"></i>
-            設定
-          </NuxtLink>
-          <button @click="handleLogout"
-                  class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400
-                     hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-            <i class="fa-solid fa-right-from-bracket w-4"></i>
-            登出
-          </button>
-        </div>
+        </Transition>
       </div>
 
-      <!-- 手機右側：漢堡 -->
+      <!-- 手機右側：頭像 + 漢堡 -->
       <div class="flex items-center gap-2 md:hidden ml-auto">
-        <button
-            @click="mobileMenuOpen = !mobileMenuOpen"
-            class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+
+        <!-- 手機頭像按鈕 -->
+        <button @click.stop="mobileAvatarOpen = !mobileAvatarOpen; mobileMenuOpen = false"
+                class="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-500
+                       flex items-center justify-center hover:opacity-80 transition-opacity flex-none">
+          <img v-if="customer?.picture" :src="customer.picture" :alt="customer?.name"
+               class="w-full h-full object-cover">
+          <span v-else
+                class="w-full h-full flex items-center justify-center bg-blue-600 text-white font-bold text-xs">
+            {{ customer?.name?.charAt(0)?.toUpperCase() || '幹' }}
+          </span>
+        </button>
+
+        <!-- 漢堡按鈕 -->
+        <button @click="mobileMenuOpen = !mobileMenuOpen; mobileAvatarOpen = false"
+                class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -144,8 +176,8 @@ const navItems = [
       </div>
     </div>
 
-    <!-- 手機展開選單 -->
-    <div v-if="mobileMenuOpen"
+    <!-- 手機：頁面導覽（漢堡展開） -->
+    <div v-show="mobileMenuOpen"
          class="md:hidden border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 pb-4">
       <ul class="flex flex-col gap-1 pt-3">
         <li v-for="item in navItems" :key="item.to">
@@ -158,46 +190,68 @@ const navItems = [
             {{ item.label }}
           </NuxtLink>
         </li>
+        <li>
+          <button
+              @click="dark_mode.change_dark_mode"
+              class="flex items-center w-full px-4 py-3 rounded-lg text-base font-medium transition-colors
+                     text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+            {{ dark_mode.data.display_name }}
+          </button>
+        </li>
       </ul>
-
-      <div class="border-t border-gray-200 dark:border-gray-700 mt-3 pt-3 flex flex-col gap-1">
-        <!-- 手機使用者資訊 -->
-        <div class="flex items-center gap-3 px-4 py-2">
-          <div class="w-8 h-8 rounded-full overflow-hidden flex-none border-2 border-blue-500">
-            <img v-if="customer?.picture" :src="customer.picture" :alt="customer?.name"
-                 class="w-full h-full object-cover">
-            <span v-else
-                  class="w-full h-full flex items-center justify-center bg-blue-600 text-white font-bold text-xs">
-              {{ customer?.name?.charAt(0)?.toUpperCase() || '幹' }}
-            </span>
-          </div>
-          <div class="min-w-0">
-            <p class="text-sm font-semibold text-gray-800 dark:text-white truncate">{{ customer?.name || '幹部' }}</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400">{{ customer?.role }}</p>
-          </div>
-        </div>
-        <button
-            @click="dark_mode.change_dark_mode"
-            class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200
-                   hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left">
-          {{ dark_mode.data.display_name }}
-        </button>
-        <NuxtLink target="_blank" to="/"
-                  class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200
-                   hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-          查看前台
-        </NuxtLink>
-        <NuxtLink to="/staff/setting/main"
-                  class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200
-                   hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-          設定
-        </NuxtLink>
-        <button @click="handleLogout"
-                class="flex items-center px-4 py-3 rounded-lg text-base font-medium text-red-600 dark:text-red-400
-                   hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left">
-          登出
-        </button>
-      </div>
     </div>
   </nav>
+
+  <!-- 手機：頭像下拉（浮動，nav 外） -->
+  <Transition
+      enter-active-class="transition ease-out duration-150"
+      enter-from-class="opacity-0 scale-95 -translate-y-1"
+      enter-to-class="opacity-100 scale-100 translate-y-0"
+      leave-active-class="transition ease-in duration-100"
+      leave-from-class="opacity-100 scale-100 translate-y-0"
+      leave-to-class="opacity-0 scale-95 -translate-y-1">
+    <div v-if="mobileAvatarOpen"
+         class="md:hidden fixed right-3 top-14 w-60 bg-white dark:bg-gray-800 border border-gray-200
+                dark:border-gray-700 rounded-2xl shadow-xl overflow-hidden z-50">
+      <!-- 使用者資訊 -->
+      <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+        <div class="w-9 h-9 rounded-full overflow-hidden flex-none border-2 border-blue-500">
+          <img v-if="customer?.picture" :src="customer.picture" :alt="customer?.name"
+               class="w-full h-full object-cover">
+          <span v-else
+                class="w-full h-full flex items-center justify-center bg-blue-600 text-white font-bold text-sm">
+            {{ customer?.name?.charAt(0)?.toUpperCase() || '幹' }}
+          </span>
+        </div>
+        <div class="min-w-0">
+          <p class="text-sm font-semibold text-gray-800 dark:text-white truncate">{{ customer?.name || '幹部' }}</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">{{ customer?.role }}</p>
+        </div>
+      </div>
+      <ul class="py-1">
+        <li>
+          <NuxtLink target="_blank" to="/" @click="mobileAvatarOpen = false"
+                    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
+                           hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <i class="fa-solid fa-house w-4"></i>查看前台
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink target="_blank" to="/photo/home" @click="mobileAvatarOpen = false"
+                    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
+                           hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <i class="fa-solid fa-image w-4"></i>查看照片
+          </NuxtLink>
+        </li>
+
+        <li class="border-t border-gray-100 dark:border-gray-700 mt-1 pt-1">
+          <button @click="handleLogout"
+                  class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400
+                         hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <i class="fa-solid fa-right-from-bracket w-4"></i>登出
+          </button>
+        </li>
+      </ul>
+    </div>
+  </Transition>
 </template>

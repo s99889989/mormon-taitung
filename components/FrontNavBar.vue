@@ -191,7 +191,7 @@ onUnmounted(() => {
         <!-- 桌機頭像按鈕 -->
         <div class="relative" ref="avatarRef">
           <!-- 未登入 -->
-          <button v-if="!customer" @click="toggleAvatar"
+          <button v-if="!customer" @click.stop="toggleAvatar"
                   :class="isDark ? 'border-gray-600 text-gray-400 hover:border-blue-400 hover:text-blue-400' : 'border-gray-300 text-gray-500 hover:border-blue-500 hover:text-blue-500'"
                   class="w-9 h-9 rounded-full border-2 flex items-center justify-center transition-colors bg-transparent">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,7 +200,7 @@ onUnmounted(() => {
             </svg>
           </button>
           <!-- 已登入 -->
-          <button v-else @click="toggleAvatar"
+          <button v-else @click.stop="toggleAvatar"
                   class="w-9 h-9 rounded-full overflow-hidden border-2 border-blue-500 hover:opacity-80 transition-opacity p-0">
             <img v-if="customer.picture" :src="customer.picture" :alt="customer.name"
                  class="w-full h-full object-cover">
@@ -293,7 +293,7 @@ onUnmounted(() => {
         </button>
 
         <!-- 手機頭像按鈕（未登入） -->
-        <button v-if="!customer" @click="toggleAvatar"
+        <button v-if="!customer" @click.stop="toggleAvatar"
                 :class="isDark ? 'border-gray-600 text-gray-400' : 'border-gray-300 text-gray-500'"
                 class="w-8 h-8 rounded-full border-2 flex items-center justify-center bg-transparent transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -302,7 +302,7 @@ onUnmounted(() => {
           </svg>
         </button>
         <!-- 手機頭像按鈕（已登入） -->
-        <button v-else @click="toggleAvatar"
+        <button v-else @click.stop="toggleAvatar"
                 class="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-500 hover:opacity-80 transition-opacity p-0">
           <img v-if="customer.picture" :src="customer.picture" :alt="customer.name"
                class="w-full h-full object-cover">
