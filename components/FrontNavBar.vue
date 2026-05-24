@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCustomerStore } from '~/stores/customer'
+import { API_BASE_URL, GOOGLE_CLIENT_ID } from '~/utils/api'
 
 const props = defineProps<{ isDark: boolean }>()
 const emit = defineEmits(['toggle-dark'])
@@ -34,8 +35,7 @@ const navItems = [
 ]
 
 // ── Google 登入 ────────────────────────────────────────────────────────────
-const API_BASE = 'https://madustrialtd.asuscomm.com:8080/'
-const GOOGLE_CLIENT_ID = '你的_GOOGLE_CLIENT_ID'
+const API_BASE = API_BASE_URL
 
 const customerStore = useCustomerStore()
 const customer = computed(() => customerStore.data.customer)
@@ -103,7 +103,7 @@ const fetchMe = async () => {
     const res = await fetch(`${API_BASE}mormon/customer/me`, { credentials: 'include' })
     const data = await res.json()
     if (!data.error) customerStore.setCustomer(data)
-  } catch { /* 靜默處理 */ }
+  } catch { /* 靜默 */ }
 }
 
 onMounted(async () => {
@@ -250,7 +250,7 @@ onUnmounted(() => {
                 </div>
                 <ul class="py-1">
                   <li v-if="customer.role === 'ADMIN' || customer.role === 'STAFF' || customer.role === 'EDITOR'">
-                    <NuxtLink to="/admin" @click="closeAvatar"
+                    <NuxtLink to="/staff/home" @click="closeAvatar"
                               :class="isDark ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-blue-50'"
                               class="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,7 +385,7 @@ onUnmounted(() => {
           </div>
           <ul class="py-1">
             <li v-if="customer.role === 'ADMIN' || customer.role === 'STAFF' || customer.role === 'EDITOR'">
-              <NuxtLink to="/admin" @click="closeAvatar"
+              <NuxtLink to="/staff/home" @click="closeAvatar"
                         :class="isDark ? 'text-blue-400 hover:bg-gray-700' : 'text-blue-600 hover:bg-blue-50'"
                         class="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

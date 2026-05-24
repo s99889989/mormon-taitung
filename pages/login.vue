@@ -6,7 +6,7 @@ definePageMeta({
     function() {
       const auth = useCookie('admin_auth')
       if (auth.value) {
-        return navigateTo('/admin/roll_call/list')
+        return navigateTo('/admin/home')
       }
     }
   ]
@@ -38,7 +38,7 @@ const handleLogin = async () => {
         sameSite: 'strict',
       })
       auth.value = 'true'
-      await navigateTo('/admin/roll_call/list')
+      await navigateTo('/admin/home')
     } else {
       error.value = '帳號或密碼錯誤'
     }
@@ -66,11 +66,11 @@ const handleLogin = async () => {
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-1">帳號</label>
           <input
-            v-model="username"
-            type="text"
-            placeholder="請輸入帳號"
-            @keyup.enter="handleLogin"
-            class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
+              v-model="username"
+              type="text"
+              placeholder="請輸入帳號"
+              @keyup.enter="handleLogin"
+              class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
           />
         </div>
@@ -78,11 +78,11 @@ const handleLogin = async () => {
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-1">密碼</label>
           <input
-            v-model="password"
-            type="password"
-            placeholder="請輸入密碼"
-            @keyup.enter="handleLogin"
-            class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
+              v-model="password"
+              type="password"
+              placeholder="請輸入密碼"
+              @keyup.enter="handleLogin"
+              class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
           />
         </div>
@@ -92,9 +92,9 @@ const handleLogin = async () => {
 
         <!-- 登入按鈕 -->
         <button
-          @click="handleLogin"
-          :disabled="loading"
-          class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 disabled:cursor-not-allowed
+            @click="handleLogin"
+            :disabled="loading"
+            class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 disabled:cursor-not-allowed
                  text-white font-semibold rounded-lg transition-colors text-base mt-2">
           {{ loading ? '登入中...' : '登入' }}
         </button>
