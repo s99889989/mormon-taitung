@@ -1,28 +1,28 @@
 <script setup lang="js">
-import { useHtmlPageStore } from '~/stores/html_page'
+import {useHtmlPageStore} from '~/stores/html_page'
 
-definePageMeta({ layout: 'admin' })
+definePageMeta({layout: 'admin'})
 
 const htmlPageStore = useHtmlPageStore()
 const loading = ref(false)
-const saving  = ref(false)
-const toast   = reactive({ show: false, message: '', error: false })
-const modal    = reactive({ show: false })
+const saving = ref(false)
+const toast = reactive({show: false, message: '', error: false})
+const modal = reactive({show: false, mode: 'add'}) // mode: 'add' | 'edit'
 const showDeleteConfirm = ref(false)
-const deleteTarget = reactive({ slug: '', title: '' })
+const deleteTarget = reactive({slug: '', title: ''})
 
 const form = reactive({
-  slug:  '',
+  slug: '',
   title: '',
-  file:  null,
+  file: null,
 })
 const fileInputRef = ref(null)
 const fileName = ref('')
 
 const showToast = (msg, error = false) => {
   toast.message = msg
-  toast.error   = error
-  toast.show    = true
+  toast.error = error
+  toast.show = true
   setTimeout(() => toast.show = false, 2500)
 }
 
@@ -39,9 +39,19 @@ const refresh = async () => {
 }
 
 const openAdd = () => {
-  form.slug  = ''
+  modal.mode = 'add'
+  form.slug = ''
   form.title = ''
-  form.file  = null
+  form.file = null
+  fileName.value = ''
+  modal.show = true
+}
+
+const openEdit = (page) => {
+  modal.mode = 'edit'
+  form.slug = page.slug
+  form.title = page.title
+  form.file = null
   fileName.value = ''
   modal.show = true
 }
@@ -51,37 +61,58 @@ const onFileChange = (e) => {
   if (!f) return
   form.file = f
   fileName.value = f.name
-  // 自動填入 slug（去掉副檔名）
-  if (!form.slug) {
+  // 新增模式才自動填入 slug
+  if (modal.mode === 'add' && !form.slug) {
     form.slug = f.name.replace(/\.html?$/i, '').replace(/\s+/g, '-').toLowerCase()
   }
 }
 
 const save = async () => {
-  if (!form.slug.trim()) { showToast('請填寫網址代稱 (slug)', true); return }
-  if (!form.title.trim()) { showToast('請填寫標題', true); return }
-  if (!form.file)         { showToast('請選擇 HTML 檔案', true); return }
-
-  // slug 只允許英數與 dash
-  if (!/^[a-z0-9\-_]+$/i.test(form.slug)) {
-    showToast('網址代稱只能使用英文、數字、橫線', true)
+  if (!form.title.trim()) {
+    showToast('請填寫標題', true);
     return
   }
 
-  saving.value = true
-  try {
-    await htmlPageStore.upload(form.slug.trim(), form.title.trim(), form.file)
-    showToast('上傳成功')
-    modal.show = false
-  } catch {
-    showToast('上傳失敗', true)
-  } finally {
-    saving.value = false
+  if (modal.mode === 'add') {
+    if (!form.slug.trim()) {
+      showToast('請填寫網址代稱 (slug)', true);
+      return
+    }
+    if (!form.file) {
+      showToast('請選擇 HTML 檔案', true);
+      return
+    }
+    if (!/^[a-z0-9\-_]+$/i.test(form.slug)) {
+      showToast('網址代稱只能使用英文、數字、橫線', true)
+      return
+    }
+    saving.value = true
+    try {
+      await htmlPageStore.upload(form.slug.trim(), form.title.trim(), form.file)
+      showToast('上傳成功')
+      modal.show = false
+    } catch {
+      showToast('上傳失敗', true)
+    } finally {
+      saving.value = false
+    }
+  } else {
+    // 編輯模式
+    saving.value = true
+    try {
+      await htmlPageStore.update(form.slug, form.title.trim(), form.file)
+      showToast('儲存成功')
+      modal.show = false
+    } catch {
+      showToast('儲存失敗', true)
+    } finally {
+      saving.value = false
+    }
   }
 }
 
 const confirmDelete = (page) => {
-  deleteTarget.slug  = page.slug
+  deleteTarget.slug = page.slug
   deleteTarget.title = page.title
   showDeleteConfirm.value = true
 }
@@ -159,6 +190,11 @@ const copyUrl = (slug) => {
                              text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                 複製網址
               </button>
+              <button @click="openEdit(page)"
+                      class="px-2.5 py-1 text-xs rounded-lg border border-blue-200 dark:border-blue-800
+                             text-blue-500 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                編輯
+              </button>
               <button @click="confirmDelete(page)"
                       class="px-2.5 py-1 text-xs rounded-lg border border-red-200 dark:border-red-800
                              text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
@@ -172,13 +208,17 @@ const copyUrl = (slug) => {
       </div>
     </div>
 
-    <!-- ════════ 上傳 Modal ════════ -->
+    <!-- ════════ 新增 / 編輯 Modal ════════ -->
     <div v-if="modal.show"
          class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-start sm:items-center justify-center z-50 p-0 sm:p-4">
-      <div class="bg-white dark:bg-zinc-900 rounded-b-3xl sm:rounded-2xl shadow-xl w-full sm:max-w-lg max-h-screen sm:max-h-[90vh] overflow-y-auto">
+      <div
+          class="bg-white dark:bg-zinc-900 rounded-b-3xl sm:rounded-2xl shadow-xl w-full sm:max-w-lg max-h-screen sm:max-h-[90vh] overflow-y-auto">
 
-        <div class="px-5 py-4 border-b border-stone-100 dark:border-stone-700 flex items-center justify-between sticky top-0 bg-white dark:bg-zinc-900 z-10">
-          <h3 class="font-bold text-base text-stone-800 dark:text-stone-100">上傳 HTML 頁面</h3>
+        <div
+            class="px-5 py-4 border-b border-stone-100 dark:border-stone-700 flex items-center justify-between sticky top-0 bg-white dark:bg-zinc-900 z-10">
+          <h3 class="font-bold text-base text-stone-800 dark:text-stone-100">
+            {{ modal.mode === 'edit' ? '編輯 HTML 頁面' : '上傳 HTML 頁面' }}
+          </h3>
           <button @click="modal.show = false" class="text-stone-400 hover:text-stone-600 p-1">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -195,28 +235,39 @@ const copyUrl = (slug) => {
                    class="w-full px-3 py-2 text-sm rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-800 text-stone-800 dark:text-stone-100 outline-none focus:ring-2 focus:ring-blue-400"/>
           </div>
 
-          <!-- Slug -->
+          <!-- Slug（編輯模式唯讀） -->
           <div>
             <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-1">
-              網址代稱 (slug) * <span class="font-normal text-stone-400">— 只能英文、數字、橫線</span>
+              網址代稱 (slug)
+              <span v-if="modal.mode === 'add'" class="font-normal text-stone-400">* — 只能英文、數字、橫線</span>
+              <span v-else class="font-normal text-stone-400">— 建立後不可更改</span>
             </label>
             <div class="flex items-center gap-1.5">
               <span class="text-xs text-stone-400 font-mono whitespace-nowrap">/html/</span>
               <input v-model="form.slug" placeholder="example-page"
-                     class="flex-1 px-3 py-2 text-sm rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-800 text-stone-800 dark:text-stone-100 outline-none focus:ring-2 focus:ring-blue-400 font-mono"/>
+                     :disabled="modal.mode === 'edit'"
+                     class="flex-1 px-3 py-2 text-sm rounded-xl border font-mono outline-none transition-colors"
+                     :class="modal.mode === 'edit'
+                       ? 'border-stone-100 dark:border-stone-700 bg-stone-50 dark:bg-zinc-800/50 text-stone-400 dark:text-stone-500 cursor-not-allowed'
+                       : 'border-stone-200 dark:border-stone-700 bg-white dark:bg-zinc-800 text-stone-800 dark:text-stone-100 focus:ring-2 focus:ring-blue-400'"/>
             </div>
           </div>
 
           <!-- 檔案 -->
           <div>
-            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-2">HTML 檔案 *</label>
+            <label class="text-xs font-semibold text-stone-600 dark:text-stone-300 block mb-2">
+              HTML 檔案
+              <span v-if="modal.mode === 'add'" class="font-normal text-stone-400">*</span>
+              <span v-else class="font-normal text-stone-400">— 不選則保留原有內容</span>
+            </label>
             <label
                 class="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed rounded-xl cursor-pointer transition-colors"
                 :class="form.file
                   ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
                   : 'border-stone-300 dark:border-stone-600 bg-stone-50 dark:bg-zinc-800 hover:bg-stone-100 dark:hover:bg-zinc-700'">
               <div class="flex flex-col items-center gap-1 text-center px-4">
-                <svg class="w-7 h-7" :class="form.file ? 'text-blue-500' : 'text-stone-400'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-7 h-7" :class="form.file ? 'text-blue-500' : 'text-stone-400'" fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0119 9.414V19a2 2 0 01-2 2z"/>
                 </svg>
@@ -231,15 +282,17 @@ const copyUrl = (slug) => {
 
         </div>
 
-        <div class="px-5 py-4 border-t border-stone-100 dark:border-stone-700 flex gap-2 justify-end sticky bottom-0 bg-white dark:bg-zinc-900">
+        <div
+            class="px-5 py-4 border-t border-stone-100 dark:border-stone-700 flex gap-2 justify-end sticky bottom-0 bg-white dark:bg-zinc-900">
           <button @click="modal.show = false"
                   class="px-4 py-2 text-sm bg-stone-100 dark:bg-zinc-800 text-stone-600 dark:text-stone-300 rounded-xl hover:bg-stone-200 transition-colors">
             取消
           </button>
           <button @click="save" :disabled="saving"
                   class="px-4 py-2 text-sm bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center gap-1.5">
-            <div v-if="saving" class="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            上傳
+            <div v-if="saving"
+                 class="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            {{ modal.mode === 'edit' ? '儲存' : '上傳' }}
           </button>
         </div>
       </div>
@@ -285,6 +338,7 @@ const copyUrl = (slug) => {
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s, transform 0.3s;
 }
+
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
   transform: translateY(8px);
