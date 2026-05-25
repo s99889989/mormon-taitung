@@ -99,11 +99,11 @@
         <!-- 地圖圖片 -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div class="rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-800">
-            <img :src="`${BASE}LINE_ALBUM_260525_1.jpg`" alt="場地衛星圖與步行路線" class="w-full h-auto object-cover">
+            <img :src="`${BASE}LINE_ALBUM_第二組名單呦～(場地跟地圖也放一起)_260525_1.jpg`" alt="場地衛星圖與步行路線" class="w-full h-auto object-cover">
             <p class="text-sm text-gray-600 dark:text-gray-400 px-3 py-2">衛星圖 · 捷絲旅 → 十鼓文創</p>
           </div>
           <div class="rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-800">
-            <img :src="`${BASE}LINE_ALBUM_260525_3.jpg`" alt="園區總覽與奇美博物館路線" class="w-full h-auto object-cover">
+            <img :src="`${BASE}LINE_ALBUM_第二組名單呦～(場地跟地圖也放一起)_260525_3.jpg`" alt="園區總覽與奇美博物館路線" class="w-full h-auto object-cover">
             <p class="text-sm text-gray-600 dark:text-gray-400 px-3 py-2">園區總覽 · 奇美博物館路線（步行13分）</p>
           </div>
         </div>
@@ -113,7 +113,7 @@
       <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
         <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">住宿 · 捷絲旅 台南虎山館</p>
         <div class="rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-800">
-          <img :src="`${BASE}LINE_ALBUM_260525_4.jpg`" alt="住宿房間與十鼓二館空間" class="w-full h-auto object-cover">
+          <img :src="`${BASE}LINE_ALBUM_第二組名單呦～(場地跟地圖也放一起)_260525_2.jpg`" alt="住宿房間與十鼓二館空間" class="w-full h-auto object-cover">
         </div>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">房型為多人房，二館為大會活動空間（右上角標示「2館」）</p>
       </div>
@@ -266,7 +266,7 @@
 
 <script setup>
 import { ref } from 'vue'
-definePageMeta({ layout: 'blank' })
+definePageMeta({ layout: 'default' })
 
 useHead({
   title: '2026 全國年輕單成大會 — 信賴祂',
