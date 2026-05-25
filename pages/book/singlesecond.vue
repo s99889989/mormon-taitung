@@ -63,6 +63,7 @@
               <td class="px-3 py-2 font-medium text-gray-900 dark:text-gray-100">
                 <span v-if="m.highlight" class="inline-block w-2 h-2 rounded-full bg-yellow-400 mr-1.5 align-middle"></span>
                 {{ m.name }}
+                <span v-if="m.note" class="block text-xs text-orange-500 dark:text-orange-400 font-normal mt-0.5">⚠️ {{ m.note }}</span>
               </td>
               <td class="px-3 py-2 text-gray-700 dark:text-gray-300">{{ m.gender }}</td>
               <td class="px-3 py-2 text-gray-700 dark:text-gray-300">{{ m.stake }}</td>
@@ -291,7 +292,7 @@ const members = [
   { name: '呂庭瑜', gender: '女', stake: '西台北', ward: '新埔',   highlight: false },
   { name: '鄧恩凌', gender: '女', stake: '台南',   ward: '台南一', highlight: true  },
   { name: '張苑貞', gender: '女', stake: '台南',   ward: '歸仁',   highlight: false },
-  { name: '張沛宸', gender: '女', stake: '南高雄', ward: '大寮',   highlight: false },
+  { name: '張沛宸', gender: '女', stake: '南高雄', ward: '大寮',   highlight: false, note: '第一天無法請假不會到，第二天上午到（確切時間待定）' },
   { name: '賈晴雯', gender: '女', stake: '東台中', ward: '霧峰',   highlight: false },
   { name: '吳立恩', gender: '男', stake: '中台北', ward: '信安',   highlight: false },
   { name: '葉彥廷', gender: '男', stake: '東台北', ward: '汐止',   highlight: true  },
