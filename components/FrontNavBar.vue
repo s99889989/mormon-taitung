@@ -46,7 +46,10 @@ const avatarRef = ref<HTMLElement | null>(null)
 const toggleAvatar = () => {
   avatarOpen.value = !avatarOpen.value
   if (avatarOpen.value && !customer.value) {
-    nextTick(() => renderGoogleBtn('nav-google-btn'))
+    nextTick(() => {
+      renderGoogleBtn('nav-google-btn')
+      renderGoogleBtn('nav-google-btn-mobile')
+    })
   }
 }
 const closeAvatar = () => { avatarOpen.value = false }
