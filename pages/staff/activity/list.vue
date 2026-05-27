@@ -1,6 +1,6 @@
-
 <script setup lang="js">
 import { useActiveStore } from '~/stores/active'
+import { API_BASE_URL } from '~/utils/api'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
@@ -51,7 +51,6 @@ const todayDate = () => {
   const d = new Date()
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`
 }
-const apiBase = () => 'https://madustrialtd.asuscomm.com:8080'
 
 // ── 標籤 ──────────────────────────────────────────────────────────
 const addTag = () => {
@@ -123,11 +122,11 @@ const handleCoverSelect = async (e) => {
   fd.append('file', file)
   try {
     const res = await fetch(
-        `${apiBase()}/image/add/mormon__image__active__${form.date || 'general'}`,
+        `${API_BASE_URL}image/add/mormon__image__active__${form.date || 'general'}`,
         { method: 'POST', body: fd }
     )
     const imageName = await res.text()
-    const url = `${apiBase()}/mormon/image/active/${form.date || 'general'}/${imageName}`
+    const url = `${API_BASE_URL}mormon/image/active/${form.date || 'general'}/${imageName}`
     form.images = [url, ...form.images.slice(1)]
   } catch { showToast('封面上傳失敗', true) }
   finally { uploading.value = false; if (coverInputRef.value) coverInputRef.value.value = '' }
@@ -165,11 +164,11 @@ const save = async () => {
       const fd = new FormData()
       fd.append('file', f)
       const res = await fetch(
-          `${apiBase()}/image/add/mormon__attach__active__${form.date || 'general'}`,
+          `${API_BASE_URL}image/add/mormon__attach__active__${form.date || 'general'}`,
           { method: 'POST', body: fd }
       )
       const fileName = await res.text()
-      const url = `${apiBase()}/mormon/image/active/${form.date || 'general'}/${fileName}`
+      const url = `${API_BASE_URL}mormon/image/active/${form.date || 'general'}/${fileName}`
       const idx = form.attachments.findIndex(a => a.isNew && a.name === f.name)
       if (idx !== -1) { form.attachments[idx].url = url; form.attachments[idx].isNew = false }
     }
@@ -206,6 +205,11 @@ const doDelete = async () => {
   await activeStore.remove(deleteTarget.date, deleteTarget.time)
   showDeleteConfirm.value = false
   showToast('已刪除')
+}
+
+const fixImgUrl = (url) => {
+  if (!url) return ''
+  return url.replace('https://madustrialtd.asuscomm.com:8080', API_BASE_URL.replace(/\/$/, ''))
 }
 </script>
 
@@ -280,8 +284,8 @@ const doDelete = async () => {
             <!-- 縮圖 -->
             <div class="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-stone-100 dark:bg-zinc-800">
               <img v-if="active.images && active.images.length > 0"
-                   :src="active.images[0]" :alt="active.name" class="w-full h-full object-cover"
-                   @click="previewUrl = active.images[0]" />
+                   :src="fixImgUrl(active.images[0])" :alt="active.name" class="w-full h-full object-cover"
+                   @click="previewUrl = fixImgUrl(active.images[0])" />
               <div v-else class="w-full h-full flex items-center justify-center text-stone-300 dark:text-zinc-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -413,7 +417,7 @@ const doDelete = async () => {
             <label class="text-xs sm:text-xl font-semibold text-stone-600 dark:text-stone-300 block mb-1">封面圖</label>
             <div v-if="form.coverPreview || form.images[0]"
                  class="relative w-full h-40 rounded-xl overflow-hidden mb-2 border border-stone-200 dark:border-stone-700">
-              <img :src="form.coverPreview || form.images[0]" class="w-full h-full object-cover" />
+              <img :src="form.coverPreview || fixImgUrl(form.images[0])" class="w-full h-full object-cover" />
               <button @click="removeCover"
                       class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">×</button>
             </div>

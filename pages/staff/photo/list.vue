@@ -1,8 +1,8 @@
-
 <script setup lang="ts">
+import { API_BASE_URL } from '~/utils/api'
 definePageMeta({ layout: 'staff' })
 
-const BASE_URL = 'https://madustrialtd.asuscomm.com:8080'
+const BASE_URL = API_BASE_URL.replace(/\/$/, '')
 
 // ── Tab ───────────────────────────────────────────────────────────
 const activeTab = ref<'photo' | 'video'>('photo')

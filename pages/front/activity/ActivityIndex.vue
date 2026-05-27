@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { API_BASE_URL } from '~/utils/api'
 definePageMeta({ layout: 'default' })
 
 import { useActiveStore } from '~/stores/active'
@@ -33,6 +34,11 @@ onMounted(async () => {
   await activeStore.refreshActive()
   loading.value = false
 })
+
+const fixImgUrl = (url) => {
+  if (!url) return ''
+  return url.replace('https://madustrialtd.asuscomm.com:8080', API_BASE_URL.replace(/\/$/, ''))
+}
 </script>
 
 <template>
@@ -89,7 +95,7 @@ onMounted(async () => {
         <!-- 封面圖 -->
         <div class="w-full aspect-video bg-gray-100 dark:bg-gray-700 overflow-hidden flex-none">
           <img v-if="active.images && active.images.length > 0"
-               :src="active.images[0]" :alt="active.name"
+               :src="fixImgUrl(active.images[0])" :alt="active.name"
                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
           <div v-else class="w-full h-full flex items-center justify-center text-4xl">🎉</div>
         </div>

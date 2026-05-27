@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { API_BASE_URL } from '~/utils/api'
 definePageMeta({ layout: 'default' })
 
 import { useActiveStore } from '~/stores/active'
@@ -24,6 +25,11 @@ const currentIdx = computed(() =>
 )
 const prevActive = computed(() => currentIdx.value > 0 ? normalList.value[currentIdx.value - 1] : null)
 const nextActive = computed(() => currentIdx.value < normalList.value.length - 1 ? normalList.value[currentIdx.value + 1] : null)
+
+const fixImgUrl = (url) => {
+  if (!url) return ''
+  return url.replace('https://madustrialtd.asuscomm.com:8080', API_BASE_URL.replace(/\/$/, ''))
+}
 </script>
 
 <template>
@@ -52,7 +58,7 @@ const nextActive = computed(() => currentIdx.value < normalList.value.length - 1
         <div v-if="active.images && active.images.length > 0"
              class="lg:w-80 lg:flex-none">
           <div class="lg:sticky lg:top-24">
-            <img :src="active.images[0]" :alt="active.name"
+            <img :src="fixImgUrl(active.images[0])" :alt="active.name"
                  class="w-full rounded-2xl shadow-lg object-cover" />
           </div>
         </div>

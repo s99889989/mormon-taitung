@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { API_BASE_URL } from '~/utils/api'
 import { useActiveStore } from '~/stores/active'
 definePageMeta({ layout: 'default' })
 
@@ -25,6 +26,11 @@ const quickLinks = [
   // { to: '/front/english', label: '英文會話', icon: '🗣️', desc: '每週三晚上 7:00' },
   { to: '/front/about', label: '認識我們', icon: '👥', desc: '關於台東一支會' },
 ]
+
+const fixImgUrl = (url) => {
+  if (!url) return ''
+  return url.replace('https://madustrialtd.asuscomm.com:8080', API_BASE_URL.replace(/\/$/, ''))
+}
 </script>
 
 <template>
@@ -114,7 +120,7 @@ const quickLinks = [
                            hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col">
             <div class="w-full aspect-video bg-gray-100 dark:bg-gray-700 overflow-hidden flex-none">
               <img v-if="active.images && active.images.length > 0"
-                   :src="active.images[0]" :alt="active.name"
+                   :src="fixImgUrl(active.images[0])" :alt="active.name"
                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               <div v-else class="w-full h-full flex items-center justify-center text-4xl">🎉</div>
             </div>

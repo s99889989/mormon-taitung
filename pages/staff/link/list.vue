@@ -1,16 +1,15 @@
-
 <script setup lang="js">
-import { useLinkStore } from '~/stores/link'
+import {useLinkStore} from '~/stores/link'
 
-definePageMeta({ layout: 'staff' })
+definePageMeta({layout: 'staff'})
 
 const linkStore = useLinkStore()
 const loading = ref(false)
-const saving  = ref(false)
-const toast   = reactive({ show: false, message: '', error: false })
-const modal   = reactive({ show: false, mode: 'add' })
+const saving = ref(false)
+const toast = reactive({show: false, message: '', error: false})
+const modal = reactive({show: false, mode: 'add'})
 const showDeleteConfirm = ref(false)
-const deleteTarget = reactive({ id: '', name: '' })
+const deleteTarget = reactive({id: '', name: ''})
 
 const form = reactive({
   id: '',
@@ -93,6 +92,15 @@ const doDelete = async () => {
 }
 
 const commonIcons = ['🔗', '⛪', '▶️', '🗣️', '🌳', '📖', '🎵', '📧', '🌐', '📱', '💻', '❤️']
+
+const getFaviconUrl = (url) => {
+  try {
+    const hostname = new URL(url).hostname
+    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`
+  } catch {
+    return ''
+  }
+}
 </script>
 
 <template>
@@ -138,7 +146,7 @@ const commonIcons = ['🔗', '⛪', '▶️', '🗣️', '🌳', '📖', '🎵',
             <div class="w-9 h-9 flex-none flex items-center justify-center">
               <img
                   v-if="link.url"
-                  :src="`https://www.google.com/s2/favicons?domain=${(() => { try { return new URL(link.url).hostname } catch { return '' } })()}&sz=64`"
+                  :src="getFaviconUrl(link.url)"
                   :alt="link.name"
                   class="w-7 h-7 rounded"
                   @error="(e) => { e.target.style.display='none'; e.target.nextElementSibling.style.display='flex' }"
