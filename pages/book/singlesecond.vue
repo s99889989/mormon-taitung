@@ -124,56 +124,57 @@
         <button @click="showCheckin = !showCheckin"
                 class="w-full flex items-center justify-between gap-2 text-left">
           <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase">捷絲旅 · 入住須知</p>
-          <span class="text-gray-400 dark:text-gray-500 transition-transform duration-200 text-lg leading-none"
-                :class="showCheckin ? 'rotate-180' : ''">▾</span>
+          <i class="fa-solid fa-chevron-down text-gray-400 dark:text-gray-500 transition-transform duration-200"
+             :class="showCheckin ? 'rotate-180' : ''"></i>
         </button>
         <div v-if="showCheckin" class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4 space-y-2.5 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🕓</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-regular fa-clock flex-none mt-0.5 w-4 text-center text-amber-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">入住 ／ 退房</span>：下午 4 點後 Check in，中午 12 點前 Check out</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">📶</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-wifi flex-none mt-0.5 w-4 text-center text-emerald-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">WiFi</span>：搜尋 <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm">JustSleep</span>，無需密碼</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🍳</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-utensils flex-none mt-0.5 w-4 text-center text-orange-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">早餐</span>：06:30–10:30，一樓捷食藝，報房號即可（無餐券）</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🛗</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-elevator flex-none mt-0.5 w-4 text-center text-slate-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">電梯</span>：感應房卡再按樓層，樓層管制互不相通。大門 23:00–06:00 門禁，務必帶房卡</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">📞</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-phone flex-none mt-0.5 w-4 text-center text-violet-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">房內電話</span>：撥 9 聯絡櫃台；互撥為 2＋房號；撥打國內外線電話費用另計</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🏊</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-person-swimming flex-none mt-0.5 w-4 text-center text-sky-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">一樓泳池</span>：09:00–11:30 ／ 13:00–17:30（依天氣調整）。需著泳衣＋泳帽，泳池全區禁飲食</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🎮</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-building flex-none mt-0.5 w-4 text-center text-indigo-400"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">二樓鼓逸廊</span>：24 小時，請降低音量。戶外露臺＋洗衣間（投幣式）開放 08:00–22:00</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🛵</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-bag-shopping flex-none mt-0.5 w-4 text-center text-pink-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">外送</span>：需自行下樓與外送員點交，櫃台不代收</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🚭</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-ban-smoking flex-none mt-0.5 w-4 text-center text-red-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">禁菸</span>：全館禁菸（含陽台、二樓戶外露臺），違者酌收 $2,000 清潔費</p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">🪥</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-pump-soap flex-none mt-0.5 w-4 text-center text-teal-500"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">盥洗用品</span>：依台南市條例，飯店不提供一次性衛生用品（梳子、牙刷、牙膏、刮鬍刀、刮鬍膏、浴帽），<span class="text-red-600 dark:text-red-400 font-medium">請自備</span></p>
           </div>
-          <div class="flex gap-2.5">
-            <span class="flex-none text-lg">💧</span>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-droplet flex-none mt-0.5 w-4 text-center text-blue-400"></i>
             <p><span class="font-medium text-gray-900 dark:text-gray-100">飲水</span>：無瓶裝水，各樓層設有飲水機，可用房內環保冷水壺或自備容器</p>
           </div>
           <div class="mt-3 bg-gray-100 dark:bg-gray-800 rounded-xl px-4 py-2.5 text-sm text-gray-500 dark:text-gray-400">
-            📞 捷絲旅台南虎山館櫃台：<a href="tel:062660568" class="underline underline-offset-2 text-[#1a2e5a] dark:text-blue-400">06-2660568</a>
+            <i class="fa-solid fa-phone mr-1.5 text-violet-500"></i>
+            捷絲旅台南虎山館櫃台：<a href="tel:062660568" class="underline underline-offset-2 text-[#1a2e5a] dark:text-blue-400">06-2660568</a>
           </div>
         </div>
       </div>
