@@ -319,8 +319,7 @@
                 </ol>
                 <div class="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg px-3 py-2.5 text-sm text-amber-800 dark:text-amber-300">
                   <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>
-                  <span class="font-medium">停車費折抵提醒：</span>開車前來者請登記車牌號碼，並回覆大會信箱您的車牌號碼、駕駛人名字、聯絡方式，以利停車費折抵及停車管理。
-                  <br><a href="mailto:cstw.ysac@gmail.com" class="underline underline-offset-2 text-[#1a2e5a] dark:text-blue-400">cstw.ysac@gmail.com</a>
+                  <span class="font-medium">停車費折抵提醒：</span>開車前來者請回覆大會通知信件，或來信至 <a href="mailto:cstw.ysac@gmail.com" class="underline underline-offset-2 text-[#1a2e5a] dark:text-blue-400">cstw.ysac@gmail.com</a>，提供您的車牌號碼、駕駛人名字、聯絡方式，以利停車費折抵及停車管理。
                 </div>
               </div>
             </div>
