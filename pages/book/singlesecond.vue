@@ -21,7 +21,7 @@
       <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
         <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">官方連結</p>
         <div class="flex flex-col sm:flex-row gap-3">
-          <a href="https://www.instagram.com/tw_ysac?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+          <a href="https://reurl.cc/M25Ro3" target="_blank"
              class="flex items-center gap-3 flex-1 bg-gray-100 dark:bg-gray-800 rounded-xl px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
             <span class="text-2xl">📸</span>
             <div>
@@ -176,6 +176,156 @@
             <i class="fa-solid fa-phone mr-1.5 text-violet-500"></i>
             捷絲旅台南虎山館櫃台：<a href="tel:062660568" class="underline underline-offset-2 text-[#1a2e5a] dark:text-blue-400">06-2660568</a>
           </div>
+        </div>
+      </div>
+
+      <!-- 行前通知 -->
+      <div class="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 mb-4">
+        <button @click="showNotice = !showNotice"
+                class="w-full flex items-center justify-between gap-2 text-left">
+          <p class="text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase">行前通知 · 大會活動資訊</p>
+          <i class="fa-solid fa-chevron-down text-gray-400 dark:text-gray-500 transition-transform duration-200"
+             :class="showNotice ? 'rotate-180' : ''"></i>
+        </button>
+        <div v-if="showNotice" class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4 space-y-5 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+
+          <!-- 報到時間 / 結束時間 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <i class="fa-regular fa-calendar-check text-[#1a2e5a] dark:text-blue-400"></i>
+                <p class="font-semibold text-gray-900 dark:text-gray-100">報到時間</p>
+              </div>
+              <p class="text-sm">2026 年 6 月 18 日（四）</p>
+              <p class="text-sm font-medium text-[#1a2e5a] dark:text-blue-300">下午 13:00 – 14:00</p>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <i class="fa-regular fa-flag text-[#1a2e5a] dark:text-blue-400"></i>
+                <p class="font-semibold text-gray-900 dark:text-gray-100">報到地點</p>
+              </div>
+              <p class="text-sm font-medium text-[#1a2e5a] dark:text-blue-300">十鼓文創園區</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400">台南市仁德區文華路二段 326 號</p>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 sm:col-span-2">
+              <div class="flex items-center gap-2 mb-1">
+                <i class="fa-solid fa-hourglass-end text-[#1a2e5a] dark:text-blue-400"></i>
+                <p class="font-semibold text-gray-900 dark:text-gray-100">結束時間</p>
+              </div>
+              <p class="text-sm">2026 年 6 月 20 日（六）中午 12:15 – 下午 12:30</p>
+            </div>
+          </div>
+
+          <!-- 必備物品 -->
+          <div>
+            <p class="font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-bag-shopping text-[#1a2e5a] dark:text-blue-400"></i>必備物品
+            </p>
+            <ul class="space-y-2.5">
+              <li class="flex items-start gap-3">
+                <i class="fa-regular fa-id-card flex-none mt-0.5 w-4 text-center text-blue-500"></i>
+                <p><span class="font-medium text-gray-900 dark:text-gray-100">個人證件</span>：身分證、學生證（如持有請攜帶）、健保卡</p>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-bottle-water flex-none mt-0.5 w-4 text-center text-sky-500"></i>
+                <p><span class="font-medium text-gray-900 dark:text-gray-100">隨身物品</span>：隨身水壺（務必多補充水分，避免中暑）、防曬物品（帽子 ／ 防曬外套 ／ 雨傘）、輕便雨衣</p>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-pen flex-none mt-0.5 w-4 text-center text-orange-500"></i>
+                <p><span class="font-medium text-gray-900 dark:text-gray-100">筆與筆記本</span>：部分活動內容需要記錄筆記</p>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-pills flex-none mt-0.5 w-4 text-center text-green-500"></i>
+                <p><span class="font-medium text-gray-900 dark:text-gray-100">個人藥品、健保卡與防蚊用品</span>：若有固定服用藥物，準備足夠劑量；另提醒攜帶防蚊液以防蚊蟲叮咬</p>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-pump-soap flex-none mt-0.5 w-4 text-center text-teal-500"></i>
+                <p><span class="font-medium text-gray-900 dark:text-gray-100">盥洗用品</span>：飯店不提供一次性盥洗用品（牙刷、牙膏、刮鬍刀、浴帽等），<span class="font-medium text-red-600 dark:text-red-400">請自備</span></p>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-shoe-prints flex-none mt-0.5 w-4 text-center text-amber-500"></i>
+                <p><span class="font-medium text-gray-900 dark:text-gray-100">服裝與鞋子</span>：三天活動含戶外活動，請著運動服裝及鞋子，並準備陽傘、帽子、防曬乳及飲用水</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 注意事項 -->
+          <div>
+            <p class="font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-circle-exclamation text-amber-500"></i>注意事項
+            </p>
+            <ol class="space-y-2 list-decimal list-inside">
+              <li class="text-sm">本次大會將進行攝影與影音紀錄，若您不同意被拍攝或錄影，請於活動前主動告知工作人員，我們將協助安排。</li>
+              <li class="text-sm"><span class="font-medium text-gray-900 dark:text-gray-100">第一天午餐自理</span></li>
+              <li class="text-sm">請儘量不要攜帶貴重物品，若需攜帶請妥善保管，遺失自行負責。</li>
+              <li class="text-sm">舞會風格：會請各隊隊輔通知</li>
+              <li class="text-sm">如果隊輔沒有聯絡你，請聯絡官方 IG 或官方 Gmail：<a href="mailto:cstw.ysac@gmail.com" class="text-[#1a2e5a] dark:text-blue-400 underline underline-offset-2">cstw.ysac@gmail.com</a></li>
+            </ol>
+          </div>
+
+          <!-- 交通方式 -->
+          <div>
+            <p class="font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-route text-[#1a2e5a] dark:text-blue-400"></i>交通方式
+            </p>
+            <div class="space-y-3">
+
+              <!-- 遊覽車 -->
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+                <p class="font-medium text-gray-900 dark:text-gray-100 mb-1 flex items-center gap-2">
+                  <i class="fa-solid fa-bus text-[#1a2e5a] dark:text-blue-400 w-4 text-center"></i>支會遊覽車
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">請向支聯會負責遊覽車人員確認發車時間，當天請準時集合，別睡過頭囉！</p>
+              </div>
+
+              <!-- 火車 -->
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+                <p class="font-medium text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+                  <i class="fa-solid fa-train text-[#1a2e5a] dark:text-blue-400 w-4 text-center"></i>自行前往（台鐵）
+                </p>
+                <ol class="text-sm space-y-1 list-decimal list-inside text-gray-600 dark:text-gray-400">
+                  <li>搭乘台鐵至<span class="font-medium text-gray-800 dark:text-gray-200">保安火車站</span></li>
+                  <li>出站後步行約 15 分鐘至十鼓仁糖文創園區第二停車場</li>
+                </ol>
+                <p class="text-sm mt-2 text-amber-600 dark:text-amber-400 font-medium">⚑ 會場位於第二停車場內，請於 13:30 前抵達</p>
+              </div>
+
+              <!-- 高鐵 -->
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+                <p class="font-medium text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+                  <i class="fa-solid fa-train-subway text-[#1a2e5a] dark:text-blue-400 w-4 text-center"></i>自行前往（高鐵）
+                </p>
+                <ol class="text-sm space-y-1 list-decimal list-inside text-gray-600 dark:text-gray-400">
+                  <li>搭乘高鐵至<span class="font-medium text-gray-800 dark:text-gray-200">台南高鐵站</span></li>
+                  <li>台南沙崙站轉乘台鐵至<span class="font-medium text-gray-800 dark:text-gray-200">保安火車站</span></li>
+                  <li>出站後步行約 15 分鐘至十鼓仁糖文創園區第二停車場</li>
+                </ol>
+                <p class="text-sm mt-2 text-amber-600 dark:text-amber-400 font-medium">⚑ 會場位於第二停車場內，請於 13:30 前抵達</p>
+              </div>
+
+              <!-- 開車 -->
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+                <p class="font-medium text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+                  <i class="fa-solid fa-car text-[#1a2e5a] dark:text-blue-400 w-4 text-center"></i>自行前往（開車）
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                  導航：十鼓仁糖文創園區（台南市仁德區文華路二段 326 號）
+                  <br>會場位於<span class="font-medium text-gray-800 dark:text-gray-200">第二停車場裡面</span>，請於 13:30 前抵達
+                </p>
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">停車地點：</p>
+                <ol class="text-sm space-y-0.5 list-decimal list-inside text-gray-600 dark:text-gray-400 mb-3">
+                  <li>十鼓文創園區第 1 停車場或第 2 停車場</li>
+                  <li>捷絲旅台南虎山館（台南市仁德區成功里文華路二段 300 號）</li>
+                </ol>
+                <div class="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg px-3 py-2.5 text-sm text-amber-800 dark:text-amber-300">
+                  <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>
+                  <span class="font-medium">停車費折抵提醒：</span>開車前來者請登記車牌號碼，並回覆大會信箱您的車牌號碼、駕駛人名字、聯絡方式，以利停車費折抵及停車管理。
+                  <br><a href="mailto:cstw.ysac@gmail.com" class="underline underline-offset-2 text-[#1a2e5a] dark:text-blue-400">cstw.ysac@gmail.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -388,6 +538,7 @@ const contacts = [
 
 const activeDay = ref(0)
 const showCheckin = ref(false)
+const showNotice = ref(false)
 
 const schedule = [
   {
