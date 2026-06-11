@@ -10,6 +10,10 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules: {
+    '/**': { redirect: 'https://jesuschristtaitung.karltw.com/**' }
+  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
@@ -51,6 +55,4 @@ export default defineNuxtConfig({
       ]
     }
   },
-
-
 })
